@@ -1,0 +1,23 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<h1>Log in</h1>
+
+<form action="/login" method="post">
+    <div>
+        <label for="login_useremail"><span>Username</span></label>
+        <input id="login_useremail" type="email" name="useremail" placeholder="Email" required>
+    </div>
+    
+    <div>
+        <label for="login__password"><span>Password</span></label>
+        <input id="login__password" type="password" name="password" placeholder="Password" required>
+    </div>
+    
+    <div>
+        <input type="submit" value="Sign In">
+    </div>
+</form>
+<p>Not a member? <a href="#">Sign up now</a></p>
+</div>
+{% endblock %}
