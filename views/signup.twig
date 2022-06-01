@@ -1,0 +1,48 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<h1>Sign up</h1>
+
+<form action="/signup" method="post">
+    <div>
+        <label for="signup_useremail"><span>Email</span></label>
+        <input id="signup_useremail" type="email" name="signup_useremail" placeholder="Email" required>
+    </div>
+    
+    <div>
+        <label for="signup__password"><span>Password</span></label>
+        <input id="signup__password" type="password" name="password" placeholder="Password" required>
+    </div>
+    
+    <div>
+        <label for="signup__first_name"><span>First name</span></label>
+        <input id="signup__first_name" type="text" name="first_name" placeholder="First name" required>
+    </div>
+
+    <div>
+        <label for="signup__last_name"><span>Last name</span></label>
+        <input id="signup__last_name" type="text" name="last_name" placeholder="Last name" required>
+    </div>
+
+    <div>
+        <label for="signup__street"><span>Street</span></label>
+        <input id="signup__street" type="text" name="street" placeholder="Street" required>
+    </div>
+
+    <div>
+        <label for="signup__building"><span>Building</span></label>
+        <input id="signup__building" type="number" name="building" placeholder="Building" required>
+    </div>
+
+    <div>
+        <label for="signup__zipcode"><span>Zipcode</span></label>
+        <input id="signup__zipcode" type="number" name="zipcode" placeholder="Zipcode" required>
+    </div>
+
+    <div>
+        <input type="submit" value="Sign up">
+    </div>
+</form>
+<p>Already a member? <a href="/">Log in</a></p>
+</div>
+{% endblock %}
