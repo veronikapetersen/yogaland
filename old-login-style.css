@@ -1,0 +1,44 @@
+
+
+  /* Color Theme Swatches in Hex */
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-1-hex { color: #e38817; }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-2-hex { color: #F2E2CE; }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-3-hex { color: #F2B988; }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-4-hex { color: #a94521; }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-5-hex { color: #404040; }
+  
+  /* Color Theme Swatches in RGBA */
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-1-rgba { color: rgba(242, 167, 75, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-2-rgba { color: rgba(242, 225, 205, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-3-rgba { color: rgba(242, 185, 135, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-4-rgba { color: rgba(165, 91, 64, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-5-rgba { color: rgba(63, 63, 63, 1); }
+  
+  /* Color Theme Swatches in HSLA */
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-1-hsla { color: hsla(33, 86, 62, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-2-hsla { color: hsla(33, 58, 87, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-3-hsla { color: hsla(28, 80, 74, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-4-hsla { color: hsla(16, 43, 45, 1); }
+  .silhouette-fitness-girl-practicing-yoga-on-mountain-5-hsla { color: hsla(0, 0, 25, 1); }
+
+  
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #F2E2CE;
+}
+  
+  .fonts {
+    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto Serif', serif;
+  }
+  
+#login {
+    background-color: white;
+}
