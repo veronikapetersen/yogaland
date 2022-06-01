@@ -1,4 +1,5 @@
 var express = require('express');
+const session = require('express-session');
 var router = express.Router();
 const { Client } = require('pg');
 let client;
@@ -12,70 +13,77 @@ function createClient() {
 }
 
 
-// GET home page.
+
+// GET login page.
 router.get('/', function (req, res, next) {
   res.render('login', { title: 'YogaLand' });
 });
 
 
+// GET index page
 router.get('/index', function (req, res, next) {
-  res.render('index', { title: 'YogaLand' });
+  console.log("rendering index page");
+  //  initialize session:
+  let session = req.session;
+  if (req.session.loggedin){
+    console.log("logged in");
+    let data = session.result;
+    res.render('index', { title: 'YogaLand', name: data.rows[0].user_first_name});
+  }else{
+    res.render('/');
+  }
 });
 
+
+router.get('/logout', function (req, res, next) {
+  req.session.loggedin = false;
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect('/')
+  });
+})
+
+
+// POST routes
+router.post('/login', function (req, res, next) {
+  createClient();
+  let useremail = req.body.useremail;
+  let password = req.body.password;
+  console.log(useremail, password);
+  if (useremail && password) {
+    client.connect();
+    client.query("SELECT * FROM public.users WHERE user_email = $1 AND user_pw = $2",
+      [useremail, password], function (err, result) {
+        if (err) throw err;
+        console.log("length: ", result.rows.length);
+        if (result.rows.length > 0) {
+          // initialize session
+          let session = req.session;
+          req.session.loggedin = true;
+          session.result = result;
+          console.log(session.result);
+          res.redirect('/index');
+          client.end();
+        }
+        else {
+          console.log("no user found");
+          client.end();
+        }
+      });
+  }
+});
 
 
 
 router.get('/show_data', function (req, res, next) {
   createClient();
   client.connect();
-  client.query('SELECT * FROM public.users', (err, res) => {
+  client.query('SELECT * FROM public.users', (err, result) => {
     if (err) throw err;
-    let data = JSON.stringify(res.rows);
-    console.log(data);
-  })
-  client.end();
-})
-
-
-// POST routes
-router.post('/login', function (req, res, next) {
-
-  function login() {
-    createClient();
-    let useremail = req.body.useremail;
-    let password = req.body.password;
-    client.connect(function (err) {
-      client.query("SELECT * FROM public.users WHERE user_email = $1 AND user_pw = $2", [useremail, password], function (err, result) {
-        if (err) throw err;
-        let data = JSON.stringify(result.rows);
-        console.log(data);
-        res.send(data);
-      });
-    });
+    let data = JSON.stringify(result.rows);
     client.end();
-  };
-
-  login();
-});
-
-// if (error) throw error;
-
-// 		if (results.length > 0) {
-// 			request.session.loggedin = true;
-// 			request.session.useremail = useremail;
-// 			// response.redirect('/index');
-//       console.log("hey");
-// 		} else {
-// 			response.send('Incorrect Username and/or Password!');
-// 		}			
-// 		response.end();
-// 	});
-// } else {
-// 	response.send('Please enter Username and Password!');
-// 	response.end();
-// }
-
-// }
-// )
+    res.send(data);
+  })
+})
 
 module.exports = router;

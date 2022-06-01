@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'supertopsecret',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }));
 
