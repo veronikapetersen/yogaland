@@ -16,7 +16,7 @@ function createClient() {
 
 // GET login page.
 router.get('/', function (req, res, next) {
-  res.render('login', { title: 'YogaLand' });
+  res.render('login', { title: 'YogaLand'});
 });
 
 
@@ -60,35 +60,42 @@ router.get('/show_data', function (req, res, next) {
 
 
 
-
-
-
 // POST routes
 router.post('/login', function (req, res, next) {
   createClient();
   let useremail = req.body.useremail;
   let password = req.body.password;
+  let instructor = req.body.instructor_login;
   if (useremail && password) {
     client.connect();
-    client.query("SELECT * FROM public.users WHERE user_email = $1 AND user_pw = $2",
-      [useremail, password], function (err, result) {
-        if (err) throw err;
-        if (result.rows.length > 0) {
-          // initialize session
-          let session = req.session;
-          req.session.loggedin = true;
-          session.result = result;
-          res.redirect('/index');
-          client.end();
-        }
-        else {
-          client.end();
-        }
-      });
+    let sql;
+    if (instructor) {
+      sql = "SELECT * FROM public.instructors WHERE instructor_email = $1 AND instructor_pw = $2"
+    } else {
+      sql = "SELECT * FROM public.users WHERE user_email = $1 AND user_pw = $2"
+    }
+    client.query(sql, [useremail, password], function (err, result) {
+      if (err) throw err;
+      if (result.rows.length > 0) {
+        // initialize session
+        let session = req.session;
+        req.session.loggedin = true;
+        session.result = result;
+        res.redirect('/index');
+        client.end();
+      }
+      else {
+        console.log("user not found");
+        client.end();
+        // store the error message 
+        // pass it to the frontend with the request response method inside a function
+        // look up the example in html banners tool
+        document.querySelector("#error_msg").innerHTML="wrong credentials";
+        // res.render('/', { error_message: 'wrong credentials'});
+      }
+    });
   }
 });
-
-
 
 router.post('/signup', function (req, res, next) {
   createClient();
@@ -99,23 +106,25 @@ router.post('/signup', function (req, res, next) {
   let signup_street = req.body.street;
   let signup_building = req.body.building;
   let signup_zipcode = req.body.zipcode;
+  let instructor = req.body.instructor_signup;
 
-  console.log("email:", signup_useremail, "pw:", signup_password,
-    "first name:", signup_first_name, "last name:", signup_last_name,
-    "address:", signup_street, signup_building, "zipcode:", signup_zipcode);
-
-    if (signup_useremail && signup_password && signup_first_name && signup_last_name && signup_street && signup_building && signup_zipcode) {
-      client.connect();
-      client.query("INSERT INTO public.users (user_email, user_pw, user_first_name, user_last_name, user_street, user_building, user_zipcode) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-      [signup_useremail, signup_password, signup_first_name, signup_last_name, signup_street, signup_building, signup_zipcode], function (err, result) {
+  if (signup_useremail && signup_password && signup_first_name && signup_last_name && signup_street && signup_building && signup_zipcode) {
+    client.connect();
+    let sql;
+    if (instructor) {
+      sql = "INSERT INTO public.instructors (instructor_email, instructor_pw, instructor_first_name, instructor_last_name, instructor_street, instructor_building, instructor_zipcode) VALUES ($1, $2, $3, $4, $5, $6, $7)";
+    } else {
+      sql = "INSERT INTO public.users (user_email, user_pw, user_first_name, user_last_name, user_street, user_building, user_zipcode) VALUES ($1, $2, $3, $4, $5, $6, $7)";
+    }
+    client.query(sql, [signup_useremail, signup_password, signup_first_name, signup_last_name, signup_street, signup_building, signup_zipcode], function (err, result) {
         if (err) throw err;
         if (result.rowCount.length > 0) {
           res.send("user created!");
           client.end();
           console.log("user added");
         }
-      }) 
-    }
+      })
+  }
 });
 
 module.exports = router;

@@ -31,9 +31,13 @@
                 </div>
 
                 <div>
+                <label><input id="instructor_login" name="instructor_login" type="checkbox">Log in as yoga instructor</label>
+                </div>
+                <div>
                     <input class="submit_btn" type="submit" value="Log In">
                 </div>
             </form>
+            <div id="error_msg"></div>
         </div>
         <div class="form-container signup-container">
             <form action="/signup" method="post">
@@ -79,7 +83,9 @@
                         <input id="signup__zipcode" type="number" name="zipcode" placeholder="Zipcode" required>
                     </label>
                 </div>
-
+                <div>
+                    <label><input id="instructor_signup" name="instructor_signup" type="checkbox">Sign up as yoga instructor</label>
+                    </div>
                 <div>
                     <input class="submit_btn" type="submit" value="Sign up">
                 </div>
