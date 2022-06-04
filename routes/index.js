@@ -77,23 +77,49 @@ router.get('/show_data', function (req, res, next) {
 
 
 router.get(`/index/classes/*`, function (req, res, next) {
-  
+
   let query = req.query;
-  let body = req.body;
-  let params = req.params;
-  console.log("query: ", query, "body: ", body, "params: ", params);
+  // let body = req.body;
+  // let params = req.params;
+  // console.log("query: ", query, "body: ", body, "params: ", params);
+  console.log("query: ", query);
+  let count = 0;
+  let where = 'WHERE ';
+  let paramsArray = [];
 
-return res.send(true);
+  for (const key in query) {
+    // console.log(`${key}: ${query[key]}`);
 
-  // createClient();
-  // client.connect();
-  // client.query('SELECT * FROM public.classes', (err, result) => {
-  //   if (err) throw err;
-  //   let data = JSON.stringify(result.rows);
-  //   client.end();
-  //   res.json(data);
-  // return res.send(data)
-  // })
+    if (Array.isArray(query[key])) {
+      query[key].forEach(x => {
+        paramsArray.push(x);
+        if (count > 0) {
+          where += ' OR '
+        }
+        where += key + `=$` + ++count;
+      });
+    }else{
+      paramsArray.push(query[key]);
+      if (count > 0) {
+        where += ' OR '
+      }
+      where += key + `=$` + ++count;
+    }
+
+  }
+
+  console.log("params array:", paramsArray);
+  createClient();
+  client.connect();
+  client.query('SELECT * FROM public.classes ' + where, paramsArray, (err, result) => {
+    if (err) throw err;
+    let data = JSON.stringify(result.rows);
+    client.end();
+    res.json(data);
+    // console.log(data);
+    // return res.send(data)
+  })
+  // return res.send(true);
 })
 
 

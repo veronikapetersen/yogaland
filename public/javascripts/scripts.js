@@ -1,4 +1,4 @@
-// document.querySelector("#show_users").addEventListener('click', show_users);
+document.querySelector("#show_users").addEventListener('click', show_users);
 
 async function show_users() {
     try {
@@ -68,13 +68,17 @@ checkboxes.forEach(checkbox => {
 
         function updateClassList() {
 
-            query = url;
-            // const response = await fetch(`/index/classes/${query}`)
+            query = url;  
             const response = fetch(url)
             .then(response => response.json())
-            .then(data => classes = data);
+            .then(data => 
+                {
+                    classes_obj = data;
+                    document.querySelector("#classes").innerHTML = classes_obj;
+                }
+                );
             
-            document.querySelector("#classes").innerHTML = classes;
+            console.log(classes_obj);
         }
         updateClassList();
 
