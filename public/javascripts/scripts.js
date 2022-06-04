@@ -1,4 +1,4 @@
-document.querySelector("#show_users").addEventListener('click', show_users);
+// document.querySelector("#show_users").addEventListener('click', show_users);
 
 async function show_users() {
     try {
@@ -11,6 +11,87 @@ async function show_users() {
         console.error(err);
     }
 }
+
+document.querySelector("#show_classes_btn").addEventListener('click', show_classes);
+
+async function show_classes() {
+    try {
+        const response = await fetch(`/classes`)
+            .then(response => response.json())
+            .then(data => classes = data);
+        document.querySelector("#classes").innerHTML = classes;
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
+
+
+// async function test() {
+//     const response = await fetch(`/parameters/*`);
+//     console.log(response);
+// }
+
+// array with selected checkboxes 
+let array = [];
+var checkboxes = document.querySelectorAll(".checkbox");
+
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+
+        if (checkbox.checked == true) {
+            array.push({ key: checkbox.dataset.key, value: checkbox.dataset.value });
+        } else {
+            array = array.filter(a => a.value !== checkbox.dataset.value);
+        }
+        console.log(array);
+
+        let url = new URL(window.location.href+'/classes/');
+
+        if (url.searchParams) {
+
+            for (var key of url.searchParams.keys()) {
+                url.searchParams.delete(key);
+
+            }
+        }
+
+        array.forEach(arrayItem => {
+            url.searchParams.append(arrayItem.key, arrayItem.value);
+
+        })
+
+
+        console.log(url);
+
+
+        function updateClassList() {
+
+            query = url;
+            // const response = await fetch(`/index/classes/${query}`)
+            const response = fetch(url)
+            .then(response => response.json())
+            .then(data => classes = data);
+            
+            document.querySelector("#classes").innerHTML = classes;
+        }
+        updateClassList();
+
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
