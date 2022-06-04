@@ -54,7 +54,8 @@ router.get('/show_data', function (req, res, next) {
     if (err) throw err;
     let data = JSON.stringify(result.rows);
     client.end();
-    res.send(data);
+    res.json(data);
+    // return res.send(data)
   })
 })
 
