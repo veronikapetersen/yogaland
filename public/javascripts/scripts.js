@@ -87,6 +87,7 @@ checkboxes.forEach(checkbox => {
                                         <span class="material-symbols-outlined">self_improvement</span>
                                         ${singleObject.instructor_first_name} 
                                         ${singleObject.instructor_last_name} 
+                                        <span class="material-symbols-outlined">double_arrow</span>
                                     </div>
                                     <div class="single_class_capacity grey">
                                         <span class="material-symbols-outlined">groups</span>

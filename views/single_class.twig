@@ -2,10 +2,46 @@
 
 {% block body %}
 
-<div id="testing_single_class">{{data.class_capacity}}</div>
-
+{# <div id="testing_single_class">{{data.class_capacity}}</div> #}
 
 
 {# <div id="class_title" class=""></div> #}
-<img class="single_class_cover_photo" src="/images/pexels-andrea-piacquadio-3757955.jpg" alt="yoga_class">
+<section id="class_page_container">
+
+    <div id="class_page_top">
+        <div id="class_page_image_wrapper">
+            <img id="class_page_image" src="/images/pexels-andrea-piacquadio-3757955.jpg" alt="yoga_class">
+        </div>
+
+        <div id="class_page_main_info">
+            <div id="class_page_title">Hatha yoga class</div>
+            <div class="class_page_instructor">with <span class="class_page_instructor grey">Trine Nielsen</span></div>
+            <div class="class_page_date_time">
+                <div><span class="material-symbols-outlined">event</span> 22.06.2022</div>
+                <div><span class="material-symbols-outlined">schedule</span> 16:00</div>
+            </div>
+        </div>
+    </div>
+
+        <div id="class_page_extra_info">
+            <div class="class_page_location grey">Location: 
+                <span class="class_page_studio grey">Yoga Studio XYZ</span>
+                <span class="class_page_street grey">Amagerbrogade</span>
+                <span class="class_page_building grey">72</span>,
+                <span class="class_page_zipcode grey">2300</span>
+            </div>
+            <div class="class_page_class_description grey">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit eleifend lacus et pretium. Cras nec lobortis eros. Praesent interdum cursus justo vel egestas. Nam dictum hendrerit mauris, ornare egestas urna faucibus at. Pellentesque ex urna, imperdiet a ornare at, vestibulum in est. Aenean et nunc pretium leo blandit commodo. Fusce congue risus id condimentum euismod. Nam aliquet, tellus id posuere sagittis, magna justo vulputate lacus, ac fringilla mi nunc vitae tellus. Duis non hendrerit magna, sit amet pellentesque urna. Maecenas semper tortor nisi, quis sollicitudin neque varius aliquet. Praesent lobortis massa eros, ut sodales magna semper vel. Nam sapien purus, condimentum id neque eu, aliquet ullamcorper tortor. Sed sagittis magna a nibh pulvinar ullamcorper.
+            </div>
+          
+            <div class="class_page_price">120 DKK</div>
+            <button>add to basket</button>
+            <div class="class_page_ratings grey">4.5 rating</div>
+        </div>
+
+
+</section>
+
+
+
 {% endblock %}

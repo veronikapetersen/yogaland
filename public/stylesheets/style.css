@@ -260,9 +260,39 @@ body {
   height: auto;
 }
 
+/* class page - start */
+#class_page_container {
+  font-family: 'Lato', sans-serif;
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  flex-direction: column;
+}
 
-/* single class - separate page */
-.single_class_cover_photo {
-  width: 150px;
+#class_page_image {
+  width: 300px;
   height: auto;
 }
+
+#class_page_top {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#class_page_main_info {
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#class_page_title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.class_page_date_time {
+  font-size: 2rem;
+}
+/* class page - end */
