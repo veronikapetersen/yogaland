@@ -3,25 +3,24 @@
 {% block body %}
 
 <div>hello {{ name }}</div>
-
+<span class="material-symbols-outlined">account_circle</span>
 <a href="/logout">Log out</a>
-<br>
-<br>
-<br>
+{# <button id="show_users">show users</button> #}
 
-<button id="show_users">show users</button>
-
-<div id="users"></div>
+{# <div id="users"></div> #}
 
 
 <div id="home_page_container">
 
     <div id="filters_wrapper">
         <div>Yoga Type
-            <div  class="filters_checkboxes">
-                <label><input class="checkbox" data-key="class_type" data-value="hatha" id="hatha" name="hatha" type="checkbox">hatha yoga</label>
-                <label><input class="checkbox" data-key="class_type" data-value="flow" id="flow" name="flow" type="checkbox">flow yoga</label>
-                <label><input class="checkbox" data-key="class_type" data-value="prenatal" id="prenatal" name="prenatal" type="checkbox">prenatal yoga</label>
+            <div class="filters_checkboxes">
+                <label><input class="checkbox" data-key="class_type" data-value="hatha" id="hatha" name="hatha"
+                        type="checkbox">hatha yoga</label>
+                <label><input class="checkbox" data-key="class_type" data-value="flow" id="flow" name="flow"
+                        type="checkbox">flow yoga</label>
+                <label><input class="checkbox" data-key="class_type" data-value="prenatal" id="prenatal" name="prenatal"
+                        type="checkbox">prenatal yoga</label>
             </div>
         </div>
 
@@ -29,52 +28,83 @@
 
         <div>Time
             <div class="filters_checkboxes">
-                <label><input class="checkbox" data-key="time" data-value="morning" id="morning" name="morning" type="checkbox">6:00 - 12:00</label>
-                <label><input class="checkbox" data-key="time" data-value="afternoon" id="afternoon" name="afternoon" type="checkbox">12:00-18:00</label>
-                <label><input class="checkbox" data-key="time" data-value="evening" id="evening" name="evening" type="checkbox">18:00-22:00</label>
+                <label><input class="checkbox" data-key="class_time" data-value="morning" id="morning" name="morning"
+                        type="checkbox">6:00 - 12:00</label>
+                <label><input class="checkbox" data-key="class_time" data-value="afternoon" id="afternoon"
+                        name="afternoon" type="checkbox">12:00-18:00</label>
+                <label><input class="checkbox" data-key="class_time" data-value="evening" id="evening" name="evening"
+                        type="checkbox">18:00-22:00</label>
             </div>
         </div>
 
-        <div>Location
+
+
+        <div>Language
             <div class="filters_checkboxes">
-                <label><input class="checkbox" id="indoor" name="indoor" type="checkbox">Indoor</label>
-                <label><input class="checkbox" id="outdoor" name="outdoor" type="checkbox">Outdoor</label>
+                <label><input class="checkbox" data-key="class_language" data-value="English" id="english" name="english"
+                        type="checkbox">English</label>
+                <label><input class="checkbox" data-key="class_language" data-value="Danish" id="danish"
+                        name="danish" type="checkbox">Danish</label>
             </div>
         </div>
 
-        <div>Day of the Week
+
+        {# <div>Location
             <div class="filters_checkboxes">
-                <label><input class="checkbox" id="monday" name="monday" type="checkbox">Mon</label>
-                <label><input class="checkbox" id="tuesday" name="tuesday" type="checkbox">Tue</label>
-                <label><input class="checkbox" id="wednesday" name="wednesday" type="checkbox">Wed</label>
-                <label><input class="checkbox" id="thursday" name="thursday" type="checkbox">Thu</label>
-                <label><input class="checkbox" id="friday" name="friday" type="checkbox">Fri</label>
-                <label><input class="checkbox" id="saturday" name="saturday" type="checkbox">Sat</label>
-                <label><input class="checkbox" id="sunday" name="sunday" type="checkbox">Sun</label>
+                <label><input class="checkbox" data-key="class_in_outdoor" data-value="indoor" id="indoor" name="indoor"
+                        type="checkbox">Indoor</label>
+                <label><input class="checkbox" data-key="class_in_outdoor" data-value="outdoor" id="outdoor"
+                        name="outdoor" type="checkbox">Outdoor</label>
             </div>
-        </div>
+        </div> #}
+
+        {# <div>Day of the Week
+            <div class="filters_checkboxes">
+                <label><input class="checkbox" data-key="class_day" data-value="monday" id="monday" name="monday"
+                        type="checkbox">Mon</label>
+                <label><input class="checkbox" data-key="class_day" data-value="tuesday" id="tuesday" name="tuesday"
+                        type="checkbox">Tue</label>
+                <label><input class="checkbox" data-key="class_day" data-value="wednesday" id="wednesday"
+                        name="wednesday" type="checkbox">Wed</label>
+                <label><input class="checkbox" data-key="class_day" data-value="thursday" id="thursday" name="thursday"
+                        type="checkbox">Thu</label>
+                <label><input class="checkbox" data-key="class_day" data-value="friday" id="friday" name="friday"
+                        type="checkbox">Fri</label>
+                <label><input class="checkbox" data-key="class_day" data-value="saturday" id="saturday" name="saturday"
+                        type="checkbox">Sat</label>
+                <label><input class="checkbox" data-key="class_day" data-value="sunday" id="sunday" name="sunday"
+                        type="checkbox">Sun</label>
+            </div>
+        </div> #}
 
         <div>Price
             <div class="filters_checkboxes">
-                <label><input class="checkbox" id="cheap" name="cheap" type="checkbox">under 100DKK</label>
-                <label><input class="checkbox" id="average" name="average" type="checkbox">100-200DKK</label>
-                <label><input class="checkbox" id="pricy" name="pricy" type="checkbox">200DKK+</label>
+                <label><input class="checkbox" data-key="class_price" data-value="cheap" id="cheap" name="cheap"
+                        type="checkbox">under 100DKK</label>
+                <label><input class="checkbox" data-key="class_price" data-value="average" id="average" name="average"
+                        type="checkbox">100-200DKK</label>
+                <label><input class="checkbox" data-key="class_price" data-value="pricy" id="pricy" name="pricy"
+                        type="checkbox">200DKK+</label>
             </div>
         </div>
-        
+
         <div>Duration
             <div class="filters_checkboxes">
-                <label><input class="checkbox" id="30min" name="30min" type="checkbox">30 min</label>
-                <label><input class="checkbox" id="45min" name="45min" type="checkbox">45 min</label>
-                <label><input class="checkbox" id="60min" name="60min" type="checkbox">60 min</label>
-                <label><input class="checkbox" id="90min" name="90min" type="checkbox">90 min</label>
+                <label><input class="checkbox" data-key="class_duration" data-value="30" id="30min" name="30min"
+                        type="checkbox">30 min</label>
+                <label><input class="checkbox" data-key="class_duration" data-value="45" id="45min" name="45min"
+                        type="checkbox">45 min</label>
+                <label><input class="checkbox" data-key="class_duration" data-value="60" id="60min" name="60min"
+                        type="checkbox">60 min</label>
+                <label><input class="checkbox" data-key="class_duration" data-value="90" id="90min" name="90min"
+                        type="checkbox">90 min</label>
             </div>
         </div>
     </div>
 
     <div id="search_results_wrapper">
-        <div id="search_results">search results
-            <button id="show_classes_btn">show classes</button>
+        <div id="search_results">
+            {# <button id="show_classes_btn">show classes</button> #}
             <div id="classes"></div>
         </div>
         <div id="map">map</div>
