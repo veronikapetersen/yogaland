@@ -35,6 +35,11 @@ nav {
   font-size: 20px;
 }
 
+.checkout {
+  display: flex;
+  align-items: center;
+}
+
 #dropdown_menu {
   position: absolute;
   z-index: 1;
@@ -50,7 +55,7 @@ nav {
   text-decoration: none;
 }
 
-#my_profile_icon:hover + #dropdown_menu {
+#my_profile_icon:hover+#dropdown_menu {
   display: block;
 }
 
@@ -280,7 +285,18 @@ body {
 }
 
 #class_page_main_info {
-  margin: 0 10px;
+  margin: 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.class_page_col_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.class_page_col_right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -292,7 +308,132 @@ body {
   font-weight: bold;
 }
 
+.class_page_instructor {
+  font-size: 20px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.class_page_instructor:hover span {
+  color: black;
+}
+
 .class_page_date_time {
-  font-size: 2rem;
+  font-size: 1.8rem;
+}
+
+.class_page_date_time span {
+  margin-bottom: 10px;
+}
+
+.class_page_price {
+  font-size: 30px;
+}
+
+#class_page_extra_info {
+  margin: 20px 0;
+}
+
+.class_page_extra_info_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.class_page_location {
+  margin: 10px 0 20px 0;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.location_link {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.class_page_studio a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.class_page_studio a:hover {
+  color: black;
+}
+
+.class_page_ratings {
+  margin: 10px 40px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.class_page_ratings div {
+  margin: 0 5px;
+}
+
+.class_page_ratings_number {
+  display: flex;
+  align-items: center;
+}
+
+.pin_drop {
+  margin-right: 5px;
+}
+
+
+.class_page_ratings_reviews a {
+  text-decoration: none;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.class_page_ratings_reviews a:hover {
+  color: black;
+}
+
+.class_page_review_number {
+  margin-left: 3px;
+}
+
+.class_page_class_description {
+  margin-bottom: 20px;
+}
+
+
+.review_wrapper {
+  border-bottom: 0.7px solid grey;
+  padding: 10px 0;
+  display: flex;
+}
+.review_author {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 0.7px solid grey;
+  margin: 30px;
+  padding-left: 10px;
+}
+
+.review_date_time {
+  display: flex;
+}
+
+.review_date_time div {
+  margin: 5px 10px 5px 0;
+  color: rgb(155, 155, 155);
+  font-size: 13px;
+}
+
+.review_title {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.review_text, .review_author {
+  font-size: 15px;
 }
 /* class page - end */
