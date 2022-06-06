@@ -7,12 +7,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100;0,8..144,200;0,8..144,300;0,8..144,400;0,8..144,600;1,8..144,100;1,8..144,200;1,8..144,300;1,8..144,400;1,8..144,600&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-  
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
 
-    
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -42,12 +45,43 @@
   {% block body %}{% endblock %}
   {% block footer %}
   <footer>
-    footer here
+    <div class="footer_columns">
+
+      <div class="footer_col_left">
+        <div class="footer_col_heading">Support</div>
+        <ul>
+          <li>Help Center</li>
+          <li>Safety Information</li>
+          <li>Cancellation Policy</li>
+        </ul>
+      </div>
+
+      <div class="footer_col_mid">
+        <div class="footer_col_heading">Community</div>
+        <ul>
+          <li>Meetups</li>
+          <li>Staying in touch</li>
+          <li>Retreats</li>
+        </ul>
+      </div>
+
+      <div class="footer_col_right">
+        <div class="footer_col_heading">About</div>
+        <ul>
+          <li>Newsroom</li>
+          <li>New features</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+    
+    </div>
+
+
   </footer>
   {% endblock %}
 
   <script src="/javascripts/scripts.js"></script>
-  
+
 </body>
 
 </html>

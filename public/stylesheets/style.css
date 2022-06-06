@@ -408,6 +408,7 @@ body {
   padding: 10px 0;
   display: flex;
 }
+
 .review_author {
   width: 20%;
   display: flex;
@@ -433,7 +434,50 @@ body {
   font-weight: bold;
 }
 
-.review_text, .review_author {
+.review_text,
+.review_author {
   font-size: 15px;
 }
+
 /* class page - end */
+
+
+
+/* footer - start */
+footer {
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  font-family: 'Lato', sans-serif;
+  padding: 40px 0;
+}
+
+.footer_columns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer_col_heading {
+  font-weight: bold;
+  color: rgb(215, 215, 215, 0.9);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer_columns div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.footer_columns ul {
+  list-style: none;
+}
+
+.footer_columns ul li {
+  margin: 0;
+  padding: 10px 0;
+  color: rgb(215, 215, 215, 0.7);
+}
+
+/* footer - end */
