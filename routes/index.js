@@ -26,6 +26,11 @@ router.get('/signup', function (req, res, next) {
 });
 
 
+router.get('/instructor', function (req, res, next) {
+  res.render('instructor', { title: 'YogaLand' });
+});
+
+
 // GET index page
 router.get('/index', function (req, res, next) {
   // for testing purposes - render home page without being logged in

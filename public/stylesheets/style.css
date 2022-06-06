@@ -175,6 +175,7 @@ body {
   background-color: #e38817;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
+
 }
 
 .hover-underline-animation:hover:after {
@@ -481,3 +482,175 @@ footer {
 }
 
 /* footer - end */
+
+
+/* instructor page - start */
+#instructor_page_container {
+  font-family: 'Lato', sans-serif;
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+#instructor_page_top {
+  display: flex;
+  justify-content: space-around;
+}
+
+.instructor_page_top_col_left {
+  display: flex;
+}
+
+.instructor_page_top_col_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.favourite {
+  display: flex;
+  align-items: center;
+}
+
+.favourite span {
+  margin-right: 5px;
+  transition: transform 80ms ease-in;
+}
+
+.favourite span:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.favourite span:active {
+  cursor: pointer;
+  transform: scale(0.8);
+}
+
+#instructor_page_image {
+  width: 150px;
+  border-radius: 100px;
+}
+
+#instructor_page_info_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.instr_name {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.instr_title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 10px 10px;
+}
+
+.upcoming {
+  display: flex;
+}
+
+.upcoming a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#instructor_page_main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.instructor_page_main_col_left {
+  font-size: 1.5rem;
+  width: 60%;
+}
+
+.instructor_page_main_col_right {
+  width: 30%;
+}
+
+.instructor_page_main_col_right ul {
+  margin-bottom: 10px;
+}
+
+.instructor_page_main_col_right .instructor_page_studio a {
+  text-decoration: none;
+}
+
+.col_right_heading {
+  margin-bottom: 10px;
+}
+
+.col_left_row {
+  margin-bottom: 15px;
+}
+
+.reviews_mini {
+  height: 220px;
+  overflow-y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  background-color: white;
+  padding: 0 15px;
+  border-radius: 5px;
+}
+
+.review_mini_wrapper {
+  border-bottom: 0.7px solid grey;
+  padding: 15px 0;
+}
+
+.reviews_mini:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.review_mini_author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 0.7px solid grey;
+  padding-left: 10px;
+}
+
+#instructor_upcoming_classes {
+  margin: 30px 0;
+}
+
+.instructor_upcoming_classes__heading {
+  padding-bottom: 10px;
+  border-bottom: 0.7px solid grey;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.upcoming_class {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  background-color: white;
+  padding: 30px 15px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.upcoming_class:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.upcom_class_container {
+  display: flex;
+}
+
+.upcom_class_container a {
+  text-decoration: none;
+}
+.upcom_class_col_left, .upcom_class_col_right {
+  margin-right: 10px;
+}
+/* instructor page - end */
