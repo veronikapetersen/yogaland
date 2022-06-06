@@ -355,7 +355,7 @@ body {
   margin-right: 10px;
 }
 
-.location_link:hover span a{
+.location_link:hover span a {
   color: black;
 }
 
@@ -666,19 +666,11 @@ footer {
   justify-content: flex-end;
 }
 
-.upcom_class_col_right div {
-  /* padding-bottom: 10px; */
-}
-
 .upcom_class_col_left {
   margin-right: 30px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
-
-.upcom_class_col_left div {
-  /* padding-bottom: 10px; */
 }
 
 .weekday {
@@ -723,3 +715,259 @@ footer {
 }
 
 /* instructor page - end */
+
+/* home page for instructors - start */
+#home_instr_top {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  font-family: 'Lato', sans-serif;
+}
+
+.home_instr_top__col_left {
+  width: 60%;
+  padding: 20px;
+}
+
+.home_instr_top__col_right {
+  padding: 20px;
+}
+
+.home_instr_upcom_title {
+  font-size: 2rem;
+}
+
+.edit_icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit_icon .material-symbols-outlined {
+  transition: transform 80ms ease-in;
+}
+
+.edit_icon:hover {
+  cursor: pointer;
+}
+
+.edit_icon:hover .material-symbols-outlined {
+  color: black;
+  transform: scale(1.2);
+}
+
+.edit_icon:active .material-symbols-outlined {
+  transform: scale(0.8);
+}
+
+.home_instr_upcom_classes_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  background-color: white;
+  padding: 30px 15px;
+  border-radius: 5px;
+  margin: 30px 0;
+}
+
+.home_instr_upcom_classes_wrapper:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.upcom_class_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upcom_class_container a {
+  text-decoration: none;
+}
+
+.home_instr_upcom_class_cont {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  background-color: white;
+  padding: 20px 15px;
+  border-radius: 5px;
+  margin: 30px 0;
+}
+
+.home_instr_upcom_class_cont:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.home_instr_upcom_class_col_left {
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.home_instr_upcom_class_col_left>div {
+  margin-bottom: 5px;
+}
+
+.upcoming_class_title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.home_instr_upcom_class_col_right {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.home_instr_upcom_class_col_right>div {
+  margin-bottom: 5px;
+}
+
+.home_instr_location_link {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.home_instr_location_link a {
+  text-decoration: none;
+}
+
+.home_instr_location_link:hover span a {
+  color: black;
+}
+
+.home_instr_attention {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: black;
+}
+
+.home_instr_attention-icon {
+  margin-right: 5px;
+}
+
+#home_instr_see_all_btn,
+#home_instr_create_event_btn,
+#home_instr_create_class_btn {
+  border-radius: 20px;
+  border: 1px solid #e38817;
+  background-color: #e38817;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+#home_instr_see_all_btn:active,
+#home_instr_create_event_btn:active,
+#home_instr_create_class_btn:active {
+  transform: scale(0.95);
+}
+
+#home_instr_see_all_btn:hover,
+#home_instr_create_event_btn:hover,
+#home_instr_create_class_btn:hover {
+  cursor: pointer;
+}
+
+.create_new_container {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.create_new_container:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.create_new__text {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.create_new__title {
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#home_instr__dynamic_content {
+  margin: 20px 0;
+}
+
+#new_class_form_wrapper,
+#new_event_form_wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  width: 70%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+.title {
+  color: black;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  /* margin-top: 30px; */
+}
+
+.input-container {
+  height: 50px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.input {
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+
+
+.submit {
+  background-color: #a94521;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  transform: scale(0.95);
+}
+
+
+
+
+
+
+/* home page for instructors - end */

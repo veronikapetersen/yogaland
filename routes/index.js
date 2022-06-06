@@ -20,14 +20,16 @@ router.get('/', function (req, res, next) {
   res.render('login', { title: 'YogaLand' });
 });
 
-
 router.get('/signup', function (req, res, next) {
   res.render('signup', { title: 'YogaLand' });
 });
 
-
 router.get('/instructor', function (req, res, next) {
   res.render('instructor', { title: 'YogaLand' });
+});
+
+router.get('/home_instructor', function (req, res, next) {
+  res.render('home_instructor', { title: 'YogaLand', whoami: ': Instructors' });
 });
 
 
