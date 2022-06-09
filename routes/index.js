@@ -1,11 +1,11 @@
 var express = require('express');
 const session = require('express-session');
 var router = express.Router();
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
+
+
 const { Client } = require('pg');
 let client;
-
-// Connect to db
 function createClient() {
   client = new Client({
     connectionString: 'postgres://tbfnnuirlbjgnp:1fba8e67df7a5cd9db62a91904e224de773d0deaeed315be1c29bee90e6b84ca@ec2-34-242-84-130.eu-west-1.compute.amazonaws.com:5432/d9cf4rej73i41r',
@@ -191,7 +191,7 @@ router.post('/signup', function (req, res, next) {
   let signup_useremail = req.body.signup_useremail;
   
   const saltRounds = 10;
-  const salt = bcrypt.genSaltSync(saltRounds);
+  // const salt = bcrypt.genSaltSync(saltRounds);
 
   let signup_password = req.body.password;
   let signup_first_name = req.body.first_name;
