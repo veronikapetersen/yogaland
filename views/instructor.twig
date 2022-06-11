@@ -2,9 +2,6 @@
 
 {% block body %}
 
-{# <div id="testing_single_class">{{data.class_capacity}}</div> #}
-
-
 <section id="instructor_page_container">
     <div id="instructor_page_top">
         <div class="instructor_page_top_col_left">
@@ -37,17 +34,13 @@
         <div class="instructor_page_main_col_left">
             <div class="col_left_row">Experience: {{experience}} years </div>
             <div class="col_left_row">Ratings: 4.9 </div>
-            <div class="col_left_row">Reviews:</div>
-
-         
-            
+            <div class="col_left_row">Reviews:</div>            
             <div class="reviews_mini">
                 {% for review in reviews %}
                 <div class="review_mini_wrapper">
                     <div class="review_info">
                         <div class="review_date_time">
                             <div class="review_date">{{review.review_date|date("d/m/Y")}}</div>
-                            {# <div class="review_date">{{review.review_date}}</div> #}
                             <div class="review_time">{{review.review_time}}</div>
                             <div class="review_mini_author grey">{{review.user_first_name}} {{review.user_last_name}}</div>
                         </div>
@@ -58,15 +51,8 @@
                             {{review.review_text}}
                         </div>
                     </div>
-                    
-                    
                 </div>
                 {% endfor %}
-
-  
-
-
-
             </div>
         </div>
 
@@ -110,123 +96,51 @@
         <div class="instructor_upcoming_classes__heading">
             {{first_name}}'s upcoming classes
         </div>
+
+
         <div id="upcoming_classes_wrapper">
+
+            {% for upcomingClass in upcomingClasses %}            
+            
             <div class="upcoming_class_wrapper">
-
-                <div class="upcoming_class_title">Hatha Yoga class 🇺🇸 🇩🇰 </div>
-
+                <div class="upcoming_class_title"> {{upcomingClass.class_type}} Yoga class 🇺🇸 🇩🇰 </div>
+                
                 <div class="upcom_class_container">
-
+                    
                     <div class="upcom_class_col_left">
-                        <div>29.06.2022</div>
-                        <div>14:00</div>
-                        <div class="grey weekday">Monday</div>
+                        <div> {{upcomingClass.class_date|date("d/m/Y")}} </div>
+                        <div> {{upcomingClass.class_time}} </div>
+                        <div class="grey weekday">{{upcomingClass.class_date|date("l")}} </div>
                     </div>
-
+                    
                     <div class="upcom_class_col_right">
                         <div class="location_link hover-underline-animation">
                             <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
                             <span class="instructor_page_studio">
-                                <a class="grey" href="">Amagerbrogade 23, 2300</a>
+                                <a class="grey" href="">{{upcomingClass.location_street}} {{upcomingClass.location_building}}, {{upcomingClass.location_zipcode}}  </a>
                             </span>
                             <span class="material-symbols-outlined">double_arrow</span>
                         </div>
-
+                        
                         <div class="max_capacity grey">
                             <span class="group_icon material-symbols-outlined">groups</span>
-                            <div>Max <span>12</span> people</div>
+                            <div>Max {{upcomingClass.class_capacity}} people</div>
                         </div>
-
+                        
                         <div class="attention grey">
                             <span class="attention-icon grey material-symbols-outlined">priority_high</span>
-                            <div>4 spots left</div>
+                            <div> {{upcomingClass.class_capacity - upcomingClass.reservations}} spots left</div>
                         </div>
                     </div>
-
+                    
                     <div id="basket" class="single_class_basket">
                         <span class="material-symbols-outlined">shopping_cart</span>Add to basket
                     </div>
-
+                    
                 </div>
             </div>
-            <div class="upcoming_class_wrapper">
-
-                <div class="upcoming_class_title">Hatha Yoga class 🇺🇸 🇩🇰 </div>
-
-                <div class="upcom_class_container">
-
-                    <div class="upcom_class_col_left">
-                        <div>29.06.2022</div>
-                        <div>14:00</div>
-                        <div class="grey weekday">Monday</div>
-                    </div>
-
-                    <div class="upcom_class_col_right">
-                        <div class="location_link hover-underline-animation">
-                            <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
-                            <span class="instructor_page_studio">
-                                <a class="grey" href="">Amagerbrogade 23, 2300</a>
-                            </span>
-                            <span class="material-symbols-outlined">double_arrow</span>
-                        </div>
-
-                        <div class="max_capacity grey">
-                            <span class="group_icon material-symbols-outlined">groups</span>
-                            <div>Max <span>12</span> people</div>
-                        </div>
-
-                        <div class="attention grey">
-                            <span class="attention-icon grey material-symbols-outlined">priority_high</span>
-                            <div>4 spots left</div>
-                        </div>
-                    </div>
-
-                    <div id="basket" class="single_class_basket">
-                        <span class="material-symbols-outlined">shopping_cart</span>Add to basket
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="upcoming_class_wrapper">
-
-                <div class="upcoming_class_title">Hatha Yoga class 🇺🇸 🇩🇰 </div>
-
-                <div class="upcom_class_container">
-
-                    <div class="upcom_class_col_left">
-                        <div>29.06.2022</div>
-                        <div>14:00</div>
-                        <div class="grey weekday">Monday</div>
-                    </div>
-
-                    <div class="upcom_class_col_right">
-                        <div class="location_link hover-underline-animation">
-                            <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
-                            <span class="instructor_page_studio">
-                                <a class="grey" href="">Amagerbrogade 23, 2300</a>
-                            </span>
-                            <span class="material-symbols-outlined">double_arrow</span>
-                        </div>
-
-                        <div class="max_capacity grey">
-                            <span class="group_icon material-symbols-outlined">groups</span>
-                            <div>Max <span>12</span> people</div>
-                        </div>
-
-                        <div class="attention">
-                            <span class="attention-icon material-symbols-outlined">priority_high</span>
-                            <div>4 spots left</div>
-                        </div>
-                    </div>
-
-                    <div id="basket" class="single_class_basket">
-                        <span class="material-symbols-outlined">shopping_cart</span>Add to basket
-                    </div>
-
-                </div>
-            </div>
-
+            
+            {% endfor %}            
 
         </div>
     </div>

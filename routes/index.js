@@ -54,16 +54,58 @@ router.get('/logout', function (req, res, next) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get('/class/:id', function (req, res, next) {
   createClient();
   client.connect();
-  client.query('SELECT * FROM public.classes WHERE class_id = $1', [req.params.id], (err, result) => {
+  client.query('SELECT * FROM public.classes  JOIN public.locations on locations.location_id = classes.location_id JOIN public.instructors on instructors.instructor_id = classes.instructor_id WHERE class_id = $1', [req.params.id], (err, result) => {
     if (err) throw err;
     let data = result.rows[0];
+    console.log(data);
     client.end();
     res.render('single_class', { title: 'YogaLand', data: data });
   })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 router.get('/instructor/:id', function (req, res, next) {
@@ -78,19 +120,41 @@ router.get('/instructor/:id', function (req, res, next) {
     client.query('SELECT * FROM public.reviews JOIN public.users on reviews.user_id = users.user_id WHERE reviews.instructor_id = $1', [req.params.id], (err, result) => {
       if (err) throw err;
       let datareviews = result.rows;
-      client.end();
 
-      res.render('instructor', {
-        title: 'YogaLand',
-        first_name: data.instructor_first_name,
-        last_name: data.instructor_last_name,
-        experience: data.instructor_experience,
-        reviews: datareviews
+
+      //upcoming classes for instructor
+      client.query('SELECT *, (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id) FROM public.classes JOIN public.locations on classes.location_id = locations.location_id WHERE classes.instructor_id = $1', [req.params.id], (err, result) => {
+
+        if (err) throw err;
+        let upcomingClasses = result.rows;
+        console.log(upcomingClasses)
+        
+        client.end();
+        
+        res.render('instructor', {
+          title: 'YogaLand',
+          first_name: data.instructor_first_name,
+          last_name: data.instructor_last_name,
+          experience: data.instructor_experience,
+          reviews: datareviews,
+          upcomingClasses: upcomingClasses
+        });
       });
 
     });
+
   })
 });
+
+
+
+
+
+
+
+
+
+
 
 
 
