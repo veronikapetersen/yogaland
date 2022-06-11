@@ -57,10 +57,24 @@ router.get('/logout', function (req, res, next) {
 })
 
 
-router.get('/show_data', function (req, res, next) {
+
+router.get('/class/id/:id', function (req, res, next) {
   createClient();
   client.connect();
-  client.query('SELECT * FROM public.users', (err, result) => {
+  client.query('SELECT * FROM public.classes WHERE class_id = $1', [req.params.id],  (err, result) => {
+    if (err) throw err;
+    let data = result.rows[0];
+    client.end();
+    res.render('single_class', { title: 'YogaLand', data: data});
+  })
+})
+
+
+router.get('/classes', function (req, res, next) {
+  createClient();
+  client.connect();
+  // client.query('SELECT * FROM public.classes', (err, result) => {
+  client.query('SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id', (err, result) => {
     if (err) throw err;
     let data = JSON.stringify(result.rows);
     client.end();
@@ -68,36 +82,6 @@ router.get('/show_data', function (req, res, next) {
     // return res.send(data)
   })
 })
-
-
-router.get('/class/id/:id', function (req, res, next) {
-  createClient();
-  client.connect();
-  // req.singleObject;
-  client.query('SELECT * FROM public.classes WHERE class_id = $1', [req.params.id],  (err, result) => {
-    if (err) throw err;
-    // let data = JSON.stringify(result.rows);
-    let data = result.rows[0];
-    // res.json(data);
-    client.end();
-    // return res.send(true);
-    res.render('single_class', { title: 'YogaLand', data: data});
-    // return res.send(data)
-  })
-})
-
-
-// router.get('/classes', function (req, res, next) {
-//   createClient();
-//   client.connect();
-//   client.query('SELECT * FROM public.classes', (err, result) => {
-//     if (err) throw err;
-//     let data = JSON.stringify(result.rows);
-//     client.end();
-//     res.json(data);
-//     // return res.send(data)
-//   })
-// })
 
 router.get(`/index/classes/*`, function (req, res, next) {
 
