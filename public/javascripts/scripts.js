@@ -1,6 +1,5 @@
 document.querySelector("#show_classes_btn").addEventListener('click', show_classes);
 
-
 async function show_classes() {
     try {
         const response = await fetch(`/classes`)
@@ -10,6 +9,8 @@ async function show_classes() {
                 let obj = JSON.parse(classes);
                 document.querySelector("#classes").innerHTML = "";
                 obj.forEach(singleObject => {
+                    singleObject.spotsLeft = parseInt(singleObject.class_capacity)-parseInt(singleObject.reservations);
+                    singleObject.date = moment(singleObject.class_date).format('DD.MM.YYYY');
                     showClassesOverview(singleObject);
                 });
             });
@@ -21,6 +22,7 @@ async function show_classes() {
 
 
 function showClassesOverview(singleObject) {
+
     document.querySelector("#classes").innerHTML += `
             <div class="single_class_container">
             <div class="single_class_top">
@@ -43,9 +45,11 @@ function showClassesOverview(singleObject) {
             ${singleObject.location_street} ${singleObject.location_building}, ${singleObject.location_zipcode}
             </div>
             <div class="single_class_instructor grey hover-underline-animation">
+            <a href="/instructor/${singleObject.instructor_id}">
             <span class="material-symbols-outlined">self_improvement</span>
             ${singleObject.instructor_first_name} 
             ${singleObject.instructor_last_name} 
+            </a>
             <span class="material-symbols-outlined">double_arrow</span>
             </div>
             <div class="single_class_capacity grey">
@@ -54,7 +58,7 @@ function showClassesOverview(singleObject) {
             </div>
             <div class="single_class_date grey">
             <span class="material-symbols-outlined">event</span>
-            ${singleObject.class_date}
+            ${singleObject.date}
             </div>
             <div class="single_class_time grey">
             <span class="material-symbols-outlined">schedule</span>
@@ -63,13 +67,13 @@ function showClassesOverview(singleObject) {
             </div>
             <div class="single_class_col col_right">
             <div class="single_class_more_info grey">
-            <a class="hover-underline-animation" href="/class/id/${singleObject.class_id}">More info 
+            <a class="hover-underline-animation" href="/class/${singleObject.class_id}">More info 
             <span class="material-symbols-outlined">double_arrow</span>
             </a>
             </div>
             <div>
             <div class="single_class_price">${singleObject.class_price} DKK</div>
-            <div class="">3 spots left</div>
+            <div class="">${singleObject.spotsLeft}  spots left</div>
             </div>
             <div id="basket" class="single_class_basket">
             <span class="material-symbols-outlined">shopping_cart</span>Add to basket
@@ -112,6 +116,7 @@ checkboxes.forEach(checkbox => {
                     let obj = JSON.parse(classes_obj);
                     document.querySelector("#classes").innerHTML = "";
                     obj.forEach(singleObject => {
+                        singleObject.date = moment(singleObject.class_date).format('DD.MM.YYYY');
                         showClassesOverview(singleObject);
                     })
                 }
@@ -121,3 +126,11 @@ checkboxes.forEach(checkbox => {
 
     });
 })
+
+
+
+function showInstructor(){
+    const response = fetch()
+}
+
+showInstructor();

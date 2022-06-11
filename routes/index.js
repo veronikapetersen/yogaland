@@ -1,7 +1,9 @@
 var express = require('express');
 const session = require('express-session');
 var router = express.Router();
+var moment = require('moment');
 // const bcrypt = require('bcrypt');
+
 
 
 const { Client } = require('pg');
@@ -15,7 +17,7 @@ function createClient() {
 
 
 
-// GET login page.
+// GET
 router.get('/', function (req, res, next) {
   res.render('login', { title: 'YogaLand' });
 });
@@ -24,16 +26,10 @@ router.get('/signup', function (req, res, next) {
   res.render('signup', { title: 'YogaLand' });
 });
 
-router.get('/instructor', function (req, res, next) {
-  res.render('instructor', { title: 'YogaLand' });
-});
-
 router.get('/home_instructor', function (req, res, next) {
   res.render('home_instructor', { title: 'YogaLand', whoami: ': Instructors' });
 });
 
-
-// GET index page
 router.get('/index', function (req, res, next) {
   // for testing purposes - render home page without being logged in
   res.render('index', { title: 'YogaLand' });
@@ -58,45 +54,70 @@ router.get('/logout', function (req, res, next) {
 
 
 
-router.get('/class/id/:id', function (req, res, next) {
+router.get('/class/:id', function (req, res, next) {
   createClient();
   client.connect();
-  client.query('SELECT * FROM public.classes WHERE class_id = $1', [req.params.id],  (err, result) => {
+  client.query('SELECT * FROM public.classes WHERE class_id = $1', [req.params.id], (err, result) => {
     if (err) throw err;
     let data = result.rows[0];
     client.end();
-    res.render('single_class', { title: 'YogaLand', data: data});
+    res.render('single_class', { title: 'YogaLand', data: data });
   })
 })
+
+
+router.get('/instructor/:id', function (req, res, next) {
+  createClient();
+  client.connect();
+  //instructor information
+  client.query('SELECT * FROM public.instructors JOIN public.reviews on instructors.instructor_id = reviews.instructor_id WHERE instructors.instructor_id = $1', [req.params.id], (err, result) => {
+    if (err) throw err;
+    let data = result.rows[0];
+
+    //reviews for instructor
+    client.query('SELECT * FROM public.reviews JOIN public.users on reviews.user_id = users.user_id WHERE reviews.instructor_id = $1', [req.params.id], (err, result) => {
+      if (err) throw err;
+      let datareviews = result.rows;
+      client.end();
+
+      res.render('instructor', {
+        title: 'YogaLand',
+        first_name: data.instructor_first_name,
+        last_name: data.instructor_last_name,
+        experience: data.instructor_experience,
+        reviews: datareviews
+      });
+
+    });
+  })
+});
+
 
 
 router.get('/classes', function (req, res, next) {
   createClient();
   client.connect();
-  // client.query('SELECT * FROM public.classes', (err, result) => {
-  client.query('SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id', (err, result) => {
+  let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
+    + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
+    + ' JOIN public.locations on c.location_id = locations.location_id '
+    + ' ORDER BY class_date ASC ';
+  client.query(sql, (err, result) => {
     if (err) throw err;
     let data = JSON.stringify(result.rows);
     client.end();
     res.json(data);
-    // return res.send(data)
   })
 })
 
 router.get(`/index/classes/*`, function (req, res, next) {
 
   let query = req.query;
-  // let body = req.body;
-  // let params = req.params;
-  // console.log("query: ", query, "body: ", body, "params: ", params);
   console.log("query: ", query);
   let count = 0;
   let where = 'WHERE ';
   let paramsArray = [];
 
   for (const key in query) {
-    // console.log(`${key}: ${query[key]}`);
-
     if (Array.isArray(query[key])) {
       query[key].forEach(x => {
         paramsArray.push(x);
@@ -105,7 +126,7 @@ router.get(`/index/classes/*`, function (req, res, next) {
         }
         where += `classes.` + key + `=$` + ++count;
       });
-    }else{
+    } else {
       paramsArray.push(query[key]);
       if (count > 0) {
         where += ' OR '
@@ -118,19 +139,12 @@ router.get(`/index/classes/*`, function (req, res, next) {
   console.log("params array:", paramsArray);
   createClient();
   client.connect();
-  // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
-  // console.log(sql);
-  // client.query('SELECT * FROM public.classes ' + where, paramsArray, (err, result) => {
   client.query('SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where, paramsArray, (err, result) => {
-    
-if (err) throw err;
+    if (err) throw err;
     let data = JSON.stringify(result.rows);
     client.end();
     res.json(data);
-    // console.log(data);
-    // return res.send(data)
   })
-  // return res.send(true);
 })
 
 // POST routes
@@ -173,7 +187,7 @@ router.post('/login', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
   createClient();
   let signup_useremail = req.body.signup_useremail;
-  
+
   const saltRounds = 10;
   // const salt = bcrypt.genSaltSync(saltRounds);
 
