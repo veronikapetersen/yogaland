@@ -36,19 +36,24 @@ router.get('/home_instructor', function (req, res, next) {
 
 
 router.get('/home_user', function (req, res, next) {
-  res.render('home_user', { title: 'YogaLand'})
-})
-
-router.get('/index', function (req, res, next) {
-  //  initialize session:
   let session = req.session;
   if (session.loggedin) {
-    // let data = session.result;
-    res.render('index', { title: 'YogaLand', data: data });
+    res.render('home_user', { title: 'YogaLand', data: data })
   } else {
     res.redirect('/');
   }
-});
+})
+
+// router.get('/index', function (req, res, next) {
+//   //  initialize session:
+//   let session = req.session;
+//   if (session.loggedin) {
+//     // let data = session.result;
+//     res.render('index', { title: 'YogaLand', data: data });
+//   } else {
+//     res.redirect('/');
+//   }
+// });
 
 
 router.get('/logout', function (req, res, next) {
@@ -60,7 +65,6 @@ router.get('/logout', function (req, res, next) {
     });
   }
 })
-
 
 router.get('/users/:id/edit', function (req, res, next) {
   // let session = req.session;
@@ -82,17 +86,6 @@ router.get('/users/:id/edit', function (req, res, next) {
 
 })
 
-
-
-
-
-
-
-
-
-
-
-
 router.get('/class/:id', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
@@ -100,16 +93,15 @@ router.get('/class/:id', function (req, res, next) {
     client.connect();
     client.query('SELECT * FROM public.classes  JOIN public.locations on locations.location_id = classes.location_id JOIN public.instructors on instructors.instructor_id = classes.instructor_id WHERE class_id = $1', [req.params.id], (err, result) => {
       if (err) throw err;
-      let data = result.rows[0];
-      console.log(data);
+      let queryData = result.rows[0];
+      console.log(queryData);
       client.end();
-      res.render('single_class', { title: 'YogaLand', data: data });
+      res.render('single_class', { title: 'YogaLand', queryData: queryData, data: data });
     })
   } else {
     res.redirect('/');
   }
 })
-
 
 router.get('/instructor/:id', function (req, res, next) {
   let session = req.session;
@@ -119,7 +111,7 @@ router.get('/instructor/:id', function (req, res, next) {
     //instructor information
     client.query('SELECT * FROM public.instructors JOIN public.reviews on instructors.instructor_id = reviews.instructor_id WHERE instructors.instructor_id = $1', [req.params.id], (err, result) => {
       if (err) throw err;
-      let data = result.rows[0];
+      let queryData = result.rows[0];
       //reviews for instructor
       client.query('SELECT * FROM public.reviews JOIN public.users on reviews.user_id = users.user_id WHERE reviews.instructor_id = $1', [req.params.id], (err, result) => {
         if (err) throw err;
@@ -131,11 +123,12 @@ router.get('/instructor/:id', function (req, res, next) {
           client.end();
           res.render('instructor', {
             title: 'YogaLand',
-            first_name: data.instructor_first_name,
-            last_name: data.instructor_last_name,
-            experience: data.instructor_experience,
+            first_name: queryData.instructor_first_name,
+            last_name: queryData.instructor_last_name,
+            experience: queryData.instructor_experience,
             reviews: datareviews,
-            upcomingClasses: upcomingClasses
+            upcomingClasses: upcomingClasses,
+            data: data
           });
         });
       });
@@ -145,27 +138,48 @@ router.get('/instructor/:id', function (req, res, next) {
   }
 });
 
-
-router.get('/classes', function (req, res, next) {
-
-  let session = req.session;
-  if (session.loggedin) {
+router.get('/index', function (req, res, next) {
+  //  initialize session:
+  // let session = req.session;
+  // if (session.loggedin) {
     createClient();
     client.connect();
     let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
-      + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
-      + ' JOIN public.locations on c.location_id = locations.location_id '
-      + ' ORDER BY class_date ASC ';
+    + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
+    + ' JOIN public.locations on c.location_id = locations.location_id '
+    + ' ORDER BY class_date ASC ';
     client.query(sql, (err, result) => {
+      console.log("hey");
       if (err) throw err;
-      let data = JSON.stringify(result.rows);
+      let classesQueryData = result.rows;
       client.end();
-      res.json(data);
+      res.render('index', { title: 'YogaLand', classesData: classesQueryData });
     });
-  } else {
-    res.redirect('/');
-  }
+  // } else {
+  //   res.redirect('/');
+  // }
 });
+
+// router.get('/classes', function (req, res, next) {
+
+//   let session = req.session;
+//   if (session.loggedin) {
+//     createClient();
+//     client.connect();
+//     let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
+//       + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
+//       + ' JOIN public.locations on c.location_id = locations.location_id '
+//       + ' ORDER BY class_date ASC ';
+//     client.query(sql, (err, result) => {
+//       if (err) throw err;
+//       let data = JSON.stringify(result.rows);
+//       client.end();
+//       res.json(data);
+//     });
+//   } else {
+//     res.redirect('/');
+//   }
+// });
 
 router.get(`/index/classes/*`, function (req, res, next) {
   let session = req.session;

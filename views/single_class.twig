@@ -11,26 +11,26 @@
         </div>
 
         <div id="class_page_main_info">
-            <div id="class_page_title"> {{data.class_type}} yoga class</div>
+            <div id="class_page_title"> {{queryData.class_type}} yoga class</div>
 
             <div class="class_page_col_wrapper">
 
                 <div class="class_page_col_left">
                     <div class="class_page_instructor hover-underline-animation grey">
-                        <a href="/instructor/{{data.instructor_id}}">
-                            <span class="grey">with {{data.instructor_first_name}} {{data.instructor_last_name}} </span>
+                        <a href="/instructor/{{queryData.instructor_id}}">
+                            <span class="grey">with {{queryData.instructor_first_name}} {{queryData.instructor_last_name}} </span>
                             <span class="material-symbols-outlined">double_arrow</span>
                         </a>
                     </div>
                     <div class="class_page_date_time grey">
-                        <div><span class="material-symbols-outlined">event</span> {{data.class_date|date("d/m/Y")}}
+                        <div><span class="material-symbols-outlined">event</span> {{queryData.class_date|date("d/m/Y")}}
                         </div>
-                        <div><span class="material-symbols-outlined">schedule</span> {{data.class_time}} </div>
+                        <div><span class="material-symbols-outlined">schedule</span> {{queryData.class_time}} </div>
                     </div>
                 </div>
 
                 <div class="class_page_col_right">
-                    <div class="class_page_price"> {{data.class_price}} DKK</div>
+                    <div class="class_page_price"> {{queryData.class_price}} DKK</div>
                     <div id="basket" class="single_class_basket">
                         <span class="material-symbols-outlined">shopping_cart</span>Add to basket
                     </div>
@@ -51,8 +51,8 @@
                     <span class="material-symbols-outlined">double_arrow</span>
                 </div>
                 <div class="class_page_address">
-                    <span class="class_page_street grey"> {{data.location_street}} {{data.location_building}},
-                        {{data.location_zipcode}} </span>
+                    <span class="class_page_street grey"> {{queryData.location_street}} {{queryData.location_building}},
+                        {{queryData.location_zipcode}} </span>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
         </div>
 
         <div class="class_page_class_description grey">
-            {{data.class_description}}
+            {{queryData.class_description}}
         </div>
 
         <div id="class_page_reviews">
