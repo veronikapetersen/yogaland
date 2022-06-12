@@ -127,10 +127,3 @@ checkboxes.forEach(checkbox => {
     });
 })
 
-
-
-function showInstructor(){
-    const response = fetch()
-}
-
-showInstructor();

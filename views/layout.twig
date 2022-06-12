@@ -29,11 +29,19 @@
     </div>
     <div id="nav_menu">
       <ul>
-        <li>Link1</li>
+
+        <li><a href="/users/:id/edit">edit my info</a></li>
+
+
         <li class="checkout">
           <span class="material-symbols-outlined">shopping_cart_checkout</span>
           My cart
         </li>
+        <li>
+          {{data[0].first_name}}
+        </li>
+
+        <li><a href="/logout">Log out</a></li>
         <li>
           <span id="my_profile_icon" class="material-symbols-outlined">account_circle</span>
           <div id="dropdown_menu">
@@ -76,7 +84,7 @@
           <li>Careers</li>
         </ul>
       </div>
-    
+
     </div>
 
 
@@ -84,7 +92,9 @@
   {% endblock %}
 
   <script src="/javascripts/scripts.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js" integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"
+    integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
