@@ -1,0 +1,56 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+
+
+
+
+<form action="/edit_user_info" method="post">
+    <div>
+        <label>
+            <input id="signup_useremail" type="email" name="useremail" value="{{data.user_email}}" placeholder="Email">
+        </label>
+    </div>
+
+ 
+
+    <div>
+        <label>
+            <input id="signup__first_name" type="text" name="first_name" value="{{data.user_first_name}}" placeholder="First name">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <input id="signup__last_name" type="text" name="last_name" value="{{data.user_last_name}}" placeholder="Last name">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <input id="signup__street" type="text" name="street" value="{{data.user_street}}" placeholder="Street">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <input id="signup__building" type="number" name="building" value="{{data.user_building}}" placeholder="Building">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <input id="signup__zipcode" type="number" name="zipcode" value="{{data.user_zipcode}}" placeholder="Zipcode">
+        </label>
+    </div>
+    <div>
+        <input class="save_changes" type="submit" value="save changes">
+    </div>
+</form>
+
+
+
+
+
+{% endblock %}
