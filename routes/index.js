@@ -34,6 +34,11 @@ router.get('/home_instructor', function (req, res, next) {
   }
 });
 
+
+router.get('/home_user', function (req, res, next) {
+  res.render('home_user', { title: 'YogaLand'})
+})
+
 router.get('/index', function (req, res, next) {
   //  initialize session:
   let session = req.session;
@@ -220,7 +225,7 @@ router.post('/login', function (req, res, next) {
 
     } else {
       sql = "SELECT *, user_first_name AS first_name FROM public.users WHERE user_email = $1 AND user_pw = $2"
-      redirectUrl = '/index';
+      redirectUrl = '/home_user';
     }
 
     client.query(sql, [useremail, password], function (err, result) {

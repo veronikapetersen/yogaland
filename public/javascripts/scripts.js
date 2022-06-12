@@ -9,7 +9,7 @@ async function show_classes() {
                 let obj = JSON.parse(classes);
                 document.querySelector("#classes").innerHTML = "";
                 obj.forEach(singleObject => {
-                    singleObject.spotsLeft = parseInt(singleObject.class_capacity)-parseInt(singleObject.reservations);
+                    singleObject.spotsLeft = parseInt(singleObject.class_capacity) - parseInt(singleObject.reservations);
                     singleObject.date = moment(singleObject.class_date).format('DD.MM.YYYY');
                     showClassesOverview(singleObject);
                 });
