@@ -234,6 +234,11 @@ body {
     'opsz' 48
 }
 
+
+.filled_icon {
+  font-variation-settings:
+    'FILL' 1
+}
 .single_class_basket {
   padding: 10px;
   border: 1px solid #e38817;

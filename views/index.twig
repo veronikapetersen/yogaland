@@ -96,14 +96,7 @@
 
         <div id="search_results_wrapper">
                 <div id="search_results">
-
-
-
-
-
-                        {# <button id="show_classes_btn">show classes</button> #}
                         <div id="classes">
-
                                 {% for singleObject in classesData %}
                                 <div class="single_class_container">
                                         <div class="single_class_top">
@@ -157,7 +150,8 @@
                                                 <div class="single_class_col col_right">
                                                         <div class="single_class_more_info grey">
                                                                 <a class="hover-underline-animation"
-                                                                        href="/class/{{singleObject.class_id}}">More info
+                                                                        href="/class/{{singleObject.class_id}}"> More
+                                                                        info
                                                                         <span
                                                                                 class="material-symbols-outlined">double_arrow</span>
                                                                 </a>
@@ -165,12 +159,13 @@
                                                         <div>
                                                                 <div class="single_class_price">
                                                                         {{singleObject.class_price}} DKK</div>
-                                                                <div class="">{{singleObject.spotsLeft}} spots left</div>
+                                                                <div class="">{{singleObject.spotsLeft}} spots left
+                                                                </div>
                                                         </div>
                                                         <div id="basket" class="single_class_basket">
                                                                 <span
-                                                                        class="material-symbols-outlined">shopping_cart</span>Add
-                                                                to basket
+                                                                        class="material-symbols-outlined">shopping_cart</span>
+                                                                        <span class="addToBasketBtnValue"> Add to basket</span>
                                                         </div>
                                                 </div>
                                         </div>
