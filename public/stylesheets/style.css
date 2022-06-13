@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(250, 250, 250);
+}
+
 .fonts {
   font-family: 'Lato', sans-serif;
   font-family: 'Roboto Serif', serif;
@@ -100,12 +104,24 @@ li {
 
 #map {
   width: 40%;
-  border: 1px solid black;
+  border: 1px solid grey;
   /* background-color: rgb(223, 203, 45); */
 }
 
-body {
-  background-color: rgb(250, 250, 250);
+#map iframe {
+  width: 100%;
+  height: 700px;
+  border: 0;
+}
+
+
+.map_text {
+  font-size: 24px;
+  padding-top: 40%;
+  color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* single class search results overview*/
@@ -195,6 +211,9 @@ body {
 }
 
 
+.single_class_location:hover {
+  cursor: pointer;
+}
 .grey {
   color: #444444;
 }

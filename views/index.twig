@@ -113,19 +113,34 @@
                                                                 {{singleObject.class_duration}} min
                                                         </div>
                                                         <div class="">1.2 km away</div>
+                                                        <div class="classID" style="display:none">
+                                                                {{singleObject.class_id}} </div>
                                                 </div>
                                                 <div class="single_class_col col_mid">
                                                         <div class="single_class_title">{{singleObject.class_type}} Yoga
-                                                                class 🇺🇸 🇩🇰 </div>
-                                                        <div class="single_class_location grey">
+                                                                class <span>
+                                                                        {% if singleObject.class_language == 'Danish' %}
+                                                                        🇩🇰 
+                                                                        {% elseif singleObject.class_language == 'English'%}
+                                                                        🇺🇸 
+                                                                        {% endif %}
+                                                                </span> 
+                                                        </div>
+
+                                                        <div
+                                                                class="single_class_location hover-underline-animation grey">
+
                                                                 <span class="material-symbols-outlined">pin_drop</span>
                                                                 {{singleObject.location_street}}
                                                                 {{singleObject.location_building}},
                                                                 {{singleObject.location_zipcode}}
+                                                                <span class="googleLocation" style="display:none">
+                                                                        {{singleObject.location_map}}</span>
                                                         </div>
                                                         <div
                                                                 class="single_class_instructor grey hover-underline-animation">
-                                                                <a href="/instructor/{{singleObject.instructor_id}}">
+                                                                <a href="/instructor/{{singleObject.instructor_id}}"
+                                                                        class="grey" style="text-decoration:none">
                                                                         <span
                                                                                 class="material-symbols-outlined">self_improvement</span>
                                                                         {{singleObject.instructor_first_name}}
@@ -159,13 +174,14 @@
                                                         <div>
                                                                 <div class="single_class_price">
                                                                         {{singleObject.class_price}} DKK</div>
-                                                                <div class="">{{singleObject.spotsLeft}} spots left
+                                                                <div class="">
+                                                                        {{singleObject.class_capacity - singleObject.reservations}} spots left
                                                                 </div>
                                                         </div>
                                                         <div id="basket" class="single_class_basket">
                                                                 <span
                                                                         class="material-symbols-outlined">shopping_cart</span>
-                                                                        <span class="addToBasketBtnValue"> Add to basket</span>
+                                                                <span class="addToBasketBtnValue"> Add to basket</span>
                                                         </div>
                                                 </div>
                                         </div>
@@ -173,7 +189,11 @@
                                 {% endfor %}
                         </div>
                 </div>
-                <div id="map">map</div>
+                <div id="map">
+                        <div class="map_text">click on the address to see the map</div>
+                        <iframe class="map_iframe" src="" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">click </iframe>
+                </div>
         </div>
 </div>
 

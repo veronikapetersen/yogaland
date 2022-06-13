@@ -24,7 +24,12 @@
   {% block nav %}
   <nav>
     <div id="logo">
-      <a href="/{{home}}">YogaLand</a>
+
+      {% if {{data[0].isInstructor}} %}
+      <a href="/home_instructor">YogaLand</a>
+      {% else %}
+      <a href="/home_user">YogaLand</a>
+      {% endif %}
       <span class="grey">{{ whoami }}</span>
     </div>
     <div id="nav_menu">
@@ -33,10 +38,18 @@
         <li><a href="/users/{{data[0].user_id}}/edit">edit my info</a></li>
 
 
-        <li class="checkout">
-          <span class="material-symbols-outlined">shopping_cart_checkout</span>
-          My cart
+
+        <li>
+
         </li>
+
+        {# <li class="checkout">
+          <a href="/my_cart">
+            <span class="material-symbols-outlined">shopping_cart_checkout</span>
+            <span class="my_cart_items"></span>
+          </a>
+        </li> #}
+
         <li>
           {{data[0].first_name}}
         </li>
