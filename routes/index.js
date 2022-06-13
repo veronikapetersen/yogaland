@@ -66,7 +66,7 @@ router.get('/logout', function (req, res, next) {
   }
 })
 
-router.get('/users/:id/edit', function (req, res, next) {
+router.get('/users/:id/profile', function (req, res, next) {
   // let session = req.session;
 
   // if (session.loggedin) {
@@ -77,7 +77,7 @@ router.get('/users/:id/edit', function (req, res, next) {
     let data = result.rows[0];
     console.log(data);
     client.end();
-    res.render('edit', { title: 'YogaLand', data: data });
+    res.render('profile', { title: 'YogaLand', data: data });
   })
 
   // } else {
@@ -142,21 +142,35 @@ router.get('/index', function (req, res, next) {
   //  initialize session:
   // let session = req.session;
   // if (session.loggedin) {
-    createClient();
-    client.connect();
-    let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
-      + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
-      + ' JOIN public.locations on c.location_id = locations.location_id '
-      // + ' JOIN public.bookings on c.class_id = bookings.class_id '
-      // + ' JOIN public.users on b.user_id = users.user_id '
-      + ' ORDER BY class_date ASC ';
-    client.query(sql, (err, result) => {
-      if (err) throw err;
-      let classesQueryData = result.rows;
-      client.end();
-      res.render('index', { title: 'YogaLand', classesData: classesQueryData });
-      // res.render('index', { title: 'YogaLand', classesData: classesQueryData, data: data });
-    });
+
+  createClient();
+  client.connect();
+  let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
+    + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
+    + ' JOIN public.locations on c.location_id = locations.location_id '
+    // + ' JOIN public.bookings on c.class_id = bookings.class_id '
+    // + ' JOIN public.users on b.user_id = users.user_id '
+    + ' ORDER BY class_date ASC ';
+  client.query(sql, (err, result) => {
+    if (err) throw err;
+    let classesQueryData = result.rows;
+    client.end();
+    res.render('index', { title: 'YogaLand', classesData: classesQueryData });
+    // res.render('index', { title: 'YogaLand', classesData: classesQueryData, data: data });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
   // } else {
   //   res.redirect('/');
   // }
@@ -186,43 +200,56 @@ router.get('/index', function (req, res, next) {
 router.get(`/index/classes/*`, function (req, res, next) {
   // let session = req.session;
   // if (session.loggedin) {
-    let query = req.query;
-    console.log("query: ", query);
-    let count = 0;
-    let where = 'WHERE ';
-    let paramsArray = [];
-
+  let query = req.query;
+  console.log("query: ", query);
+  let count = 0;
+  let where = 'WHERE ';
+  let paramsArray = [];
+  if (Object.keys(query).length !== 0) {
     for (const key in query) {
       if (Array.isArray(query[key])) {
+        let subCount = 0;
+        if (count > 0) {
+          // where += ' OR '
+          where += ' AND '
+        }
+        where += '(';
         query[key].forEach(x => {
           paramsArray.push(x);
-          if (count > 0) {
+          if (subCount > 0) {
             where += ' OR '
           }
+          subCount++;
           where += `classes.` + key + `=$` + ++count;
         });
+        where += ')';
       } else {
         paramsArray.push(query[key]);
         if (count > 0) {
-          where += ' OR '
+          // where += ' OR '
+          where += ' AND '
         }
         where += `classes.` + key + `=$` + ++count;
       }
-
     }
+  } else {
+    where = '';
+  }
 
-    console.log("params array:", paramsArray);
-    createClient();
-    client.connect();
-    client.query('SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where, paramsArray, (err, result) => {
-      if (err) throw err;
-      let data = JSON.stringify(result.rows);
-      client.end();
-      res.json(data);
-    })
-//   } else {
-//     res.redirect('/');
-//   }
+  console.log("params array:", paramsArray);
+  createClient();
+  client.connect();
+  let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
+  console.log("sql: ", sql);
+  client.query(sql, paramsArray, (err, result) => {
+    if (err) throw err;
+    let data = JSON.stringify(result.rows);
+    client.end();
+    res.json(data);
+  })
+  //   } else {
+  //     res.redirect('/');
+  //   }
 })
 
 // POST routes

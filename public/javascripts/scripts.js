@@ -2,6 +2,7 @@ let array = [];
 var checkboxes = document.querySelectorAll(".checkbox");
 
 checkboxes.forEach(checkbox => {
+
     checkbox.addEventListener('change', () => {
 
         if (checkbox.checked == true) {
@@ -29,14 +30,103 @@ checkboxes.forEach(checkbox => {
                     document.querySelector("#classes").innerHTML = "";
                     obj.forEach(singleObject => {
                         console.log(singleObject);
-                        // showClassesOverview(singleObject);
+                        showClassesOverview(singleObject);
                     })
                 })
         }
         updateClassList();
+
     });
 })
 
+function showClassesOverview(singleObject) {
+    document.querySelector("#classes").innerHTML += `
+    <div class="single_class_container">
+    <div class="single_class_top">
+    </div>
+    <div class="single_class_wrapper">
+            <div class="single_class_col col_left">
+                    <div>
+                            <img class="single_class_thumbnail"
+                                    src="/images/pexels-andrea-piacquadio-3757955.jpg"
+                                    alt="yoga_class">
+                    </div>
+                    <div class="single_class_duration grey">
+                            <span class="material-symbols-outlined">timer</span>
+                            ${singleObject.class_duration} min
+                    </div>
+                    <div class="">1.2 km away</div>
+                    <div class="classID" style="display:none">
+                            ${singleObject.class_id} </div>
+            </div>
+            <div class="single_class_col col_mid">
+                    <div class="single_class_title">${singleObject.class_type} Yoga
+                            class <span>
+                                    ${ (singleObject.class_language === 'Danish'?"🇩🇰":'🇺🇸')}
+                            </span> 
+                    </div>
+
+                    <div
+                            class="single_class_location hover-underline-animation grey">
+
+                            <span class="material-symbols-outlined">pin_drop</span>
+                            ${singleObject.location_street}
+                            ${singleObject.location_building},
+                            ${singleObject.location_zipcode}
+                            <span class="googleLocation" style="display:none">
+                                    ${singleObject.location_map}</span>
+                    </div>
+                    <div
+                            class="single_class_instructor grey hover-underline-animation">
+                            <a href="/instructor/${singleObject.instructor_id}"
+                                    class="grey" style="text-decoration:none">
+                                    <span
+                                            class="material-symbols-outlined">self_improvement</span>
+                                    ${singleObject.instructor_first_name}
+                                    ${singleObject.instructor_last_name}
+                            </a>
+                            <span
+                                    class="material-symbols-outlined">double_arrow</span>
+                    </div>
+                    <div class="single_class_capacity grey">
+                            <span class="material-symbols-outlined">groups</span>
+                            Max ${singleObject.class_capacity} people
+                    </div>
+                    <div class="single_class_date grey">
+                            <span class="material-symbols-outlined">event</span>
+                            ${singleObject.date}
+                    </div>
+                    <div class="single_class_time grey">
+                            <span class="material-symbols-outlined">schedule</span>
+                            ${singleObject.class_time}
+                    </div>
+            </div>
+            <div class="single_class_col col_right">
+                    <div class="single_class_more_info grey">
+                            <a class="hover-underline-animation"
+                                    href="/class/${singleObject.class_id}"> More
+                                    info
+                                    <span
+                                            class="material-symbols-outlined">double_arrow</span>
+                            </a>
+                    </div>
+                    <div>
+                            <div class="single_class_price">
+                                    ${singleObject.class_price} DKK</div>
+                            <div class="">
+                                    ${singleObject.class_capacity - singleObject.reservations} spots left
+                            </div>
+                    </div>
+                    <div id="basket" class="single_class_basket">
+                            <span
+                                    class="material-symbols-outlined">shopping_cart</span>
+                            <span class="addToBasketBtnValue"> Add to basket</span>
+                    </div>
+            </div>
+    </div>
+</div > `;
+
+}
 
 
 let basketButtons = document.querySelectorAll("#basket");
@@ -87,3 +177,11 @@ location_divs.forEach(location_div => {
     })
 })
 
+
+let myInfo = document.querySelector(".my_info_col_wrapper");
+let myInfoTitle = document.querySelector(".my_info_top");
+
+myInfoTitle.addEventListener('click', function () {
+    myInfo.classList.toggle("hidden_form");
+    myInfoTitle.classList.toggle("active");
+})

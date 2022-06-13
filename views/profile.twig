@@ -1,0 +1,84 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+
+<section id="my_info" class="grey">
+    <div class="my_info_top">
+        <div class="my_info_title"> My Information</div>
+        {# <div class="circle"></div> #}
+        <div class="open-close-icon">
+            <input type="checkbox" id="menu_checkbox">
+            <label for="menu_checkbox">
+                <div></div>
+                <div></div>
+                <div></div>
+            </label>
+        </div>
+    </div>
+    <div class="my_info_col_wrapper hidden_form">
+        <div class="my_info_form_wrapper">
+            <form action="/edit_user_info" method="post">
+                <div>
+                    <label for="usermail"> Email </label>
+                    <input id="signup_useremail" type="email" name="useremail" value="{{data.user_email}}"
+                        placeholder="Email">
+                </div>
+
+                <div>
+                    <label for="first_name"> First name</label>
+                    <input id="signup__first_name" type="text" name="first_name" value="{{data.user_first_name}}"
+                        placeholder="First name">
+                </div>
+
+                <div>
+                    <label for="last_name">Last name</label>
+                    <input id="signup__last_name" type="text" name="last_name" value="{{data.user_last_name}}"
+                        placeholder="Last name">
+                </div>
+
+                <div>
+                    <label for="street">Street</label>
+                    <input id="signup__street" type="text" name="street" value="{{data.user_street}}"
+                        placeholder="Street">
+                </div>
+
+                <div>
+                    <label for="building">Building</label>
+                    <input id="signup__building" type="number" name="building" value="{{data.user_building}}"
+                        placeholder="Building">
+                </div>
+
+                <div>
+                    <label for="zipcode">Zip code</label>
+                    <input id="signup__zipcode" type="number" name="zipcode" value="{{data.user_zipcode}}"
+                        placeholder="Zipcode">
+                </div>
+                <div>
+                    <input id="edit_my_profile_btn" class="save_changes" type="submit" value="save changes">
+                </div>
+            </form>
+        </div>
+        <div class="profile_picture_wrapper">
+            upload a picture</div>
+    </div>
+</section>
+
+<section id="past_classes" class="grey">
+    <div class="past_classes_title">My Past Classes</div>
+    <div class="past_classes_container">
+        <div>class 1</div>
+        <div>class 2</div>
+    </div>
+</section>
+
+<section id="fav_instructors" class="grey">
+    <div class="fav_instructors_title">My Favourite Instructors</div>
+    <div class="fav_instructors_container">
+        <div>instructor 1</div>
+        <div>instructor 2</div>
+    </div>
+</section>
+
+
+{% endblock %}
