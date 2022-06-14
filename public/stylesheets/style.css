@@ -1125,9 +1125,7 @@ footer {
 #fav_instructors {
   width: 80%;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid black;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 .my_info_title,
@@ -1141,7 +1139,7 @@ footer {
 
 .my_info_form_wrapper {
   width: 300px;
-  border: 1px solid black;
+  border: 1px solid rgb(214, 214, 214);
   padding: 10px;
 }
 
@@ -1149,6 +1147,7 @@ footer {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  font-family: 'Lato', sans-serif;
 }
 
 
@@ -1156,6 +1155,10 @@ footer {
   padding: 5px;
   display: flex;
   justify-content: space-between;
+}
+
+.my_info_form_wrapper form input {
+  padding: 5px;
 }
 
 .profile_picture_wrapper {
@@ -1184,11 +1187,14 @@ footer {
   cursor: pointer;
 }
 
-.hidden_form {
+.hidden {
   display: none;
 }
 
-.active, .my_info_top:hover {
+.active,
+.my_info_top:hover,
+.past_classes_top:hover,
+.fav_instr_top:hover {
   background-color: #F2B988;
 }
 
@@ -1212,6 +1218,7 @@ footer {
   right: 5px;
   z-index: 9;
 }
+
 .circle::before {
   content: " ";
   position: absolute;
@@ -1225,31 +1232,41 @@ footer {
   z-index: 9;
 }
 
-.my_info_top {
+.my_info_top, 
+.past_classes_top,
+.fav_instr_top{
   display: flex;
   align-items: center;
 }
 
+/* user: my profile - end */
 
-/* open-close-icon start  
-#menu_checkbox {
+/* open-close-icon - start */
+
+.open_close_icon_container {
+margin-right: 20px;
+}
+
+#my_info_checkbox,
+#past_classes_checkbox,
+#fav_instr_checkbox {
   display: none;
 }
 
-label {
-
+.menu_checkbox_label {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   transform: translateY(-50%);
   transition: 0.3s ease transform;
   cursor: pointer;
+  padding-top: 15px;
 }
 
-label div {
+.menu_checkbox_label div {
   width: 6px;
   height: 6px;
-  background-color: #143240;
+  background-color: #404040;
   margin-left: 0;
   margin-bottom: 6px;
   border-radius: 4px;
@@ -1257,31 +1274,50 @@ label div {
     0.3s ease background-color;
 }
 
-label div:first-child {
+.menu_checkbox_label div:first-child {
   width: 22px;
 }
 
-label div:nth-child(2) {
+.menu_checkbox_label div:nth-child(2) {
   width: 15px;
 }
 
-label div:last-child {
+.menu_checkbox_label div:last-child {
   width: 30px;
   margin-bottom: 0;
 }
 
-#menu_checkbox:checked + label {
+#my_info_checkbox:checked+.menu_checkbox_label {
   transform: translateY(-50%) rotateZ(-90deg);
 }
 
-#menu_checkbox:checked + label div {
+#my_info_checkbox:checked+.menu_checkbox_label div {
   width: 6px;
-  margin-left: 12px;
   margin-bottom: 3px;
-  background-color: #ffc107;
+  background-color: #404040;
 }
 
- open-close-icon end  */
+
+#fav_instr_checkbox:checked+.menu_checkbox_label {
+  transform: translateY(-50%) rotateZ(-90deg);
+}
+
+#fav_instr_checkbox:checked+.menu_checkbox_label div {
+  width: 6px;
+  margin-bottom: 3px;
+  background-color: #404040;
+}
 
 
-/* user: my profile - end  */
+#past_classes_checkbox:checked+.menu_checkbox_label {
+  transform: translateY(-50%) rotateZ(-90deg);
+}
+
+#past_classes_checkbox:checked+.menu_checkbox_label div {
+  width: 6px;
+  margin-bottom: 3px;
+  background-color: #404040;
+}
+
+/* open-close-icon - end */
+

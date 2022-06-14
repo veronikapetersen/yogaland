@@ -86,6 +86,28 @@ router.get('/users/:id/profile', function (req, res, next) {
 
 })
 
+router.get('/user/:id/past_classes', function (req, res, next){
+  // let session = req.session;
+  // if (session.loggedin) {
+
+  createClient();
+  client.connect();
+  let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date < CURRENT_DATE'
+  client.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    let data = result.rows;
+    console.log(data);
+    client.end();
+    res.json(data);
+  })
+    // } else {
+  //   res.redirect('/');
+  // }
+})
+
+
+
+
 router.get('/class/:id', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {

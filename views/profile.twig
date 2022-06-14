@@ -1,22 +1,24 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+<div id="secretInfo" class="hidden">{{data.user_id}}</div>
 
 
 <section id="my_info" class="grey">
     <div class="my_info_top">
-        <div class="my_info_title"> My Information</div>
-        {# <div class="circle"></div> #}
-        <div class="open-close-icon">
-            <input type="checkbox" id="menu_checkbox">
-            <label for="menu_checkbox">
-                <div></div>
-                <div></div>
-                <div></div>
-            </label>
+        <div class="open_close_icon_container">
+            <div class="open-close-icon">
+                <input type="checkbox" id="my_info_checkbox">
+                <label class="menu_checkbox_label" for="my_info_checkbox">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </label>
+            </div>
         </div>
+        <div class="my_info_title"> My Information</div>
     </div>
-    <div class="my_info_col_wrapper hidden_form">
+    <div class="my_info_col_wrapper hidden">
         <div class="my_info_form_wrapper">
             <form action="/edit_user_info" method="post">
                 <div>
@@ -64,17 +66,52 @@
     </div>
 </section>
 
+
+
+
+
 <section id="past_classes" class="grey">
-    <div class="past_classes_title">My Past Classes</div>
-    <div class="past_classes_container">
-        <div>class 1</div>
-        <div>class 2</div>
+    <div class="past_classes_top">
+        <div class="open_close_icon_container">
+            <div class="open-close-icon">
+                <input type="checkbox" id="past_classes_checkbox">
+                <label class="menu_checkbox_label" for="past_classes_checkbox">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </label>
+            </div>
+        </div>
+        <div class="past_classes_title">My Past Classes</div>
+    </div>
+
+    <div class="past_classes_container hidden">
+
     </div>
 </section>
 
+
+
+
+
+
+
+
 <section id="fav_instructors" class="grey">
-    <div class="fav_instructors_title">My Favourite Instructors</div>
-    <div class="fav_instructors_container">
+    <div class="fav_instr_top">
+        <div class="open_close_icon_container">
+            <div class="open-close-icon">
+                <input type="checkbox" id="fav_instr_checkbox">
+                <label class="menu_checkbox_label" for="fav_instr_checkbox">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </label>
+            </div>
+        </div>
+        <div class="fav_instructors_title">My Favourite Instructors</div>
+    </div>
+    <div class="fav_instructors_container hidden">
         <div>instructor 1</div>
         <div>instructor 2</div>
     </div>

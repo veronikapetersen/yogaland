@@ -62,7 +62,7 @@ function showClassesOverview(singleObject) {
             <div class="single_class_col col_mid">
                     <div class="single_class_title">${singleObject.class_type} Yoga
                             class <span>
-                                    ${ (singleObject.class_language === 'Danish'?"🇩🇰":'🇺🇸')}
+                                    ${(singleObject.class_language === 'Danish' ? "🇩🇰" : '🇺🇸')}
                             </span> 
                     </div>
 
@@ -128,7 +128,6 @@ function showClassesOverview(singleObject) {
 
 }
 
-
 let basketButtons = document.querySelectorAll("#basket");
 basketButtons.forEach(button => {
     button.addEventListener('click', function signUpForClass() {
@@ -161,9 +160,6 @@ basketButtons.forEach(button => {
     })
 });
 
-
-
-
 let location_divs = document.querySelectorAll(".single_class_location");
 location_divs.forEach(location_div => {
     location_div.addEventListener("click", function () {
@@ -177,11 +173,61 @@ location_divs.forEach(location_div => {
     })
 })
 
-
 let myInfo = document.querySelector(".my_info_col_wrapper");
-let myInfoTitle = document.querySelector(".my_info_top");
+let myInfoTop = document.querySelector(".my_info_top");
+let myInfoCheckBox = document.querySelector("#my_info_checkbox");
 
-myInfoTitle.addEventListener('click', function () {
-    myInfo.classList.toggle("hidden_form");
-    myInfoTitle.classList.toggle("active");
+let pastClassesCheckBox = document.querySelector("#past_classes_checkbox");
+let pastClassesTop = document.querySelector(".past_classes_top");
+let pastClassesContainer = document.querySelector(".past_classes_container");
+
+let favInstrCheckBox = document.querySelector("#fav_instr_checkbox");
+let favInstrTop = document.querySelector(".fav_instr_top");
+let favInstructorsContainer = document.querySelector(".fav_instructors_container");
+
+myInfoCheckBox.addEventListener('click', function () {
+    myInfo.classList.toggle("hidden");
+    myInfoTop.classList.toggle("active");
 })
+
+pastClassesCheckBox.addEventListener('click', function () {
+    pastClassesContainer.classList.toggle("hidden");
+    pastClassesTop.classList.toggle("active");
+    fetchPastClasses();
+})
+
+favInstrCheckBox.addEventListener('click', function () {
+    favInstructorsContainer.classList.toggle("hidden");
+    favInstrTop.classList.toggle("active");
+})
+
+
+function fetchPastClasses() {
+    let id = document.querySelector("#secretInfo").innerHTML;
+    const response = fetch(`/user/${id}/past_classes`)
+        .then(response => response.json())
+        .then(fetchedData => {
+            let pastClasses = fetchedData;
+            pastClassesContainer.innerHTML = "";
+            pastClasses.forEach(pastClass => {
+                console.log("past:", pastClass);
+                let classdate = moment(pastClass.class_date).format("DD.MM.YYYY")
+                pastClassesContainer.innerHTML += `
+                <div class="home_instr_upcom_class_cont">
+                    <div class="home_instr_upcom_class_col_left">
+                        <div class="upcoming_class_title">${pastClass.class_type} Yoga Class</div>
+                        <div>${classdate}</div>
+                    </div>
+                    <div class="home_instr_upcom_class_col_right grey">
+                        <div class="home_instr_location_link">
+                            <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
+                            <span class="instructor_page_studio">
+                                <a class="grey" href="">${pastClass.location_street} ${pastClass.location_building}, ${pastClass.location_zipcode}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            })
+        })
+}
