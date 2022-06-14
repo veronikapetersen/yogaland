@@ -61,10 +61,38 @@
                 </div>
             </form>
         </div>
+
+
+
         <div class="profile_picture_wrapper">
-            upload a picture</div>
+            <div>Profile picture</div>
+            <div class="picture_preview"></div>
+            <form action="/image" method="post" enctype="multipart/form-data">
+                <div>
+                    <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile">
+                    <label for="fileToUpload">
+                        <span>choose a file</span>
+                    </label>
+                </div>
+                <div class="uploadFileBtn-wrapper">
+                    <input class="uploadFileBtn" type="submit" value="Upload Image" name="submit">
+                </div>
+                <input type="hidden" value="{{data.user_id}}" name="user_id">
+            </form>
+        </div>
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -117,5 +145,72 @@
     </div>
 </section>
 
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    let myInfo = document.querySelector(".my_info_col_wrapper");
+    let myInfoTop = document.querySelector(".my_info_top");
+    let myInfoCheckBox = document.querySelector("#my_info_checkbox");
+
+    let pastClassesCheckBox = document.querySelector("#past_classes_checkbox");
+    let pastClassesTop = document.querySelector(".past_classes_top");
+    let pastClassesContainer = document.querySelector(".past_classes_container");
+
+    let favInstrCheckBox = document.querySelector("#fav_instr_checkbox");
+    let favInstrTop = document.querySelector(".fav_instr_top");
+    let favInstructorsContainer = document.querySelector(".fav_instructors_container");
+
+    myInfoCheckBox.addEventListener('click', function () {
+        myInfo.classList.toggle("hidden");
+        myInfoTop.classList.toggle("active");
+    })
+
+    pastClassesCheckBox.addEventListener('click', function () {
+        pastClassesContainer.classList.toggle("hidden");
+        pastClassesTop.classList.toggle("active");
+        fetchPastClasses();
+    })
+
+    favInstrCheckBox.addEventListener('click', function () {
+        favInstructorsContainer.classList.toggle("hidden");
+        favInstrTop.classList.toggle("active");
+    })
+
+
+
+
+    function showUploadFileName() {
+
+        var inputs = document.querySelectorAll('.inputfile');
+        Array.prototype.forEach.call(inputs, function (input) {
+            var label = input.nextElementSibling,
+                labelVal = label.querySelector('span').innerHTML;
+
+            input.addEventListener('change', function (e) {
+                var fileName = '';
+                if (this.files && this.files.length > 1) {
+                    fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+                } else {
+                    fileName = e.target.value.split("\\").pop();
+                }
+                if (fileName) {
+                    label.querySelector('span').innerHTML = fileName;
+                } else {
+                    label.innerHTML = labelVal;
+                }
+            });
+        });
+
+
+    }
+
+    showUploadFileName();
+
+
+
+</script>
 
 {% endblock %}

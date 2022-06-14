@@ -33,13 +33,13 @@ checkboxes.forEach(checkbox => {
                         showClassesOverview(singleObject);
                     })
                 })
-            }
-            updateClassList();
-            
-        });
-    })
-    
-    function showClassesOverview(singleObject) {
+        }
+        updateClassList();
+
+    });
+})
+
+function showClassesOverview(singleObject) {
     let classdate = moment(singleObject.class_date).format("DD.MM.YYYY");
     let spotsLeft = parseInt(singleObject.class_capacity) - parseInt(singleObject.reservations);
     console.log("map: ", singleObject.location_map);
@@ -127,7 +127,7 @@ checkboxes.forEach(checkbox => {
             </div>
     </div>
 </div > `;
-showMap();
+    showMap();
 
 }
 
@@ -171,42 +171,16 @@ function showMap() {
             console.log("click");
             let googleMapsURL = this.querySelector(".googleLocation").innerHTML;
             console.log(googleMapsURL);
-            
+
             document.querySelector(".map_text").style = "display:none";
             document.querySelector(".map_iframe").src = googleMapsURL;
-            
+
         })
     })
 }
 showMap();
 
-let myInfo = document.querySelector(".my_info_col_wrapper");
-let myInfoTop = document.querySelector(".my_info_top");
-let myInfoCheckBox = document.querySelector("#my_info_checkbox");
 
-let pastClassesCheckBox = document.querySelector("#past_classes_checkbox");
-let pastClassesTop = document.querySelector(".past_classes_top");
-let pastClassesContainer = document.querySelector(".past_classes_container");
-
-let favInstrCheckBox = document.querySelector("#fav_instr_checkbox");
-let favInstrTop = document.querySelector(".fav_instr_top");
-let favInstructorsContainer = document.querySelector(".fav_instructors_container");
-
-// myInfoCheckBox.addEventListener('click', function () {
-//     myInfo.classList.toggle("hidden");
-//     myInfoTop.classList.toggle("active");
-// })
-
-// pastClassesCheckBox.addEventListener('click', function () {
-//     pastClassesContainer.classList.toggle("hidden");
-//     pastClassesTop.classList.toggle("active");
-//     fetchPastClasses();
-// })
-
-// favInstrCheckBox.addEventListener('click', function () {
-//     favInstructorsContainer.classList.toggle("hidden");
-//     favInstrTop.classList.toggle("active");
-// })
 
 
 function fetchPastClasses() {
@@ -284,18 +258,18 @@ fetchNextClasses();
 
 
 
-function fetchDiscounts(){
+function fetchDiscounts() {
     const response = fetch('/discounts')
-    .then(response => response.json())
-    .then(discountsData => {
-        let discounts = discountsData;
-        console.log(discounts);
-        let discountsContainer = document.querySelector(".last_offers_container");
-        discountsContainer.innerHTML = "";
-        discounts.forEach(offer => {
-            console.log("offer:", offer);
-            let offerdate = moment(offer.class_date).format("DD.MM.YYYY")
-            discountsContainer.innerHTML += `
+        .then(response => response.json())
+        .then(discountsData => {
+            let discounts = discountsData;
+            console.log(discounts);
+            let discountsContainer = document.querySelector(".last_offers_container");
+            discountsContainer.innerHTML = "";
+            discounts.forEach(offer => {
+                console.log("offer:", offer);
+                let offerdate = moment(offer.class_date).format("DD.MM.YYYY")
+                discountsContainer.innerHTML += `
             <div class="single_offer_wrapper">
             <div class="last_offer_title"> ${offer.class_type} yoga </div> 
             <div class="last_offer_info">
@@ -318,8 +292,36 @@ function fetchDiscounts(){
         </div>
         </div>
     `;
+            })
         })
-    })
 }
 
 fetchDiscounts();
+
+
+// function showUploadFileName() {
+
+//     var inputs = document.querySelectorAll('.inputfile');
+//     Array.prototype.forEach.call(inputs, function (input) {
+//         var label = input.nextElementSibling,
+//             labelVal = label.querySelector('span').innerHTML;
+
+//         input.addEventListener('change', function (e) {
+//             var fileName = '';
+//             if (this.files && this.files.length > 1) {
+//                 fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+//             } else {
+//                 fileName = e.target.value.split("\\").pop();
+//             }
+//             if (fileName) {
+//                 label.querySelector('span').innerHTML = fileName;
+//             } else {
+//                 label.innerHTML = labelVal;
+//             }
+//         });
+//     });
+
+
+// }
+
+// showUploadFileName();

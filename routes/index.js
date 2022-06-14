@@ -1,8 +1,9 @@
 var express = require('express');
 var session = require('express-session');
 var router = express.Router();
+const multer = require('multer');
+var path = require('path');
 // const bcrypt = require('bcrypt');
-
 
 
 const { Client } = require('pg');
@@ -14,6 +15,52 @@ function createClient() {
   })
   return client;
 }
+
+const imageUpload = multer({
+  storage: multer.diskStorage(
+    {
+      destination: function (req, file, cb) {
+        cb(null, 'images/');
+      },
+      filename: function (req, file, cb) {
+        cb(
+          null,
+          new Date().valueOf() +
+          '_' +
+          file.originalname
+        );
+      }
+    }),
+});
+
+router.get('/image/:filename', (req, res) => {
+  const { filename } = req.params;
+  const dirname = path.resolve();
+  const fullfilepath = path.join(dirname, 'images/' + filename);
+  return res.sendFile(fullfilepath);
+});
+
+router.post('/image', imageUpload.single('fileToUpload'), (req, res) => {
+  let session = req.session;
+  if (session.loggedin) {
+    const { filename, mimetype, size } = req.file;
+    const filepath = req.file.path;
+
+    let client = createClient();
+    client.connect();
+
+    let sql = 'INSERT INTO public.images (image_filename, image_filepath, image_mimetype, image_size, user_id) VALUES ($1, $2, $3, $4, $5)'
+    client.query(sql, [filename, filepath, mimetype, size, req.body.user_id], (err, result) => {
+      if (err) throw err;
+      let fileUploadData = result.rows;
+      client.end();
+      res.json(fileUploadData);
+    })
+  } else {
+    res.redirect('/');
+  }
+});
+
 
 
 
@@ -39,6 +86,7 @@ router.get('/home_user', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
     res.render('home_user', { title: 'YogaLand', data: data })
+    console.log("home user page data: ", data)
   } else {
     res.redirect('/');
   }
@@ -54,20 +102,21 @@ router.get('/logout', function (req, res, next) {
   }
 })
 
+
 router.get('/users/:id/profile', function (req, res, next) {
   let session = req.session;
 
   if (session.loggedin) {
-  // createClient();
-  let client = createClient();
-  client.connect();
-  client.query('SELECT * FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
-    if (err) throw err;
-    let data = result.rows[0];
-    console.log(data);
-    client.end();
-    res.render('profile', { title: 'YogaLand', data: data });
-  })
+    createClient();
+    let client = createClient();
+    client.connect();
+    client.query('SELECT * FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
+      if (err) throw err;
+      let data = result.rows[0];
+      console.log(data);
+      client.end();
+      res.render('profile', { title: 'YogaLand', data: data });
+    })
 
   } else {
     res.redirect('/');
@@ -75,61 +124,61 @@ router.get('/users/:id/profile', function (req, res, next) {
 
 })
 
-router.get('/user/:id/past_classes', function (req, res, next){
+router.get('/user/:id/past_classes', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
     let client = createClient();
-  // createClient();
-  client.connect();
-  let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date < CURRENT_DATE'
-  client.query(sql, [req.params.id], (err, result) => {
-    if (err) throw err;
-    let data = result.rows;
-    console.log(data);
-    client.end();
-    res.json(data);
-  })
-    } else {
+    // createClient();
+    client.connect();
+    let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date < CURRENT_DATE'
+    client.query(sql, [req.params.id], (err, result) => {
+      if (err) throw err;
+      let data = result.rows;
+      console.log(data);
+      client.end();
+      res.json(data);
+    })
+  } else {
     res.redirect('/');
   }
 })
 
 
-router.get('/user/:id/next_classes', function (req, res, next){
+router.get('/user/:id/next_classes', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
     let client = createClient();
-  // createClient();
-  client.connect();
-  let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date > CURRENT_DATE'
-  client.query(sql, [req.params.id], (err, result) => {
-    if (err) throw err;
-    let data = result.rows;
-    console.log(data);
-    client.end();
-    res.json(data);
-  })
-    } else {
+    // createClient();
+    client.connect();
+    let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date > CURRENT_DATE'
+    client.query(sql, [req.params.id], (err, result) => {
+      if (err) throw err;
+      let data = result.rows;
+      console.log(data);
+      client.end();
+      res.json(data);
+    })
+  } else {
     res.redirect('/');
   }
 })
 
 
-router.get('/discounts', function (req, res, next){
+router.get('/discounts', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
     let client = createClient();
-  // createClient();
-  client.connect();
-  let sql = 'SELECT * FROM public.classes where classes.discount = true ORDER BY classes.class_date ASC LIMIT 6'
-  client.query(sql, (err, result) => {
-    if (err) throw err;
-    let discountsData = result.rows;
-    console.log(discountsData);
-    client.end();
-    res.json(discountsData);
-  })
-    } else {
+    // createClient();
+    client.connect();
+    let sql = 'SELECT * FROM public.classes where classes.discount = true ORDER BY classes.class_date ASC LIMIT 6'
+    client.query(sql, (err, result) => {
+      if (err) throw err;
+      let discountsData = result.rows;
+      console.log(discountsData);
+      client.end();
+      res.json(discountsData);
+    })
+  } else {
     res.redirect('/');
   }
 })
@@ -196,22 +245,22 @@ router.get('/index', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
 
-  // createClient();
-  let client = createClient();
-  client.connect();
-  let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
-    + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
-    + ' JOIN public.locations on c.location_id = locations.location_id '
-    // + ' JOIN public.bookings on c.class_id = bookings.class_id '
-    // + ' JOIN public.users on b.user_id = users.user_id '
-    + ' ORDER BY class_date ASC ';
-  client.query(sql, (err, result) => {
-    if (err) throw err;
-    let classesQueryData = result.rows;
-    client.end();
-    // res.render('index', { title: 'YogaLand', classesData: classesQueryData });
-    res.render('index', { title: 'YogaLand', classesData: classesQueryData, data: data });
-  });
+    // createClient();
+    let client = createClient();
+    client.connect();
+    let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
+      + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
+      + ' JOIN public.locations on c.location_id = locations.location_id '
+      // + ' JOIN public.bookings on c.class_id = bookings.class_id '
+      // + ' JOIN public.users on b.user_id = users.user_id '
+      + ' ORDER BY class_date ASC ';
+    client.query(sql, (err, result) => {
+      if (err) throw err;
+      let classesQueryData = result.rows;
+      client.end();
+      // res.render('index', { title: 'YogaLand', classesData: classesQueryData });
+      res.render('index', { title: 'YogaLand', classesData: classesQueryData, data: data });
+    });
 
   } else {
     res.redirect('/');
@@ -223,56 +272,56 @@ router.get('/index', function (req, res, next) {
 router.get(`/index/classes/*`, function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
-  let query = req.query;
-  console.log("query: ", query);
-  let count = 0;
-  let where = 'WHERE ';
-  let paramsArray = [];
-  if (Object.keys(query).length !== 0) {
-    for (const key in query) {
-      if (Array.isArray(query[key])) {
-        let subCount = 0;
-        if (count > 0) {
-          where += ' AND '
-        }
-        where += '(';
-        query[key].forEach(x => {
-          paramsArray.push(x);
-          if (subCount > 0) {
-            where += ' OR '
+    let query = req.query;
+    console.log("query: ", query);
+    let count = 0;
+    let where = 'WHERE ';
+    let paramsArray = [];
+    if (Object.keys(query).length !== 0) {
+      for (const key in query) {
+        if (Array.isArray(query[key])) {
+          let subCount = 0;
+          if (count > 0) {
+            where += ' AND '
           }
-          subCount++;
+          where += '(';
+          query[key].forEach(x => {
+            paramsArray.push(x);
+            if (subCount > 0) {
+              where += ' OR '
+            }
+            subCount++;
+            where += `classes.` + key + `=$` + ++count;
+          });
+          where += ')';
+        } else {
+          paramsArray.push(query[key]);
+          if (count > 0) {
+            where += ' AND '
+          }
           where += `classes.` + key + `=$` + ++count;
-        });
-        where += ')';
-      } else {
-        paramsArray.push(query[key]);
-        if (count > 0) {
-          where += ' AND '
         }
-        where += `classes.` + key + `=$` + ++count;
       }
-    }
-  } else {
-    where = '';
-  }
-
-  console.log("params array:", paramsArray);
-  // createClient();
-  let client = createClient();
-  client.connect();
-  // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
-  let sql = 'SELECT *, (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id) FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
-  console.log("sql: ", sql);
-  client.query(sql, paramsArray, (err, result) => {
-    if (err) throw err;
-    let data = JSON.stringify(result.rows);
-    client.end();
-    res.json(data);
-  })
     } else {
-      res.redirect('/');
+      where = '';
     }
+
+    console.log("params array:", paramsArray);
+    // createClient();
+    let client = createClient();
+    client.connect();
+    // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
+    let sql = 'SELECT *, (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id) FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
+    console.log("sql: ", sql);
+    client.query(sql, paramsArray, (err, result) => {
+      if (err) throw err;
+      let data = JSON.stringify(result.rows);
+      client.end();
+      res.json(data);
+    })
+  } else {
+    res.redirect('/');
+  }
 })
 
 // POST routes
@@ -289,15 +338,11 @@ router.post('/login', function (req, res, next) {
     if (instructor) {
       sql = "SELECT *, instructor_first_name AS first_name FROM public.instructors WHERE instructor_email = $1 AND instructor_pw = $2";
       redirectUrl = '/home_instructor';
-      instructor = true;
-
     } else {
       sql = "SELECT *, user_first_name AS first_name FROM public.users WHERE user_email = $1 AND user_pw = $2"
       redirectUrl = '/home_user';
-      instructor = false;
     }
 
-    console.log(instructor);
     client.query(sql, [useremail, password], function (err, result) {
       if (err) throw err;
       if (result.rows.length > 0) {
