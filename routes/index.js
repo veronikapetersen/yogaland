@@ -6,12 +6,13 @@ var router = express.Router();
 
 
 const { Client } = require('pg');
-let client;
+//let client;
 function createClient() {
-  client = new Client({
+  let client = new Client({
     connectionString: 'postgres://tbfnnuirlbjgnp:1fba8e67df7a5cd9db62a91904e224de773d0deaeed315be1c29bee90e6b84ca@ec2-34-242-84-130.eu-west-1.compute.amazonaws.com:5432/d9cf4rej73i41r',
     ssl: { rejectUnauthorized: false }
   })
+  return client;
 }
 
 
@@ -57,7 +58,8 @@ router.get('/users/:id/profile', function (req, res, next) {
   let session = req.session;
 
   if (session.loggedin) {
-  createClient();
+  // createClient();
+  let client = createClient();
   client.connect();
   client.query('SELECT * FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
     if (err) throw err;
@@ -76,8 +78,8 @@ router.get('/users/:id/profile', function (req, res, next) {
 router.get('/user/:id/past_classes', function (req, res, next){
   let session = req.session;
   if (session.loggedin) {
-
-  createClient();
+    let client = createClient();
+  // createClient();
   client.connect();
   let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date < CURRENT_DATE'
   client.query(sql, [req.params.id], (err, result) => {
@@ -93,12 +95,53 @@ router.get('/user/:id/past_classes', function (req, res, next){
 })
 
 
+router.get('/user/:id/next_classes', function (req, res, next){
+  let session = req.session;
+  if (session.loggedin) {
+    let client = createClient();
+  // createClient();
+  client.connect();
+  let sql = 'SELECT * FROM public.bookings INNER JOIN public.users on bookings.user_id = users.user_id INNER JOIN public.classes on bookings.class_id = classes.class_id INNER JOIN public.locations on classes.location_id = locations.location_id WHERE bookings.user_id = $1 AND classes.class_date > CURRENT_DATE'
+  client.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    let data = result.rows;
+    console.log(data);
+    client.end();
+    res.json(data);
+  })
+    } else {
+    res.redirect('/');
+  }
+})
+
+
+router.get('/discounts', function (req, res, next){
+  let session = req.session;
+  if (session.loggedin) {
+    let client = createClient();
+  // createClient();
+  client.connect();
+  let sql = 'SELECT * FROM public.classes where classes.discount = true ORDER BY classes.class_date ASC LIMIT 6'
+  client.query(sql, (err, result) => {
+    if (err) throw err;
+    let discountsData = result.rows;
+    console.log(discountsData);
+    client.end();
+    res.json(discountsData);
+  })
+    } else {
+    res.redirect('/');
+  }
+})
+
+
 
 
 router.get('/class/:id', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
-    createClient();
+    // createClient();
+    let client = createClient();
     client.connect();
     client.query('SELECT * FROM public.classes  JOIN public.locations on locations.location_id = classes.location_id JOIN public.instructors on instructors.instructor_id = classes.instructor_id WHERE class_id = $1', [req.params.id], (err, result) => {
       if (err) throw err;
@@ -115,7 +158,8 @@ router.get('/class/:id', function (req, res, next) {
 router.get('/instructor/:id', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
-    createClient();
+    // createClient();
+    let client = createClient();
     client.connect();
     //instructor information
     client.query('SELECT * FROM public.instructors JOIN public.reviews on instructors.instructor_id = reviews.instructor_id WHERE instructors.instructor_id = $1', [req.params.id], (err, result) => {
@@ -152,7 +196,8 @@ router.get('/index', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
 
-  createClient();
+  // createClient();
+  let client = createClient();
   client.connect();
   let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
     + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
@@ -213,9 +258,11 @@ router.get(`/index/classes/*`, function (req, res, next) {
   }
 
   console.log("params array:", paramsArray);
-  createClient();
+  // createClient();
+  let client = createClient();
   client.connect();
-  let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
+  // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
+  let sql = 'SELECT *, (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id) FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
   console.log("sql: ", sql);
   client.query(sql, paramsArray, (err, result) => {
     if (err) throw err;
@@ -230,7 +277,8 @@ router.get(`/index/classes/*`, function (req, res, next) {
 
 // POST routes
 router.post('/login', function (req, res, next) {
-  createClient();
+  // createClient();
+  let client = createClient();
   let useremail = req.body.useremail;
   let password = req.body.password;
   let instructor = req.body.instructor_login;
@@ -273,7 +321,8 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/signup', function (req, res, next) {
-  createClient();
+  // createClient();
+  let client = createClient();
   let signup_useremail = req.body.signup_useremail;
 
   const saltRounds = 10;
@@ -316,7 +365,8 @@ router.post('/edit_user_info', function (req, res, next) {
   let signup_building = req.body.building;
   let signup_zipcode = req.body.zipcode;
   let id;
-  createClient();
+  // createClient();
+  let client = createClient();
   client.connect();
   sql = ' SELECT * FROM public.users WHERE users.user_email = $1';
   client.query(sql, [signup_useremail], function (err, result) {
@@ -346,7 +396,8 @@ router.post('/class_signup', function (req, res, next) {
   let user_id = data[0].user_id;
   console.log(user_id)
   let sql = 'INSERT INTO public.bookings (class_id, user_id) VALUES ($1, $2)'
-  createClient();
+  // createClient();
+  let client = createClient();
   client.connect();
 
   client.query(sql, [class_id, user_id], function (err, result) {

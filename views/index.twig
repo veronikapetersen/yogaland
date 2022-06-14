@@ -5,18 +5,18 @@
 <div id="home_page_container">
 
         <div id="filters_wrapper">
-                <div>Yoga Type
+                <div class="single_filter"><span class="filter_type">Yoga Type</span>
                         <div class="filters_checkboxes">
                                 <label><input class="checkbox" data-key="class_type" data-value="hatha" id="hatha" 
-                                                name="hatha" type="checkbox">hatha yoga</label>
+                                                name="hatha" type="checkbox"> hatha yoga</label>
                                 <label><input class="checkbox" data-key="class_type" data-value="flow" id="flow"
-                                                name="flow" type="checkbox">flow yoga</label>
+                                                name="flow" type="checkbox"> flow yoga</label>
                                 <label><input class="checkbox" data-key="class_type" data-value="prenatal" id="prenatal"
-                                                name="prenatal" type="checkbox">prenatal yoga</label>
+                                                name="prenatal" type="checkbox"> prenatal yoga</label>
                         </div>
                 </div>
 
-                <div>Date</div>
+                {# <div>Date</div>
 
                 <div>Time
                         <div class="filters_checkboxes">
@@ -27,16 +27,16 @@
                                 <label><input class="checkbox" data-key="class_time" data-value="evening" id="evening"
                                                 name="evening" type="checkbox">18:00-22:00</label>
                         </div>
-                </div>
+                </div> #}
 
 
 
-                <div>Language
+                <div class="single_filter"><span class="filter_type">Language</span>
                         <div class="filters_checkboxes">
                                 <label><input class="checkbox" data-key="class_language" data-value="English"
-                                                id="english" name="english" type="checkbox">English</label>
+                                                id="english" name="english" type="checkbox"> English</label>
                                 <label><input class="checkbox" data-key="class_language" data-value="Danish" id="danish"
-                                                name="danish" type="checkbox">Danish</label>
+                                                name="danish" type="checkbox"> Danish</label>
                         </div>
                 </div>
 
@@ -69,7 +69,7 @@
                         </div>
                 </div> #}
 
-                <div>Price
+                {# <div>Price
                         <div class="filters_checkboxes">
                                 <label><input class="checkbox" data-key="class_price" data-value="cheap" id="cheap"
                                                 name="cheap" type="checkbox">under 100DKK</label>
@@ -78,18 +78,18 @@
                                 <label><input class="checkbox" data-key="class_price" data-value="pricy" id="pricy"
                                                 name="pricy" type="checkbox">200DKK+</label>
                         </div>
-                </div>
+                </div> #}
 
-                <div>Duration
+                <div class="single_filter"><span class="filter_type">Duration</span>
                         <div class="filters_checkboxes">
                                 <label><input class="checkbox" data-key="class_duration" data-value="30" id="30min"
-                                                name="30min" type="checkbox">30 min</label>
+                                                name="30min" type="checkbox"> 30 min</label>
                                 <label><input class="checkbox" data-key="class_duration" data-value="45" id="45min"
-                                                name="45min" type="checkbox">45 min</label>
+                                                name="45min" type="checkbox"> 45 min</label>
                                 <label><input class="checkbox" data-key="class_duration" data-value="60" id="60min"
-                                                name="60min" type="checkbox">60 min</label>
+                                                name="60min" type="checkbox"> 60 min</label>
                                 <label><input class="checkbox" data-key="class_duration" data-value="90" id="90min"
-                                                name="90min" type="checkbox">90 min</label>
+                                                name="90min" type="checkbox"> 90 min</label>
                         </div>
                 </div>
         </div>
@@ -139,7 +139,7 @@
                                                         </div>
                                                         <div
                                                                 class="single_class_instructor grey hover-underline-animation">
-                                                                <a href="/instructor/{{singleObject.instructor_id}}"
+                                                                <a class="single_class_instructor grey" href="/instructor/{{singleObject.instructor_id}}"
                                                                         class="grey" style="text-decoration:none">
                                                                         <span
                                                                                 class="material-symbols-outlined">self_improvement</span>

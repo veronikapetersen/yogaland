@@ -29,17 +29,20 @@ checkboxes.forEach(checkbox => {
                     let obj = JSON.parse(classes_obj);
                     document.querySelector("#classes").innerHTML = "";
                     obj.forEach(singleObject => {
-                        console.log(singleObject);
+                        console.log("single object:", singleObject);
                         showClassesOverview(singleObject);
                     })
                 })
-        }
-        updateClassList();
-
-    });
-})
-
-function showClassesOverview(singleObject) {
+            }
+            updateClassList();
+            
+        });
+    })
+    
+    function showClassesOverview(singleObject) {
+    let classdate = moment(singleObject.class_date).format("DD.MM.YYYY");
+    let spotsLeft = parseInt(singleObject.class_capacity) - parseInt(singleObject.reservations);
+    console.log("map: ", singleObject.location_map);
     document.querySelector("#classes").innerHTML += `
     <div class="single_class_container">
     <div class="single_class_top">
@@ -73,12 +76,11 @@ function showClassesOverview(singleObject) {
                             ${singleObject.location_street}
                             ${singleObject.location_building},
                             ${singleObject.location_zipcode}
-                            <span class="googleLocation" style="display:none">
-                                    ${singleObject.location_map}</span>
+                            <span class="googleLocation" style="display:none">${singleObject.location_map}</span>
                     </div>
                     <div
                             class="single_class_instructor grey hover-underline-animation">
-                            <a href="/instructor/${singleObject.instructor_id}"
+                            <a class="single_class_instructor grey" href="/instructor/${singleObject.instructor_id}"
                                     class="grey" style="text-decoration:none">
                                     <span
                                             class="material-symbols-outlined">self_improvement</span>
@@ -94,7 +96,7 @@ function showClassesOverview(singleObject) {
                     </div>
                     <div class="single_class_date grey">
                             <span class="material-symbols-outlined">event</span>
-                            ${singleObject.date}
+                            ${classdate}
                     </div>
                     <div class="single_class_time grey">
                             <span class="material-symbols-outlined">schedule</span>
@@ -114,7 +116,7 @@ function showClassesOverview(singleObject) {
                             <div class="single_class_price">
                                     ${singleObject.class_price} DKK</div>
                             <div class="">
-                                    ${singleObject.class_capacity - singleObject.reservations} spots left
+                                    ${spotsLeft} spots left
                             </div>
                     </div>
                     <div id="basket" class="single_class_basket">
@@ -125,6 +127,7 @@ function showClassesOverview(singleObject) {
             </div>
     </div>
 </div > `;
+showMap();
 
 }
 
@@ -160,18 +163,22 @@ basketButtons.forEach(button => {
     })
 });
 
-let location_divs = document.querySelectorAll(".single_class_location");
-location_divs.forEach(location_div => {
-    location_div.addEventListener("click", function () {
-        console.log("click");
-        let googleMapsURL = this.querySelector(".googleLocation").innerHTML;
-        console.log(googleMapsURL);
+function showMap() {
 
-        document.querySelector(".map_text").style = "display:none";
-        document.querySelector(".map_iframe").src = googleMapsURL;
-
+    let location_divs = document.querySelectorAll(".single_class_location");
+    location_divs.forEach(location_div => {
+        location_div.addEventListener("click", function () {
+            console.log("click");
+            let googleMapsURL = this.querySelector(".googleLocation").innerHTML;
+            console.log(googleMapsURL);
+            
+            document.querySelector(".map_text").style = "display:none";
+            document.querySelector(".map_iframe").src = googleMapsURL;
+            
+        })
     })
-})
+}
+showMap();
 
 let myInfo = document.querySelector(".my_info_col_wrapper");
 let myInfoTop = document.querySelector(".my_info_top");
@@ -185,21 +192,21 @@ let favInstrCheckBox = document.querySelector("#fav_instr_checkbox");
 let favInstrTop = document.querySelector(".fav_instr_top");
 let favInstructorsContainer = document.querySelector(".fav_instructors_container");
 
-myInfoCheckBox.addEventListener('click', function () {
-    myInfo.classList.toggle("hidden");
-    myInfoTop.classList.toggle("active");
-})
+// myInfoCheckBox.addEventListener('click', function () {
+//     myInfo.classList.toggle("hidden");
+//     myInfoTop.classList.toggle("active");
+// })
 
-pastClassesCheckBox.addEventListener('click', function () {
-    pastClassesContainer.classList.toggle("hidden");
-    pastClassesTop.classList.toggle("active");
-    fetchPastClasses();
-})
+// pastClassesCheckBox.addEventListener('click', function () {
+//     pastClassesContainer.classList.toggle("hidden");
+//     pastClassesTop.classList.toggle("active");
+//     fetchPastClasses();
+// })
 
-favInstrCheckBox.addEventListener('click', function () {
-    favInstructorsContainer.classList.toggle("hidden");
-    favInstrTop.classList.toggle("active");
-})
+// favInstrCheckBox.addEventListener('click', function () {
+//     favInstructorsContainer.classList.toggle("hidden");
+//     favInstrTop.classList.toggle("active");
+// })
 
 
 function fetchPastClasses() {
@@ -231,3 +238,88 @@ function fetchPastClasses() {
             })
         })
 }
+
+
+function fetchNextClasses() {
+    let id = document.querySelector("#secretInfoHomeUser").innerHTML;
+    const response = fetch(`/user/${id}/next_classes`)
+        .then(response => response.json())
+        .then(fetchedData => {
+            let nextClasses = fetchedData;
+            console.log("next classes:", nextClasses);
+            let nextClassesContainer = document.querySelector(".nextClassesContainer");
+            document.querySelector("#nextClassesCount").innerText = nextClasses.length;
+            nextClassesContainer.innerHTML = "";
+            nextClasses.forEach(nextClass => {
+                console.log("next:", nextClass);
+                let classdate = moment(nextClass.class_date).format("DD.MM.YYYY")
+                nextClassesContainer.innerHTML += `
+            <div class="home_instr_upcom_class_cont">
+                <div class="home_instr_upcom_class_col_left">
+                    <div class="upcoming_class_title"> ${nextClass.class_type} </div>
+                    <div>${classdate}</div>
+                    <div>${nextClass.class_time}</div>
+                </div>
+                <div class="home_instr_upcom_class_col_right grey">
+                <div class="single_class_more_info grey">
+                    <a class="hover-underline-animation" href="/class/${nextClass.class_id}">
+                    More info
+                        <span class="material-symbols-outlined">double_arrow</span>
+                    </a>
+                </div>
+                    <div class="home_instr_location_link">
+                        <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
+                        <span class="instructor_page_studio">
+                            ${nextClass.location_street} ${nextClass.location_building}, ${nextClass.location_zipcode}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        `;
+            })
+        })
+}
+fetchNextClasses();
+
+
+
+
+function fetchDiscounts(){
+    const response = fetch('/discounts')
+    .then(response => response.json())
+    .then(discountsData => {
+        let discounts = discountsData;
+        console.log(discounts);
+        let discountsContainer = document.querySelector(".last_offers_container");
+        discountsContainer.innerHTML = "";
+        discounts.forEach(offer => {
+            console.log("offer:", offer);
+            let offerdate = moment(offer.class_date).format("DD.MM.YYYY")
+            discountsContainer.innerHTML += `
+            <div class="single_offer_wrapper">
+            <div class="last_offer_title"> ${offer.class_type} yoga </div> 
+            <div class="last_offer_info">
+
+                <div class="last_offer_col_left">
+                    <div>${offerdate}</div>
+                    <div>${offer.class_time}</div>
+                </div>
+
+                <div class="last_offer_col_right">
+                    <div class="old_price grey">${offer.class_price}DKK</div>
+                    <div class="new_price">${offer.class_new_price}DKK</div>
+                </div>
+            </div>
+            <div class="single_class_more_info grey">
+            <a class="hover-underline-animation" href="/class/${offer.class_id}">
+            More info
+                <span class="material-symbols-outlined">double_arrow</span>
+            </a>
+        </div>
+        </div>
+    `;
+        })
+    })
+}
+
+fetchDiscounts();

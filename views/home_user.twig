@@ -10,7 +10,7 @@
 
         <div class="last_offers_container">
 
-            <div class="single_offer_wrapper">
+            {# <div class="single_offer_wrapper">
 
                 <div class="last_offer_title"> Hatha yoga </div>
 
@@ -97,7 +97,7 @@
                         <div class="new_price">100DKK</div>
                     </div>
                 </div>
-            </div>
+            </div> #}
 
 
         </div>
@@ -106,84 +106,16 @@
             <a href="/index" id="browse_all_classes_btn">Browse all classes</a>
         </div>
 
-
-
-        
-{#     
-        <div class="create_new_container">
-            <div class="create_new__title grey">
-                New Class
-            </div>
-            <div class="create_new__text grey">
-                Here you can create a new yoga class.
-            </div>
-            <div class="create_new__text grey">
-                Once it is published, users will be able to find it on the search page.
-            </div>
-
-            <button id="home_instr_create_class_btn">Add a new class</button>
-        </div>
-
-        <div class="create_new_container">
-            <div class="create_new__title grey">
-                New Event
-            </div>
-            <div class="create_new__text grey">
-                Planning something bigger than a regular class?
-            </div>
-            <div class="create_new__text grey">
-                Use this form to create an event - a getaway, a retreat, or a meetup!
-            </div>
-
-            <button id="home_instr_create_event_btn">Create an event</button>
-
-        </div> #}
     </div>
 
     <div class="home_instr_top__col_right">
-        <div class="home_instr_upcom_title grey">My next classes (<span>3</span>) </div>
-        <div id="home_instr_upcom_classes_wrapper">
-            <div class="home_instr_upcom_class_cont">
-                <div class="home_instr_upcom_class_col_left">
-                    <div class="upcoming_class_title">Hatha</div>
-                    <div>29.06.2022</div>
-                    <div>14:00</div>
-                </div>
-                <div class="home_instr_upcom_class_col_right grey">
-
-                    <div class="home_instr_location_link">
-                        <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
-                        <span class="instructor_page_studio">
-                            <a class="grey" href="">Amagerbrogade 23, 2300</a>
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="home_instr_upcom_class_cont">
-                <div class="home_instr_upcom_class_col_left">
-                    <div class="upcoming_class_title">Hatha</div>
-                    <div>29.06.2022</div>
-                    <div>14:00</div>
-                </div>
-                <div class="home_instr_upcom_class_col_right grey">
-
-                    <div class="home_instr_location_link">
-                        <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
-                        <span class="instructor_page_studio">
-                            <a class="grey" href="">Amagerbrogade 23, 2300</a>
-                        </span>
-                    </div>
-
-                </div>
-            </div>
+        <div class="hidden" id="secretInfoHomeUser">{{data[0].user_id}}</div>
+        <div class="home_instr_upcom_title grey">My next classes (<span id="nextClassesCount"></span>)</div>
+        <div class="nextClassesContainer" id="home_instr_upcom_classes_wrapper">
         </div>
         <button id="home_instr_see_all_btn">See all</button>
     </div>
 </section>
-
-
 
 
 
@@ -198,21 +130,22 @@
 <section id="stats">
 
     <div class="stats_section_title">My stats this month</div>
-
+    
     <div class="stats_columns">
-
+        
         <div class="stats_col">
             <div class="stats_number">5</div>
-            <div>classes attended</div>
+            <div class="stats_text grey">classes attended</div>
         </div>
         
         <div class="stats_col">
-
+            
             <div class="stats_number">250</div>
-            <div>min trained</div>
+            <div class="stats_text grey">min trained</div>
         </div>
     </div>
-    </section>
+
+</section>
 
 
 
