@@ -34,7 +34,6 @@ router.get('/home_instructor', function (req, res, next) {
   }
 });
 
-
 router.get('/home_user', function (req, res, next) {
   let session = req.session;
   if (session.loggedin) {
@@ -43,18 +42,6 @@ router.get('/home_user', function (req, res, next) {
     res.redirect('/');
   }
 })
-
-// router.get('/index', function (req, res, next) {
-//   //  initialize session:
-//   let session = req.session;
-//   if (session.loggedin) {
-//     // let data = session.result;
-//     res.render('index', { title: 'YogaLand', data: data });
-//   } else {
-//     res.redirect('/');
-//   }
-// });
-
 
 router.get('/logout', function (req, res, next) {
   let session = req.session;
@@ -67,9 +54,9 @@ router.get('/logout', function (req, res, next) {
 })
 
 router.get('/users/:id/profile', function (req, res, next) {
-  // let session = req.session;
+  let session = req.session;
 
-  // if (session.loggedin) {
+  if (session.loggedin) {
   createClient();
   client.connect();
   client.query('SELECT * FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
@@ -80,15 +67,15 @@ router.get('/users/:id/profile', function (req, res, next) {
     res.render('profile', { title: 'YogaLand', data: data });
   })
 
-  // } else {
-  //   res.redirect('/');
-  // }
+  } else {
+    res.redirect('/');
+  }
 
 })
 
 router.get('/user/:id/past_classes', function (req, res, next){
-  // let session = req.session;
-  // if (session.loggedin) {
+  let session = req.session;
+  if (session.loggedin) {
 
   createClient();
   client.connect();
@@ -100,9 +87,9 @@ router.get('/user/:id/past_classes', function (req, res, next){
     client.end();
     res.json(data);
   })
-    // } else {
-  //   res.redirect('/');
-  // }
+    } else {
+    res.redirect('/');
+  }
 })
 
 
@@ -162,8 +149,8 @@ router.get('/instructor/:id', function (req, res, next) {
 
 router.get('/index', function (req, res, next) {
   //  initialize session:
-  // let session = req.session;
-  // if (session.loggedin) {
+  let session = req.session;
+  if (session.loggedin) {
 
   createClient();
   client.connect();
@@ -177,51 +164,20 @@ router.get('/index', function (req, res, next) {
     if (err) throw err;
     let classesQueryData = result.rows;
     client.end();
-    res.render('index', { title: 'YogaLand', classesData: classesQueryData });
-    // res.render('index', { title: 'YogaLand', classesData: classesQueryData, data: data });
+    // res.render('index', { title: 'YogaLand', classesData: classesQueryData });
+    res.render('index', { title: 'YogaLand', classesData: classesQueryData, data: data });
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
-  // } else {
-  //   res.redirect('/');
-  // }
+  } else {
+    res.redirect('/');
+  }
 });
 
-// router.get('/classes', function (req, res, next) {
 
-//   let session = req.session;
-//   if (session.loggedin) {
-//     createClient();
-//     client.connect();
-//     let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
-//       + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
-//       + ' JOIN public.locations on c.location_id = locations.location_id '
-//       + ' ORDER BY class_date ASC ';
-//     client.query(sql, (err, result) => {
-//       if (err) throw err;
-//       let data = JSON.stringify(result.rows);
-//       client.end();
-//       res.json(data);
-//     });
-//   } else {
-//     res.redirect('/');
-//   }
-// });
 
 router.get(`/index/classes/*`, function (req, res, next) {
-  // let session = req.session;
-  // if (session.loggedin) {
+  let session = req.session;
+  if (session.loggedin) {
   let query = req.query;
   console.log("query: ", query);
   let count = 0;
@@ -232,7 +188,6 @@ router.get(`/index/classes/*`, function (req, res, next) {
       if (Array.isArray(query[key])) {
         let subCount = 0;
         if (count > 0) {
-          // where += ' OR '
           where += ' AND '
         }
         where += '(';
@@ -248,7 +203,6 @@ router.get(`/index/classes/*`, function (req, res, next) {
       } else {
         paramsArray.push(query[key]);
         if (count > 0) {
-          // where += ' OR '
           where += ' AND '
         }
         where += `classes.` + key + `=$` + ++count;
@@ -269,9 +223,9 @@ router.get(`/index/classes/*`, function (req, res, next) {
     client.end();
     res.json(data);
   })
-  //   } else {
-  //     res.redirect('/');
-  //   }
+    } else {
+      res.redirect('/');
+    }
 })
 
 // POST routes
@@ -283,7 +237,7 @@ router.post('/login', function (req, res, next) {
   if (useremail && password) {
     client.connect();
     let sql;
-    // let redirectUrl;
+    let redirectUrl;
     if (instructor) {
       sql = "SELECT *, instructor_first_name AS first_name FROM public.instructors WHERE instructor_email = $1 AND instructor_pw = $2";
       redirectUrl = '/home_instructor';
