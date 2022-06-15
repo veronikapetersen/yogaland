@@ -48,7 +48,8 @@
 
         <li><a href="/logout">Log out</a></li>
         <li>
-          <span id="my_profile_icon" class="material-symbols-outlined">account_circle</span>
+          <img id="my_profile_icon" src="{{(data[0].src?data[0].src:'/images/profile-placeholder.png')}}" alt="profile_pic_small">
+          {# <span id="my_profile_icon" class="material-symbols-outlined">account_circle</span> #}
           <div id="dropdown_menu">
             <a href="/logout">Log out</a>
           </div>

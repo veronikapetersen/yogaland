@@ -66,7 +66,8 @@
 
         <div class="profile_picture_wrapper">
             <div>Profile picture</div>
-            <div class="picture_preview"></div>
+            {# <div><img class="picture_preview" id="profile_pic_preview" src="/images/profile-placeholder.png" alt="profilepicture"> </div> #}
+            <div><img class="picture_preview" id="profile_pic_preview" src="{{(data.src?data.src:'/images/profile-placeholder.png')}}" alt="profilepicture"> </div>
             <form action="/image" method="post" enctype="multipart/form-data">
                 <div>
                     <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile">
@@ -200,6 +201,11 @@
                     label.querySelector('span').innerHTML = fileName;
                 } else {
                     label.innerHTML = labelVal;
+                }
+
+                const [file] = this.files;
+                if (file) {
+                    document.querySelector("#profile_pic_preview").src = URL.createObjectURL(file)
                 }
             });
         });

@@ -20,7 +20,7 @@ const imageUpload = multer({
   storage: multer.diskStorage(
     {
       destination: function (req, file, cb) {
-        cb(null, 'images/');
+        cb(null, 'public/images');
       },
       filename: function (req, file, cb) {
         cb(
@@ -36,15 +36,37 @@ const imageUpload = multer({
 router.get('/image/:filename', (req, res) => {
   const { filename } = req.params;
   const dirname = path.resolve();
-  const fullfilepath = path.join(dirname, 'images/' + filename);
-  return res.sendFile(fullfilepath);
+  const src = path.join('/images/' + filename)
+  const srcFull = path.join('public/images/' + filename)
+  const fullfilepath = path.join(dirname, 'public/images/' + filename);
+
+  let session = req.session;
+  if (session.loggedin) {
+    const client = createClient();
+    client.connect();
+    let sql = 'SELECT * FROM public.images WHERE user_id = $1 and image_filepath = $2';
+    // let sql = 'SELECT * FROM public.images WHERE user_id = $1';
+    let user_id = data[0].user_id;
+    client.query(sql, [user_id, srcFull], (err, result) => {
+      if (err) throw err;
+      let imageData = result.rows;
+      console.log("image data :", imageData);
+    })
+  } else {
+    res.redirect('/');
+  }
+
+  // return res.sendFile(fullfilepath);
 });
+
+
 
 router.post('/image', imageUpload.single('fileToUpload'), (req, res) => {
   let session = req.session;
   if (session.loggedin) {
     const { filename, mimetype, size } = req.file;
-    const filepath = req.file.path;
+    // const filepath = req.file.path;
+    const filepath = req.file.path.replace("public/", "/");
 
     let client = createClient();
     client.connect();
@@ -54,15 +76,13 @@ router.post('/image', imageUpload.single('fileToUpload'), (req, res) => {
       if (err) throw err;
       let fileUploadData = result.rows;
       client.end();
-      res.json(fileUploadData);
+      // res.json(fileUploadData);
+      res.redirect(`/users/${req.body.user_id}/profile`);
     })
   } else {
     res.redirect('/');
   }
 });
-
-
-
 
 // GET
 router.get('/', function (req, res, next) {
@@ -110,8 +130,8 @@ router.get('/users/:id/profile', function (req, res, next) {
     createClient();
     let client = createClient();
     client.connect();
-    client.query('SELECT * FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
-      if (err) throw err;
+    client.query('SELECT *, (SELECT images.image_filepath FROM public.images WHERE images.user_id = users.user_id LIMIT 1) AS src FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
+    if (err) throw err;
       let data = result.rows[0];
       console.log(data);
       client.end();
@@ -339,7 +359,7 @@ router.post('/login', function (req, res, next) {
       sql = "SELECT *, instructor_first_name AS first_name FROM public.instructors WHERE instructor_email = $1 AND instructor_pw = $2";
       redirectUrl = '/home_instructor';
     } else {
-      sql = "SELECT *, user_first_name AS first_name FROM public.users WHERE user_email = $1 AND user_pw = $2"
+      sql = "SELECT *, (SELECT images.image_filepath FROM public.images WHERE images.user_id = users.user_id LIMIT 1) AS src, user_first_name AS first_name FROM public.users WHERE user_email = $1 AND user_pw = $2"
       redirectUrl = '/home_user';
     }
 
