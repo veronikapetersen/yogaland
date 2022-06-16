@@ -107,6 +107,19 @@
                                 value="{{queryData.class_id}}">
                         </label>
                     </div>
+                    <div class="hidden">
+                        <label class="hidden">
+                            <input id="ins_id" type="text" name="ins_id" class="hidden"
+                                value="{{queryData.instructor_id}}">
+                        </label>
+                    </div>
+                    <div class="hidden">
+                        <label class="hidden">
+                            <input id="review_date" type="text" name="review_date" class="hidden"
+                                value="{{"now"|date("Y/m/d")}}">
+                        </label>
+                    </div>
+
                     <div>
                         <label>
                             <input id="review_title_input" type="text" name="review_title_input" 
@@ -153,5 +166,15 @@
 </section>
 
 
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    showLogOutBtn();
+
+</script>
 
 {% endblock %}

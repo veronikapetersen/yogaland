@@ -495,29 +495,17 @@ router.post('/class_signup', function (req, res, next) {
 
 router.post('/submit_review', function (req, res) {
   let user_id = data.user_id;
-  let class_id = req.body.class_id;
-  console.log(user_id);
-  console.log(class_id);
-  let sql = 'INSERT INTO public.reviews (user_id, class_id, review_title, review_text) VALUES ($1, $2, $3, $4)';
+  let sql = 'INSERT INTO public.reviews (user_id, class_id, review_title, review_text, instructor_id, review_date, review_time ) VALUES ($1, $2, $3, $4, $5, $6)';
   let client = createClient();
   client.connect();
-  client.query(sql, [user_id, class_id, req.body.review_title_input, req.body.review_text_input], function (err, result) {
+  client.query(sql, [user_id, req.body.class_id, req.body.review_title_input, req.body.review_text_input, req.body.ins_id, req.body.review_date], function (err, result) {
     if (err) throw err;
     reviews = result.rows;
     client.end();
     res.redirect(`/class/${class_id}`)
-    // res.send("review sent");
     console.log("review added");
-
-    // if (result.rowCount.length > 0) {
-    //   client.end();
-    //   res.send("review sent");
-    //   console.log("review added");
-    // }
   });
 })
-
-
 
 
 
