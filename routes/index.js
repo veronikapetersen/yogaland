@@ -339,7 +339,7 @@ router.get(`/index/classes/*`, function (req, res, next) {
     // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
     let sql = `SELECT *, 
     (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id), 
-    (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $${++count} LIMIT 1)
+    (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $${++count} )
     FROM public.classes 
     JOIN public.instructors on classes.instructor_id = instructors.instructor_id 
     JOIN public.locations on classes.location_id = locations.location_id ` + where;
@@ -465,6 +465,7 @@ router.post('/class_signup', function (req, res, next) {
 
   let class_id = req.body.class_id;
   let user_id = data.user_id;
+  // let user_id = session.user_id;
   console.log("class id: ", class_id, "user_id: ", user_id);
   let sql = 'INSERT INTO public.bookings (class_id, user_id) VALUES ($1, $2)'
   let checkSql = 'SELECT * FROM public.bookings WHERE class_id = $1 AND user_id = $2'

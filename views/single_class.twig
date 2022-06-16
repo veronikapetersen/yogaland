@@ -43,16 +43,17 @@
                         {% endif %}
                         DKK
                     </div>
+
+                    {% if queryData.signedup %}
+                    <div class="going"><span>going</span></div>
+
+                    {% else %}
                     <div id="basket" class="single_class_basket">
                         <span class="material-symbols-outlined">shopping_cart</span>
-                        {% if queryData.signedup is defined %}
-                        <div>already signed up</div>
-                        <div class="single_class_new_price">{{queryData.class_new_price}}</div>
-                        {% else %}
-                        <div>you can sign up</div>
-                        {% endif %}
-
+                        <div>sign up</div>
                     </div>
+                    {% endif %}
+
                 </div>
             </div>
         </div>

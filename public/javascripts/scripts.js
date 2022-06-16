@@ -59,7 +59,7 @@ function showClassesOverview(singleObject) {
                             ${singleObject.class_duration} min
                     </div>
                     <div class="">1.2 km away</div>
-                    <div class="classID" style="display:none">${singleObject.class_id}</div>
+                    <div class="class_id" style="display:none">${singleObject.class_id}</div>
             </div>
             <div class="single_class_col col_mid">
                     <div class="single_class_title">${singleObject.class_type} Yoga
@@ -141,11 +141,12 @@ basketButtons.forEach(button => {
         let targetedIcon = this.querySelector(".material-symbols-outlined");
         targetedIcon.classList.add("filled_icon");
         targetedButton.innerText = 'signed up';
-        let addedClass = targetedButton.parentElement.parentElement.parentElement;
+        let addedClass = targetedButton.parentElement.parentElement.parentElement.parentElement;
 
-        let addedClass_id = addedClass.querySelector(".classID").innerHTML;
+        console.log("added class: ", addedClass);
+        let addedClass_id = addedClass.querySelector(".class_id").innerHTML;
 
-        console.log(addedClass_id);
+        console.log("class id: ", addedClass_id);
 
 
         let classData = {
@@ -163,6 +164,9 @@ basketButtons.forEach(button => {
 
     })
 });
+
+
+
 
 function showMap() {
 

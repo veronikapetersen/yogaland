@@ -314,6 +314,16 @@ li {
     'FILL' 1
 }
 
+.going {
+  padding: 10px;
+  border: 2px solid #e38817;
+  color: #e38817;
+  align-items: center;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 .single_class_basket {
   padding: 10px;
   border: 1px solid #e38817;

@@ -113,7 +113,7 @@
                                                                 {{singleObject.class_duration}} min
                                                         </div>
                                                         <div class="">1.2 km away</div>
-                                                        <div class="classID" style="display:none">{{singleObject.class_id}}</div>
+                                                        <div class="class_id" style="display:none">{{singleObject.class_id}}</div>
                                                 </div>
                                                 <div class="single_class_col col_mid">
                                                         <div class="single_class_title">{{singleObject.class_type}} Yoga
@@ -180,27 +180,38 @@
                                                                         {% endif %}
                                                                         DKK</div>
 
-                                                                        {# <div class="old_price grey">${offer.class_price}DKK</div>
-                                                                        <div class="new_price">${offer.class_new_price}DKK</div> #}
 
                                                                 <div class="">
                                                                         {{singleObject.class_capacity - singleObject.reservations}} spots left
                                                                 </div>
                                                         </div>
+
+
+                                                        {% if singleObject.signedup %}
+
+                                                        <div class="going">
+                                                                <span class="goingValue"> going </span>
+                                                        </div>
+
+
+
+                                                        {% else %}
+                                                        
+                                                        
                                                         <div id="basket" class="single_class_basket">
                                                                 <span
-                                                                        class="material-symbols-outlined">shopping_cart</span>
-                                                                <span class="addToBasketBtnValue">
-
-
-                                                                        {% if singleObject.signedup %}
-                                                                        already signed up
-                                                                        {% else %}
-                                                                        you can sign up
-                                                                        {% endif %}
-                                                
-                                                                </span>
+                                                                class="material-symbols-outlined">shopping_cart</span>
+                                                                <span>
+                                                                <span class="addToBasketBtnValue"> sign up </span>
                                                         </div>
+          
+                                                        {% endif %}
+
+
+
+
+
+
                                                 </div>
                                         </div>
                                 </div>
