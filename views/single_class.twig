@@ -47,16 +47,20 @@
                     {% if queryData.signedup %}
                     <div class="going"><span>going</span></div>
 
-                    {% else %}
-                    <div id="basket" class="single_class_basket">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                        <div>sign up</div>
-                    </div>
-                    {% endif %}
+                    {# {% elseif queryData.class_date|date("d/m/Y") < "now" |date("d/m/Y") %} <div class="going">
+                        <span>went</span>
+                </div> #}
 
+                {% else %}
+                <div id="basket" class="single_class_basket">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <div>sign up</div>
                 </div>
+                {% endif %}
+
             </div>
         </div>
+    </div>
     </div>
 
     <div id="class_page_extra_info">
@@ -80,7 +84,7 @@
                 <div class="class_page_ratings_number"> ⭐ 4.5</div>
                 <div class="class_page_ratings_reviews hover-underline-animation">
                     <a class="grey" href="#class_page_reviews"> Reviews
-                        <span class="class_page_review_number">(12)</span>
+                        <span class="class_page_review_number">({{classReviews.length}})</span>
                         <span class="material-symbols-outlined">double_arrow</span>
                     </a>
                 </div>
@@ -93,26 +97,51 @@
 
         <div id="class_page_reviews">
 
-            {% for ss in sss %}
+            <div>
+
+                <div>Leave a review </div>
+                <form action="/submit_review" method="post">
+                    <div class="hidden">
+                        <label class="hidden">
+                            <input id="class_id" type="text" name="class_id" class="hidden"
+                                value="{{queryData.class_id}}">
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input id="review_title_input" type="text" name="review_title_input" 
+                                placeholder="review title">
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input id="review_text_input" type="text" name="review_text_input" 
+                                placeholder="review text">
+                        </label>
+                    </div>
+                    <div>
+                        <input class="submit_review_btn" type="submit" value="Send">
+                    </div>
+                </form>
+            </div>
+
+            {% for review in classReviews %}
 
 
             <div class="review_wrapper">
                 <div class="review_info">
                     <div class="review_date_time">
-                        <div class="review_date">12.02.2022</div>
-                        <div class="review_time">12:36</div>
+                        <div class="review_date">{{review.review_date|date('d/m/Y')}}</div>
+                        <div class="review_time">{{review.review_time}}</div>
                     </div>
                     <div class="review_title">
-                        lorem ipsum
+                        {{review.review_title}}
                     </div>
                     <div class="review_text grey">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit eleifend lacus et
-                        pretium.
-                        Cras nec lobortis eros. Praesent interdum cursus justo vel egestas. Nam dictum hendrerit mauris,
-                        ornare egestas urna faucibus at.
+                        {{review.review_text}}
                     </div>
                 </div>
-                <div class="review_author grey">Katrina S.</div>
+                <div class="review_author">{{review.user_first_name}} {{review.user_last_name}}</div>
             </div>
 
             {% endfor %}

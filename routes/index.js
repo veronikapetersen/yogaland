@@ -217,12 +217,17 @@ router.get('/class/:id', function (req, res, next) {
     FROM public.classes 
     JOIN public.locations on locations.location_id = classes.location_id 
     JOIN public.instructors on instructors.instructor_id = classes.instructor_id 
-    WHERE class_id = $1`, [req.params.id, session.user_id], (err, result) => {
+    WHERE classes.class_id = $1`, [req.params.id, session.user_id], (err, result) => {
       if (err) throw err;
       let queryData = result.rows[0];
-      console.log("my class", queryData);
-      client.end();
-      res.render('single_class', { title: 'YogaLand', queryData: queryData, data: data });
+
+      client.query('SELECT * FROM public.reviews JOIN public.users on reviews.user_id = users.user_id WHERE reviews.class_id =$1 ORDER BY reviews.review_date DESC', [req.params.id], (err, result) => {
+        if (err) throw err;
+        let classReviews = result.rows;
+        client.end();
+        res.render('single_class', { title: 'YogaLand', queryData: queryData, data: data, classReviews: classReviews });
+      })
+      // console.log("my class", queryData);
     })
   } else {
     res.redirect('/');
@@ -486,6 +491,31 @@ router.post('/class_signup', function (req, res, next) {
   });
 })
 
+
+
+router.post('/submit_review', function (req, res) {
+  let user_id = data.user_id;
+  let class_id = req.body.class_id;
+  console.log(user_id);
+  console.log(class_id);
+  let sql = 'INSERT INTO public.reviews (user_id, class_id, review_title, review_text) VALUES ($1, $2, $3, $4)';
+  let client = createClient();
+  client.connect();
+  client.query(sql, [user_id, class_id, req.body.review_title_input, req.body.review_text_input], function (err, result) {
+    if (err) throw err;
+    reviews = result.rows;
+    client.end();
+    res.redirect(`/class/${class_id}`)
+    // res.send("review sent");
+    console.log("review added");
+
+    // if (result.rowCount.length > 0) {
+    //   client.end();
+    //   res.send("review sent");
+    //   console.log("review added");
+    // }
+  });
+})
 
 
 

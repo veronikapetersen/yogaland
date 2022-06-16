@@ -519,6 +519,8 @@ li {
   border-left: 0.7px solid grey;
   margin: 30px;
   padding-left: 10px;
+  color: rgb(155, 155, 155);
+
 }
 
 .review_date_time {
@@ -1201,6 +1203,9 @@ footer {
 
 /* user: my profile - start  */
 
+.leave_review {
+  font-family: 'Lato', sans-serif;
+}
 
 #my_info,
 #past_classes,

@@ -205,7 +205,13 @@ function fetchPastClasses() {
                         <div>${classdate}</div>
                     </div>
                     <div class="home_instr_upcom_class_col_right grey">
-                        <div class="home_instr_location_link">
+                    <div class="single_class_more_info grey">
+                    <a class="hover-underline-animation" href="/class/${pastClass.class_id}">
+                        <span class="leave_review">Leave a review </span>
+                        <span class="material-symbols-outlined">double_arrow</span>
+                    </a>
+                </div>   
+                    <div class="home_instr_location_link">
                             <span class="material-symbols-outlined pin_drop grey">pin_drop</span>
                             <span class="instructor_page_studio">
                                 <a class="grey" href="">${pastClass.location_street} ${pastClass.location_building}, ${pastClass.location_zipcode}</a>
