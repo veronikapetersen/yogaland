@@ -24,33 +24,22 @@
   {% block nav %}
   <nav>
     <div id="logo">
-      <a href="/home_{{data[0].role}}">YogaLand</a>
+      {# <a href="/home_{{data[0].role}}">YogaLand</a> #}
+      <a href="/home_{{data.role}}">YogaLand</a>
 
       <span class="grey">{{ whoami }}</span>
     </div>
     <div id="nav_menu">
       <ul>
-
-        <li><a href="/users/{{data[0].user_id}}/profile">My profile</a></li>
+        {# <li><a href="/users/{{data[0].user_id}}/profile">My profile</a></li> #}
+        <li><a href="/users/{{data.user_id}}/profile">My profile</a></li>
+        {# <li>{{data[0].first_name}}</li> #}
+        <li>{{data.first_name}}</li>
         <li>
-        </li>
-
-        {# <li class="checkout">
-          <a href="/my_cart">
-            <span class="material-symbols-outlined">shopping_cart_checkout</span>
-            <span class="my_cart_items"></span>
-          </a>
-        </li> #}
-
-        <li>
-          {{data[0].first_name}}
-        </li>
-
-        <li><a href="/logout">Log out</a></li>
-        <li>
-          <img id="my_profile_icon" src="{{(data[0].src?data[0].src:'/images/profile-placeholder.png')}}" alt="profile_pic_small">
-          {# <span id="my_profile_icon" class="material-symbols-outlined">account_circle</span> #}
-          <div id="dropdown_menu">
+          {# <img id="my_profile_icon" src="{{(data[0].src?data[0].src:'/images/profile-placeholder.png')}}" #}
+          <img id="my_profile_icon" src="{{(data.src?data.src:'/images/profile-placeholder.png')}}"
+            alt="profile_pic_small">
+          <div id="dropdown_menu" class="hidden">
             <a href="/logout">Log out</a>
           </div>
         </li>
@@ -101,7 +90,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"
     integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {% block scripts %}{% endblock %}
+  {% block scripts %}{% endblock %}
 </body>
 
 </html>

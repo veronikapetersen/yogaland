@@ -109,7 +109,8 @@
     </div>
 
     <div class="home_instr_top__col_right">
-        <div class="hidden" id="secretInfoHomeUser">{{data[0].user_id}}</div>
+        {# <div class="hidden" id="secretInfoHomeUser">{{data[0].user_id}}</div> #}
+        <div class="hidden" id="secretInfoHomeUser">{{data.user_id}}</div>
         <div class="home_instr_upcom_title grey">My next classes (<span id="nextClassesCount"></span>)</div>
         <div class="nextClassesContainer" id="home_instr_upcom_classes_wrapper">
         </div>

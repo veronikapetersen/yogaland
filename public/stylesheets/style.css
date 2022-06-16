@@ -50,7 +50,6 @@ nav {
   background-color: brown;
   padding: 15px;
   right: 10px;
-  display: none;
 }
 
 #dropdown_menu a {
@@ -59,8 +58,15 @@ nav {
   text-decoration: none;
 }
 
-#my_profile_icon:hover+#dropdown_menu {
+.show {
   display: block;
+} 
+
+
+#my_profile_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
 }
 
 #nav_menu .material-symbols-outlined {

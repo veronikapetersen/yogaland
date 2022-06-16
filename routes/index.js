@@ -130,10 +130,10 @@ router.get('/users/:id/profile', function (req, res, next) {
     createClient();
     let client = createClient();
     client.connect();
-    client.query('SELECT *, (SELECT images.image_filepath FROM public.images WHERE images.user_id = users.user_id LIMIT 1) AS src FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
+    client.query('SELECT *, (SELECT images.image_filepath FROM public.images WHERE images.user_id = users.user_id LIMIT 1) AS src, users.user_first_name AS first_name FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
     if (err) throw err;
       let data = result.rows[0];
-      console.log(data);
+      console.log("profile url data: ", data);
       client.end();
       res.render('profile', { title: 'YogaLand', data: data });
     })
@@ -369,9 +369,11 @@ router.post('/login', function (req, res, next) {
         // initialize session
         let session = req.session;
         session.loggedin = true;
-        data = result.rows;
+        // data = result.rows;
+        data = result.rows[0];
 
-        data[0].isInstructor = instructor;
+        // data[0].isInstructor = instructor;
+        data.isInstructor = instructor;
 
         res.redirect(redirectUrl);
         client.end();
