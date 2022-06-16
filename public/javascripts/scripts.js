@@ -59,8 +59,7 @@ function showClassesOverview(singleObject) {
                             ${singleObject.class_duration} min
                     </div>
                     <div class="">1.2 km away</div>
-                    <div class="classID" style="display:none">
-                            ${singleObject.class_id} </div>
+                    <div class="classID" style="display:none">${singleObject.class_id}</div>
             </div>
             <div class="single_class_col col_mid">
                     <div class="single_class_title">${singleObject.class_type} Yoga
@@ -112,9 +111,12 @@ function showClassesOverview(singleObject) {
                                             class="material-symbols-outlined">double_arrow</span>
                             </a>
                     </div>
-                    <div>
+                    <div>   
                             <div class="single_class_price">
-                                    ${singleObject.class_price} DKK</div>
+                            ${(singleObject.discount === true ? `<div class="single_class_old_price grey">${singleObject.class_price}</div> 
+                            <div class="single_class_new_price">${singleObject.class_new_price}</div>` : `${singleObject.class_price}`)}                            
+                            DKK</div>
+                            
                             <div class="">
                                     ${spotsLeft} spots left
                             </div>
@@ -122,7 +124,7 @@ function showClassesOverview(singleObject) {
                     <div id="basket" class="single_class_basket">
                             <span
                                     class="material-symbols-outlined">shopping_cart</span>
-                            <span class="addToBasketBtnValue"> Add to basket</span>
+                            <span class="addToBasketBtnValue">Sign up</span>
                     </div>
             </div>
     </div>
@@ -149,7 +151,6 @@ basketButtons.forEach(button => {
         let classData = {
             class_id: addedClass_id
         }
-
 
         const response = fetch('/class_signup', {
             method: 'POST',

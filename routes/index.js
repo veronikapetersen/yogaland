@@ -273,8 +273,11 @@ router.get('/index', function (req, res, next) {
       + ' JOIN public.locations on c.location_id = locations.location_id '
       // + ' JOIN public.bookings on c.class_id = bookings.class_id '
       // + ' JOIN public.users on b.user_id = users.user_id '
-      + ' ORDER BY class_date ASC ';
+      + ' WHERE c.class_date > CURRENT_DATE' 
+      + ' ORDER BY c.class_date ASC';
     client.query(sql, (err, result) => {
+
+      console.log(sql);
       if (err) throw err;
       let classesQueryData = result.rows;
       client.end();
@@ -323,7 +326,7 @@ router.get(`/index/classes/*`, function (req, res, next) {
         }
       }
     } else {
-      where = '';
+      where = ' ';
     }
 
     console.log("params array:", paramsArray);
@@ -450,29 +453,21 @@ router.post('/edit_user_info', function (req, res, next) {
 
 
 
-
-
-
-
-
 router.post('/class_signup', function (req, res, next) {
 
-  console.log("body:", req.body.class_id);
-
   let class_id = req.body.class_id;
-  let user_id = data[0].user_id;
-  console.log(user_id)
+  let user_id = data.user_id;
+  console.log("class id: ", class_id, "user_id: ", user_id);
   let sql = 'INSERT INTO public.bookings (class_id, user_id) VALUES ($1, $2)'
-  // createClient();
   let client = createClient();
   client.connect();
 
   client.query(sql, [class_id, user_id], function (err, result) {
     if (err) throw err;
     if (result.rowCount.length > 0) {
-      res.send("user created!");
+      res.send("signed up for this class!");
       client.end();
-      console.log("user added");
+      console.log("signed up");
     }
   })
 })

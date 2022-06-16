@@ -113,8 +113,7 @@
                                                                 {{singleObject.class_duration}} min
                                                         </div>
                                                         <div class="">1.2 km away</div>
-                                                        <div class="classID" style="display:none">
-                                                                {{singleObject.class_id}} </div>
+                                                        <div class="classID" style="display:none">{{singleObject.class_id}}</div>
                                                 </div>
                                                 <div class="single_class_col col_mid">
                                                         <div class="single_class_title">{{singleObject.class_type}} Yoga
@@ -155,7 +154,7 @@
                                                         </div>
                                                         <div class="single_class_date grey">
                                                                 <span class="material-symbols-outlined">event</span>
-                                                                {{singleObject.date|date("d/m/Y")}}
+                                                                {{singleObject.class_date|date("d/m/Y")}}
                                                         </div>
                                                         <div class="single_class_time grey">
                                                                 <span class="material-symbols-outlined">schedule</span>
@@ -173,7 +172,17 @@
                                                         </div>
                                                         <div>
                                                                 <div class="single_class_price">
-                                                                        {{singleObject.class_price}} DKK</div>
+                                                                        {% if singleObject.discount == true %}
+                                                                        <div class="single_class_old_price grey">{{singleObject.class_price }}</div> 
+                                                                        <div class="single_class_new_price">{{singleObject.class_new_price}}</div>
+                                                                        {% elseif singleObject.discount == null %}
+                                                                        {{singleObject.class_price}}
+                                                                        {% endif %}
+                                                                        DKK</div>
+
+                                                                        {# <div class="old_price grey">${offer.class_price}DKK</div>
+                                                                        <div class="new_price">${offer.class_new_price}DKK</div> #}
+
                                                                 <div class="">
                                                                         {{singleObject.class_capacity - singleObject.reservations}} spots left
                                                                 </div>
@@ -181,7 +190,7 @@
                                                         <div id="basket" class="single_class_basket">
                                                                 <span
                                                                         class="material-symbols-outlined">shopping_cart</span>
-                                                                <span class="addToBasketBtnValue"> Add to basket</span>
+                                                                <span class="addToBasketBtnValue">Sign up</span>
                                                         </div>
                                                 </div>
                                         </div>
@@ -197,12 +206,7 @@
         </div>
 </div>
 
-
-
-
 {% endblock %}
-
-
 
 
 

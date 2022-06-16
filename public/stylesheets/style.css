@@ -283,6 +283,19 @@ li {
 .single_class_price {
   font-size: 22px;
   font-weight: bold;
+  display: flex;
+  align-items: baseline;
+}
+
+.single_class_old_price {
+  color: grey;
+  text-decoration: line-through;
+  font-size: 18px;
+  margin-right: 3px;
+}
+
+.single_class_new_price {
+  font-weight: bold;
 }
 
 /* google icons */
@@ -381,6 +394,13 @@ li {
   display: flex;
   align-items: flex-end;
   margin-bottom: 10px;
+}
+
+.class_page_instructor a {
+  text-decoration: none;
+  display: flex;
+  margin-top: 5px;
+
 }
 
 .class_page_instructor:hover span {
@@ -852,7 +872,7 @@ footer {
 
 .home_instr_upcom_class_cont {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   background-color: white;
   padding: 20px 15px;
