@@ -45,8 +45,6 @@ function showClassesOverview(singleObject) {
     console.log("map: ", singleObject.location_map);
     document.querySelector("#classes").innerHTML += `
     <div class="single_class_container">
-    <div class="single_class_top">
-    </div>
     <div class="single_class_wrapper">
             <div class="single_class_col col_left">
                     <div>
