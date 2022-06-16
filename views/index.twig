@@ -190,7 +190,16 @@
                                                         <div id="basket" class="single_class_basket">
                                                                 <span
                                                                         class="material-symbols-outlined">shopping_cart</span>
-                                                                <span class="addToBasketBtnValue">Sign up</span>
+                                                                <span class="addToBasketBtnValue">
+
+
+                                                                        {% if singleObject.signedup %}
+                                                                        already signed up
+                                                                        {% else %}
+                                                                        you can sign up
+                                                                        {% endif %}
+                                                
+                                                                </span>
                                                         </div>
                                                 </div>
                                         </div>

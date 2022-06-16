@@ -19,7 +19,8 @@
                 <div class="class_page_col_left">
                     <div class="class_page_instructor hover-underline-animation grey">
                         <a href="/instructor/{{queryData.instructor_id}}">
-                            <span class="grey">with {{queryData.instructor_first_name}} {{queryData.instructor_last_name}} </span>
+                            <span class="grey">with {{queryData.instructor_first_name}}
+                                {{queryData.instructor_last_name}} </span>
                             <span class="grey material-symbols-outlined">double_arrow</span>
                         </a>
                     </div>
@@ -31,9 +32,26 @@
                 </div>
 
                 <div class="class_page_col_right">
-                    <div class="class_page_price"> {{queryData.class_price}} DKK</div>
+                    {# <div class="class_page_price"> {{queryData.class_price}} DKK</div> #}
+                    <div class="class_page_price single_class_price">
+
+                        {% if queryData.discount == true %}
+                        <div class="single_class_old_price grey">{{queryData.class_price }}</div>
+                        <div class="single_class_new_price">{{queryData.class_new_price}}</div>
+                        {% elseif queryData.discount == null %}
+                        {{queryData.class_price}}
+                        {% endif %}
+                        DKK
+                    </div>
                     <div id="basket" class="single_class_basket">
-                        <span class="material-symbols-outlined">shopping_cart</span>Sign up
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        {% if queryData.signedup is defined %}
+                        <div>already signed up</div>
+                        <div class="single_class_new_price">{{queryData.class_new_price}}</div>
+                        {% else %}
+                        <div>you can sign up</div>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

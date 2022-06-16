@@ -131,7 +131,7 @@ router.get('/users/:id/profile', function (req, res, next) {
     let client = createClient();
     client.connect();
     client.query('SELECT *, (SELECT images.image_filepath FROM public.images WHERE images.user_id = users.user_id LIMIT 1) AS src, users.user_first_name AS first_name FROM users WHERE users.user_id = $1', [req.params.id], (err, result) => {
-    if (err) throw err;
+      if (err) throw err;
       let data = result.rows[0];
       console.log("profile url data: ", data);
       client.end();
@@ -212,10 +212,15 @@ router.get('/class/:id', function (req, res, next) {
     // createClient();
     let client = createClient();
     client.connect();
-    client.query('SELECT * FROM public.classes  JOIN public.locations on locations.location_id = classes.location_id JOIN public.instructors on instructors.instructor_id = classes.instructor_id WHERE class_id = $1', [req.params.id], (err, result) => {
+    client.query(`SELECT *,
+    (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $2 LIMIT 1) 
+    FROM public.classes 
+    JOIN public.locations on locations.location_id = classes.location_id 
+    JOIN public.instructors on instructors.instructor_id = classes.instructor_id 
+    WHERE class_id = $1`, [req.params.id, session.user_id], (err, result) => {
       if (err) throw err;
       let queryData = result.rows[0];
-      console.log(queryData);
+      console.log("my class", queryData);
       client.end();
       res.render('single_class', { title: 'YogaLand', queryData: queryData, data: data });
     })
@@ -268,14 +273,12 @@ router.get('/index', function (req, res, next) {
     // createClient();
     let client = createClient();
     client.connect();
-    let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id) FROM public.classes as c '
-      + 'JOIN public.instructors on c.instructor_id = instructors.instructor_id '
+    let sql = 'SELECT * , (SELECT COUNT(*) AS reservations FROM public.bookings AS b WHERE b.class_id = c.class_id), (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = c.class_id AND bookings.user_id = $1 LIMIT 1) FROM public.classes as c '
+      + ' JOIN public.instructors on c.instructor_id = instructors.instructor_id '
       + ' JOIN public.locations on c.location_id = locations.location_id '
-      // + ' JOIN public.bookings on c.class_id = bookings.class_id '
-      // + ' JOIN public.users on b.user_id = users.user_id '
-      + ' WHERE c.class_date > CURRENT_DATE' 
+      + ' WHERE c.class_date > CURRENT_DATE'
       + ' ORDER BY c.class_date ASC';
-    client.query(sql, (err, result) => {
+    client.query(sql, [session.user_id], (err, result) => {
 
       console.log(sql);
       if (err) throw err;
@@ -334,9 +337,14 @@ router.get(`/index/classes/*`, function (req, res, next) {
     let client = createClient();
     client.connect();
     // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
-    let sql = 'SELECT *, (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id) FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
+    let sql = `SELECT *, 
+    (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id), 
+    (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $${++count} LIMIT 1)
+    FROM public.classes 
+    JOIN public.instructors on classes.instructor_id = instructors.instructor_id 
+    JOIN public.locations on classes.location_id = locations.location_id ` + where;
     console.log("sql: ", sql);
-    client.query(sql, paramsArray, (err, result) => {
+    client.query(sql, [paramsArray, session.user_id], (err, result) => {
       if (err) throw err;
       let data = JSON.stringify(result.rows);
       client.end();
@@ -374,7 +382,7 @@ router.post('/login', function (req, res, next) {
         session.loggedin = true;
         // data = result.rows;
         data = result.rows[0];
-
+        session.user_id = data.user_id;
         // data[0].isInstructor = instructor;
         data.isInstructor = instructor;
 
@@ -459,17 +467,22 @@ router.post('/class_signup', function (req, res, next) {
   let user_id = data.user_id;
   console.log("class id: ", class_id, "user_id: ", user_id);
   let sql = 'INSERT INTO public.bookings (class_id, user_id) VALUES ($1, $2)'
+  let checkSql = 'SELECT * FROM public.bookings WHERE class_id = $1 AND user_id = $2'
   let client = createClient();
   client.connect();
-
-  client.query(sql, [class_id, user_id], function (err, result) {
+  client.query(checkSql, [class_id, user_id], function (err, result) {
     if (err) throw err;
-    if (result.rowCount.length > 0) {
-      res.send("signed up for this class!");
-      client.end();
-      console.log("signed up");
+    if (result.rowCount === 0) {
+      client.query(sql, [class_id, user_id], function (err, result) {
+        if (err) throw err;
+        if (result.rowCount.length > 0) {
+          client.end();
+          res.send("signed up for this class!");
+          console.log("signed up");
+        }
+      })
     }
-  })
+  });
 })
 
 
