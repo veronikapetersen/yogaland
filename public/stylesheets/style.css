@@ -36,9 +36,18 @@ nav {
   display: flex;
   list-style-type: none;
   align-items: center;
-  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
 }
 
+#nav_menu ul a {
+  text-decoration: none;
+  color: black;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+}
 .checkout {
   display: flex;
   align-items: center;
@@ -47,21 +56,17 @@ nav {
 #dropdown_menu {
   position: absolute;
   z-index: 1;
-  background-color: brown;
+  background-color: #a94521;
   padding: 15px;
   right: 10px;
+  color: white;
 }
 
 #dropdown_menu a {
-  color: white;
+  color: white !important;
   padding: 10px;
   text-decoration: none;
 }
-
-.show {
-  display: block;
-} 
-
 
 #my_profile_icon {
   width: 30px;
@@ -69,9 +74,17 @@ nav {
   border-radius: 15px;
 }
 
-#nav_menu .material-symbols-outlined {
-  font-size: 2rem;
+#my_profile_icon:hover {
+  cursor: pointer;
 }
+
+.welcome_user {
+  font-style: italic;
+}
+
+/* #nav_menu .material-symbols-outlined {
+  font-size: 2rem;
+} */
 
 li {
   margin: 0 10px;
@@ -1079,7 +1092,9 @@ footer {
   font-size: 18px;
 }
 
-
+#browse_all_container {
+  margin: 50px 0;
+}
 
 #browse_all_classes_btn {
   border-radius: 40px;
@@ -1088,7 +1103,7 @@ footer {
   color: #FFFFFF;
   font-size: 16px;
   font-weight: bold;
-  padding: 20px 45px;
+  padding: 30px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;

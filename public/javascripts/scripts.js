@@ -300,11 +300,10 @@ fetchDiscounts();
 
 
 function showLogOutBtn() {
-document.querySelector("#my_profile_icon").addEventListener("click", ()=> {
     let div = document.querySelector("#dropdown_menu");
-    div.classList.toggle("hidden");
-    console.log("c");
-})    
+    document.querySelector("#my_profile_icon").addEventListener("click", () => {
+        div.classList.toggle("hidden");
+    })
 }
 
 showLogOutBtn();
