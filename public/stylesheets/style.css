@@ -125,10 +125,6 @@ nav {
   border-radius: 15px;
 }
 
-#my_profile_icon:hover {
-  cursor: pointer;
-}
-
 .welcome_user {
   font-style: italic;
 }
@@ -697,7 +693,7 @@ footer {
 }
 
 .home_instr_top__col_left {
-  width: 60%;
+  width: 100%;
   padding: 20px;
 }
 
@@ -1296,8 +1292,6 @@ footer {
 /* open-close-icon - end */
 
 
-
-
 @media only screen and (min-width: 600px) and (max-width: 767px) {
 
 }
@@ -1305,103 +1299,35 @@ footer {
 
 @media only screen and (min-width: 768px) {
 
-
-
   nav {
-    display: flex;
-    justify-content: space-between;
     padding: 10px 15px;
-    align-items: center;
   }
   
   #logo {
-    font-family: 'Ubuntu', sans-serif;
     font-size: 2rem;
   }
   
-  #logo a {
-    text-decoration: none;
-    color: black;
-  }
-  
   #nav_menu ul {
-    display: flex;
-    list-style-type: none;
-    align-items: center;
-    font-family: 'Lato', sans-serif;
-    text-transform: uppercase;
     font-size: 16px;
+    margin: 0;
   }
   
   #nav_menu ul a {
-    text-decoration: none;
-    color: black;
-    font-family: 'Lato', sans-serif;
-    text-transform: uppercase;
     font-size: 16px;
-  }
-  .checkout {
-    display: flex;
-    align-items: center;
-  }
-  
-  #dropdown_menu {
-    position: absolute;
-    z-index: 1;
-    background-color: #a94521;
-    padding: 15px;
-    right: 10px;
-    color: white;
-  }
-  
-  #dropdown_menu a {
-    color: white !important;
-    padding: 10px;
-    text-decoration: none;
-  }
-  
-  #my_profile_icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+    margin: 0;
   }
   
   #my_profile_icon:hover {
     cursor: pointer;
   }
   
-  .welcome_user {
-    font-style: italic;
-  }
-  
-  /* #nav_menu .material-symbols-outlined {
-    font-size: 2rem;
-  } */
-  
-  li {
+  #nav_menu ul li {
     margin: 0 10px;
-  }
-  
-  .filters_checkboxes {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .filters_checkboxes label {
-    margin-bottom: 5px;
-  }
-  
-  .checkbox {
-    padding-left: 3px;
   }
   
   #home_page_container {
     display: flex;
     position: relative;
-  }
-  
-  .filter_type {
-    text-transform: uppercase;
   }
   
   .single_filter {
@@ -1412,18 +1338,13 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-family: 'Lato', sans-serif;
-    /* border: 1px solid black; */
-    padding: 10px;
+    justify-content: flex-start;
     width: 170px;
   }
   
   #search_results_wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px;
   }
   
   #search_results {
@@ -1433,11 +1354,11 @@ footer {
   }
   
   #map {
+    display: block;
     width: 40%;
     border: 1px solid rgb(180, 180, 180);
     height: 90vh;
     margin: 10px;
-    display: block;
   }
   
   #map iframe {
@@ -1456,39 +1377,15 @@ footer {
   }
   
   /* single class search results overview*/
-  
-  .single_class_container {
-    background-color: white;
-    margin: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  }
-  
   .single_class_container:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
   
-  .single_class_wrapper {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Lato', sans-serif;
-  }
-  
-  
   .single_class_title {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: 'Lato', sans-serif;
     font-size: 22px;
   }
   
   .single_class_more_info a {
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    color: #444444;
-    text-decoration: none;
     transition: transform 80ms ease-in;
   }
   
@@ -1540,47 +1437,20 @@ footer {
     color: black;
   }
   
-  
   .single_class_location:hover {
     cursor: pointer;
-  }
-  
-  .grey {
-    color: #444444;
   }
   
   .single_class_col div {
     margin-bottom: 10px;
   }
   
-  .single_class_col span {
-    margin-right: 5px;
-  }
-  
-  .col_left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .col_right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
   .single_class_price {
     font-size: 22px;
-    font-weight: bold;
-    display: flex;
-    align-items: baseline;
   }
   
   .single_class_old_price {
-    color: grey;
-    text-decoration: line-through;
     font-size: 18px;
-    margin-right: 3px;
   }
   
   .single_class_new_price {
@@ -1644,7 +1514,8 @@ footer {
     width: 150px;
     height: auto;
   }
-  
+
+  /* TODO  continue here*/
   /* class page - start */
   #class_page_container {
     font-family: 'Lato', sans-serif;
@@ -2068,6 +1939,7 @@ footer {
     width: 80%;
     margin: 0 auto;
     display: flex;
+    flex-direction: row;
     font-family: 'Lato', sans-serif;
   }
   
@@ -2132,7 +2004,6 @@ footer {
   
   .home_instr_upcom_class_cont {
     display: flex;
-    /* justify-content: space-between; */
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     background-color: white;
     padding: 20px 15px;
@@ -2417,6 +2288,7 @@ footer {
   .stats_columns {
     margin-top: 50px;
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
   }
   
