@@ -62,6 +62,7 @@ body {
 .single_class_basket .material-symbols-outlined {
   font-size: 40px;
 }
+
 /* google icons end */
 
 
@@ -128,6 +129,7 @@ nav {
 .welcome_user {
   font-style: italic;
 }
+
 /* nav end  */
 
 
@@ -138,6 +140,7 @@ nav {
   font-family: 'Lato', sans-serif;
   padding: 10px;
 }
+
 .filters_checkboxes {
   display: flex;
   flex-direction: column;
@@ -154,6 +157,7 @@ nav {
 .filter_type {
   text-transform: uppercase;
 }
+
 /* search filters end  */
 
 
@@ -171,7 +175,7 @@ nav {
 }
 
 #map {
-display: none;
+  display: none;
 }
 
 .single_class_container {
@@ -257,6 +261,7 @@ display: none;
 .single_class_new_price {
   font-weight: bold;
 }
+
 /* search results end */
 
 
@@ -389,7 +394,6 @@ display: none;
   margin-bottom: 20px;
 }
 
-
 .review_wrapper {
   border-bottom: 0.7px solid grey;
   padding: 10px 0;
@@ -426,7 +430,6 @@ display: none;
 .review_author {
   font-size: 14px;
 }
-
 /* class page - end */
 
 
@@ -465,6 +468,7 @@ footer {
   padding: 10px 0;
   color: rgb(215, 215, 215, 0.7);
 }
+
 /* footer - end */
 
 
@@ -679,6 +683,7 @@ footer {
   font-size: 22px;
   margin-bottom: 10px;
 }
+
 /* instructor page - end */
 
 
@@ -920,6 +925,7 @@ footer {
 .submit:active {
   transform: scale(0.95);
 }
+
 /* home page for instructors - end */
 
 
@@ -1043,6 +1049,7 @@ footer {
   font-size: 20px;
   text-transform: uppercase;
 }
+
 /* home page for users - end  */
 
 
@@ -1121,7 +1128,7 @@ footer {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-}  
+}
 
 .profile_picture_wrapper {
   display: flex;
@@ -1200,6 +1207,7 @@ footer {
 .uploadFileBtn:active {
   transform: scale(0.95);
 }
+
 /* user: my profile - end */
 
 
@@ -1292,9 +1300,7 @@ footer {
 /* open-close-icon - end */
 
 
-@media only screen and (min-width: 600px) and (max-width: 767px) {
-
-}
+@media only screen and (min-width: 600px) and (max-width: 767px) {}
 
 
 @media only screen and (min-width: 768px) {
@@ -1302,38 +1308,38 @@ footer {
   nav {
     padding: 10px 15px;
   }
-  
+
   #logo {
     font-size: 2rem;
   }
-  
+
   #nav_menu ul {
     font-size: 16px;
     margin: 0;
   }
-  
+
   #nav_menu ul a {
     font-size: 16px;
     margin: 0;
   }
-  
+
   #my_profile_icon:hover {
     cursor: pointer;
   }
-  
+
   #nav_menu ul li {
     margin: 0 10px;
   }
-  
+
   #home_page_container {
     display: flex;
     position: relative;
   }
-  
+
   .single_filter {
     margin: 5px;
   }
-  
+
   #filters_wrapper {
     display: flex;
     flex-direction: column;
@@ -1341,18 +1347,18 @@ footer {
     justify-content: flex-start;
     width: 170px;
   }
-  
+
   #search_results_wrapper {
     display: flex;
     flex-direction: row;
   }
-  
+
   #search_results {
     width: 60%;
     height: 90vh;
     overflow-y: scroll;
   }
-  
+
   #map {
     display: block;
     width: 40%;
@@ -1360,13 +1366,13 @@ footer {
     height: 90vh;
     margin: 10px;
   }
-  
+
   #map iframe {
     width: 100%;
     height: 100%;
     border: 0;
   }
-  
+
   .map_text {
     font-size: 24px;
     padding-top: 40%;
@@ -1375,34 +1381,35 @@ footer {
     justify-content: center;
     align-items: center;
   }
-  
+
   /* single class search results overview*/
   .single_class_container:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .single_class_title {
     font-size: 22px;
   }
-  
+
   .single_class_more_info a {
     transition: transform 80ms ease-in;
+    font-size: 18px;
   }
-  
+
   .single_class_more_info a:hover {
     color: black;
   }
-  
+
   .hover-underline-animation {
     display: inline-block;
     position: relative;
   }
-  
+
   .hover-underline-animation:hover {
     cursor: pointer;
     color: black;
   }
-  
+
   .hover-underline-animation:after {
     content: '';
     position: absolute;
@@ -1414,14 +1421,13 @@ footer {
     background-color: #e38817;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-  
   }
-  
+
   .hover-underline-animation:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-  
+
   .single_class_duration,
   .single_class_location,
   .single_class_instructor,
@@ -1432,280 +1438,156 @@ footer {
     align-items: flex-end;
     font-size: 18px;
   }
-  
+
   .single_class_instructor:hover {
     color: black;
   }
-  
+
   .single_class_location:hover {
     cursor: pointer;
   }
-  
+
   .single_class_col div {
     margin-bottom: 10px;
   }
-  
+
   .single_class_price {
     font-size: 22px;
   }
-  
+
   .single_class_old_price {
     font-size: 18px;
   }
-  
+
   .single_class_new_price {
     font-weight: bold;
   }
-  
-  /* google icons */
-  .material-symbols-outlined {
-    /* color: black; */
-    font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 48
-  }
-  
-  
-  .filled_icon {
-    font-variation-settings:
-      'FILL' 1
-  }
-  
+
   .going {
     padding: 10px;
-    border: 2px solid #e38817;
-    color: #e38817;
-    align-items: center;
-    border-radius: 8px;
-    text-transform: uppercase;
-    font-weight: bold;
   }
-  
+
   .single_class_basket {
     padding: 10px;
-    border: 1px solid #e38817;
-    display: flex;
-    align-items: center;
-    background-color: #e38817;
-    color: white;
     transition: transform 80ms ease-in;
-    border-radius: 8px;
-    text-transform: uppercase;
-    font-weight: bold;
   }
-  
+
   .single_class_basket:hover {
     cursor: pointer;
     transform: scale(1.05);
-  
   }
-  
+
   .single_class_basket:active {
     transform: scale(0.95);
   }
-  
-  .single_class_basket .material-symbols-outlined {
-    font-size: 40px;
-  }
-  
+
   .single_class_thumbnail {
     width: 150px;
     height: auto;
   }
 
-  /* TODO  continue here*/
   /* class page - start */
   #class_page_container {
-    font-family: 'Lato', sans-serif;
-    display: flex;
     width: 60%;
     margin: 0 auto;
-    flex-direction: column;
   }
-  
+
   #class_page_image {
     width: 300px;
     height: auto;
   }
-  
+
   #class_page_top {
-    display: flex;
     margin-bottom: 20px;
   }
-  
+
   #class_page_main_info {
     margin: 0 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
-  
-  .class_page_col_wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-  
+
   .class_page_col_right {
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
   }
-  
+
   #class_page_title {
     font-size: 3rem;
     text-transform: uppercase;
     font-weight: bold;
   }
-  
+
   .class_page_instructor {
-    font-size: 20px;
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 10px;
+    font-size: 24px;
   }
-  
+
   .class_page_instructor a {
-    text-decoration: none;
-    display: flex;
     margin-top: 5px;
-  
   }
-  
+
   .class_page_instructor:hover span {
     color: black;
   }
-  
+
   .class_page_date_time {
     font-size: 1.8rem;
   }
-  
+
   .class_page_date_time span {
     margin-bottom: 10px;
   }
-  
+
   .class_page_price {
     font-size: 30px;
   }
-  
+
   #class_page_extra_info {
     margin: 20px 0;
   }
-  
+
   .class_page_extra_info_top {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-  
-  .class_page_location {
-    margin: 10px 0 20px 0;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-  }
-  
+
   .location_link {
     display: flex;
     align-items: center;
     margin-right: 10px;
   }
-  
+
   .location_link:hover span a {
     color: black;
   }
-  
-  .class_page_studio a {
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
+
   .class_page_studio a:hover {
     color: black;
   }
-  
+
   .class_page_ratings {
     margin: 10px 40px 20px;
-    display: flex;
-    align-items: center;
   }
-  
-  .class_page_ratings div {
-    margin: 0 5px;
-  }
-  
-  .class_page_ratings_number {
-    display: flex;
-    align-items: center;
-  }
-  
-  .pin_drop {
-    margin-right: 5px;
-  }
-  
-  
-  .class_page_ratings_reviews a {
-    text-decoration: none;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-  }
-  
+
   .class_page_ratings_reviews a:hover {
     color: black;
   }
-  
-  .class_page_review_number {
-    margin-left: 3px;
-  }
-  
-  .class_page_class_description {
-    margin-bottom: 20px;
-  }
-  
-  
-  .review_wrapper {
-    border-bottom: 0.7px solid grey;
-    padding: 10px 0;
-    display: flex;
-  }
-  
+
   .review_author {
     width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-left: 0.7px solid grey;
     margin: 30px;
-    padding-left: 10px;
-    color: rgb(155, 155, 155);
-  
   }
-  
-  .review_date_time {
-    display: flex;
-  }
-  
+
   .review_date_time div {
-    margin: 5px 10px 5px 0;
-    color: rgb(155, 155, 155);
     font-size: 13px;
   }
-  
-  .review_title {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
+
   .review_text,
   .review_author {
     font-size: 15px;
   }
-  
   /* class page - end */
-  
-  
+
+
   /* instructor page - start */
   #instructor_page_container {
     font-family: 'Lato', sans-serif;
@@ -1714,108 +1596,109 @@ footer {
     margin: 0 auto;
     flex-direction: column;
   }
-  
+
   #instructor_page_top {
     display: flex;
     justify-content: space-around;
   }
-  
+
   .instructor_page_top_col_left {
     display: flex;
   }
-  
+
   .instructor_page_top_col_right {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
-  
+
   .favourite {
     display: flex;
     align-items: center;
   }
-  
+
   .favourite span {
     margin-right: 5px;
     transition: transform 80ms ease-in;
   }
-  
+
   .favourite span:hover {
     cursor: pointer;
     transform: scale(1.2);
   }
-  
+
   .favourite span:active {
     cursor: pointer;
     transform: scale(0.8);
   }
-  
+
   #instructor_page_image {
     width: 150px;
     border-radius: 100px;
   }
-  
+
   #instructor_page_info_wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
-  
+
   .instr_name {
     font-size: 3rem;
     text-transform: uppercase;
     font-weight: bold;
     padding: 0 10px;
   }
-  
+
   .instr_title {
     font-size: 2rem;
     text-transform: uppercase;
     padding: 10px 10px;
   }
-  
+
   .upcoming {
     display: flex;
   }
-  
+
   .upcoming a {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
     color: black
   }
-  
+
   #instructor_page_main {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     margin-top: 30px;
   }
-  
+
   .instructor_page_main_col_left {
     font-size: 1.5rem;
     width: 60%;
   }
-  
+
   .instructor_page_main_col_right {
     width: 30%;
   }
-  
+
   .instructor_page_main_col_right ul {
     margin-bottom: 10px;
   }
-  
+
   .instructor_page_main_col_right .instructor_page_studio a {
     text-decoration: none;
   }
-  
+
   .col_right_heading {
     margin-bottom: 10px;
   }
-  
+
   .col_left_row {
     margin-bottom: 15px;
   }
-  
+
   .reviews_mini {
     height: 220px;
     overflow-y: scroll;
@@ -1824,16 +1707,16 @@ footer {
     padding: 0 15px;
     border-radius: 5px;
   }
-  
+
   .review_mini_wrapper {
     border-bottom: 0.7px solid grey;
     padding: 15px 0;
   }
-  
+
   .reviews_mini:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .review_mini_author {
     display: flex;
     justify-content: center;
@@ -1841,18 +1724,18 @@ footer {
     border-left: 0.7px solid grey;
     padding-left: 10px;
   }
-  
+
   #instructor_upcoming_classes {
     margin: 60px 0;
   }
-  
+
   .instructor_upcoming_classes__heading {
     padding-bottom: 10px;
     border-bottom: 0.7px solid grey;
     text-transform: uppercase;
     font-size: 2rem;
   }
-  
+
   .upcoming_class_wrapper {
     display: flex;
     flex-direction: column;
@@ -1863,67 +1746,67 @@ footer {
     border-radius: 5px;
     margin: 30px 0;
   }
-  
+
   .upcoming_class_wrapper:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .upcom_class_container {
     display: flex;
     justify-content: space-between;
   }
-  
+
   .upcom_class_container a {
     text-decoration: none;
   }
-  
+
   .upcom_class_col_right {
     margin-right: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
-  
+
   .upcom_class_col_left {
     margin-right: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
-  
+
   .weekday {
     font-size: 14px;
   }
-  
+
   .max_capacity {
     display: flex;
     align-items: center;
   }
-  
+
   .group_icon {
     margin-right: 5px;
   }
-  
+
   .attention {
     display: flex;
     align-items: center;
     font-weight: bold;
     color: black;
   }
-  
+
   .attention-icon {
     margin-right: 5px;
   }
-  
+
   .upcom_class_col_left>div {
     margin-bottom: 5px;
   }
-  
+
   .upcom_class_col_right>div {
     margin-bottom: 5px;
   }
-  
-  
+
+
   .upcoming_class_title {
     text-transform: uppercase;
     font-weight: bold;
@@ -1931,9 +1814,9 @@ footer {
     font-size: 22px;
     margin-bottom: 10px;
   }
-  
+
   /* instructor page - end */
-  
+
   /* home page for instructors - start */
   #home_instr_top {
     width: 80%;
@@ -1942,42 +1825,42 @@ footer {
     flex-direction: row;
     font-family: 'Lato', sans-serif;
   }
-  
+
   .home_instr_top__col_left {
     width: 60%;
     padding: 20px;
   }
-  
+
   .home_instr_top__col_right {
     padding: 20px;
   }
-  
+
   .home_instr_upcom_title {
     font-size: 2rem;
   }
-  
+
   .edit_icon {
     display: flex;
     justify-content: flex-end;
   }
-  
+
   .edit_icon .material-symbols-outlined {
     transition: transform 80ms ease-in;
   }
-  
+
   .edit_icon:hover {
     cursor: pointer;
   }
-  
+
   .edit_icon:hover .material-symbols-outlined {
     color: black;
     transform: scale(1.2);
   }
-  
+
   .edit_icon:active .material-symbols-outlined {
     transform: scale(0.8);
   }
-  
+
   .home_instr_upcom_classes_wrapper {
     display: flex;
     flex-direction: column;
@@ -1988,20 +1871,20 @@ footer {
     border-radius: 5px;
     margin: 30px 0;
   }
-  
+
   .home_instr_upcom_classes_wrapper:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .upcom_class_container {
     display: flex;
     justify-content: space-between;
   }
-  
+
   .upcom_class_container a {
     text-decoration: none;
   }
-  
+
   .home_instr_upcom_class_cont {
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -2010,22 +1893,22 @@ footer {
     border-radius: 5px;
     margin: 30px 0;
   }
-  
+
   .home_instr_upcom_class_cont:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .home_instr_upcom_class_col_left {
     margin-right: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
-  
+
   .home_instr_upcom_class_col_left>div {
     margin-bottom: 5px;
   }
-  
+
   .upcoming_class_title {
     text-transform: uppercase;
     font-weight: bold;
@@ -2033,43 +1916,43 @@ footer {
     font-size: 22px;
     margin-bottom: 10px;
   }
-  
+
   .home_instr_upcom_class_col_right {
     margin-right: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
-  
+
   .home_instr_upcom_class_col_right>div {
     margin-bottom: 5px;
   }
-  
+
   .home_instr_location_link {
     display: flex;
     align-items: center;
     margin-right: 10px;
   }
-  
+
   .home_instr_location_link a {
     text-decoration: none;
   }
-  
+
   .home_instr_location_link:hover span a {
     color: black;
   }
-  
+
   .home_instr_attention {
     display: flex;
     align-items: center;
     font-weight: bold;
     color: black;
   }
-  
+
   .home_instr_attention-icon {
     margin-right: 5px;
   }
-  
+
   #home_instr_see_all_btn,
   #home_instr_create_event_btn,
   #home_instr_create_class_btn {
@@ -2084,46 +1967,46 @@ footer {
     text-transform: uppercase;
     transition: transform 80ms ease-in;
   }
-  
+
   #home_instr_see_all_btn:active,
   #home_instr_create_event_btn:active,
   #home_instr_create_class_btn:active {
     transform: scale(0.95);
   }
-  
+
   #home_instr_see_all_btn:hover,
   #home_instr_create_event_btn:hover,
   #home_instr_create_class_btn:hover {
     cursor: pointer;
   }
-  
+
   .create_new_container {
     background-color: white;
     padding: 20px;
     margin-bottom: 40px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   }
-  
+
   .create_new_container:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .create_new__text {
     font-size: 18px;
     margin-bottom: 10px;
   }
-  
+
   .create_new__title {
     font-size: 22px;
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 20px;
   }
-  
+
   #home_instr__dynamic_content {
     margin: 20px 0;
   }
-  
+
   #new_class_form_wrapper,
   #new_event_form_wrapper {
     align-items: center;
@@ -2135,21 +2018,20 @@ footer {
     margin: 0 auto;
     padding: 30px 0;
   }
-  
+
   .title {
     color: black;
     font-family: sans-serif;
     font-size: 36px;
     font-weight: 600;
-    /* margin-top: 30px; */
   }
-  
+
   .input-container {
     height: 50px;
     margin: 10px 0;
     width: 100%;
   }
-  
+
   .input {
     background-color: #303245;
     border-radius: 12px;
@@ -2162,9 +2044,7 @@ footer {
     padding: 4px 20px 0;
     width: 100%;
   }
-  
-  
-  
+
   .submit {
     background-color: #a94521;
     border-radius: 12px;
@@ -2178,26 +2058,26 @@ footer {
     text-align: center;
     width: 100%;
   }
-  
+
   .submit:active {
     transform: scale(0.95);
   }
-  
+
   /* home page for instructors - end */
-  
-  
-  
+
+
+
   /* home page for users - start */
   .offers_section_title {
     font-size: 34px;
     font-weight: bold;
   }
-  
+
   .last_offers_container {
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   .last_offer_title {
     text-transform: uppercase;
     font-weight: bold;
@@ -2205,48 +2085,47 @@ footer {
     font-size: 22px;
     margin-bottom: 10px;
   }
-  
+
   .single_offer_wrapper {
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     padding: 10px;
     margin: 20px 20px 20px 0;
   }
-  
-  
+
+
   .single_offer_wrapper:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
-  
+
   .last_offer_info {
     display: flex;
     justify-content: space-between;
-  
   }
-  
+
   .last_offer_col_left {
     margin-right: 20px;
   }
-  
+
   .last_offer_col_left>div,
   .last_offer_col_right>div {
     margin-bottom: 5px;
   }
-  
+
   .old_price {
     text-decoration: line-through;
     color: grey;
   }
-  
+
   .new_price {
     font-weight: bold;
     font-size: 18px;
   }
-  
+
   #browse_all_container {
     margin: 50px 0;
   }
-  
+
   #browse_all_classes_btn {
     border-radius: 40px;
     border: 1px solid #e38817;
@@ -2260,15 +2139,15 @@ footer {
     text-decoration: none;
     transition: transform 80ms ease-in;
   }
-  
+
   #browse_all_classes_btn:active {
     transform: scale(0.95);
   }
-  
+
   #browse_all_classes_btn:hover {
     cursor: pointer;
   }
-  
+
   #stats {
     width: 80%;
     margin: 0 auto;
@@ -2276,7 +2155,7 @@ footer {
     margin-bottom: 20px;
     padding: 20px;
   }
-  
+
   .stats_section_title {
     font-size: 30px;
     display: flex;
@@ -2284,20 +2163,20 @@ footer {
     justify-content: center;
     margin-top: 20px;
   }
-  
+
   .stats_columns {
     margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
   }
-  
+
   .stats_col {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .stats_number {
     font-size: 40px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -2311,22 +2190,19 @@ footer {
     align-items: center;
     color: #e38817;
   }
-  
+
   .stats_text {
     margin-top: 30px;
     margin-bottom: 30px;
     font-size: 20px;
     text-transform: uppercase;
   }
-  
   /* home page for users - end  */
-  
+
+
+
+  /* TODO: continue here  */
   /* user: my profile - start  */
-  
-  .leave_review {
-    font-family: 'Lato', sans-serif;
-  }
-  
   #my_info,
   #past_classes,
   #fav_instructors {
@@ -2334,7 +2210,7 @@ footer {
     margin: 0 auto;
     margin-bottom: 40px;
   }
-  
+
   .my_info_title,
   .past_classes_title,
   .fav_instructors_title {
@@ -2343,31 +2219,31 @@ footer {
     font-family: 'Lato', sans-serif;
     margin: 10px 0;
   }
-  
+
   .my_info_form_wrapper {
     width: 300px;
     border: 1px solid rgb(214, 214, 214);
     padding: 10px;
   }
-  
+
   .my_info_col_wrapper {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     margin-top: 10px;
     font-family: 'Lato', sans-serif;
   }
-  
-  
+
   .my_info_form_wrapper form>div {
     padding: 5px;
     display: flex;
     justify-content: space-between;
   }
-  
+
   .my_info_form_wrapper form input {
     padding: 5px;
   }
-  
+
   #edit_my_profile_btn {
     border-radius: 20px;
     border: 1px solid #e38817;
@@ -2381,33 +2257,34 @@ footer {
     transition: transform 80ms ease-in;
     margin: 10px auto;
   }
-  
+
   #edit_my_profile_btn:active {
     transform: scale(0.95);
   }
-  
+
   #edit_my_profile_btn:hover {
     cursor: pointer;
   }
-  
+
   .hidden {
     display: none;
   }
-  
+
   .active,
   .my_info_top:hover,
   .past_classes_top:hover,
   .fav_instr_top:hover {
     background-color: #F2B988;
   }
-  
+
   .my_info_top,
   .past_classes_top,
   .fav_instr_top {
     display: flex;
+    flex-direction: row;
     align-items: center;
-  }  
-  
+  }
+
   .profile_picture_wrapper {
     display: flex;
     flex-direction: column;
@@ -2417,18 +2294,18 @@ footer {
     font-family: 'Lato', sans-serif;
     border: 1px solid rgb(214, 214, 214);
   }
-  
+
   .picture_preview {
     width: 150px;
     height: 150px;
     border: 1px solid grey;
     border-radius: 80px;
   }
-  
+
   .profile_picture_wrapper form {
     width: 300px;
   }
-  
+
   .profile_picture_wrapper .inputfile {
     width: 0.1px;
     height: 0.1px;
@@ -2437,6 +2314,9 @@ footer {
     position: absolute;
     z-index: -1;
   }
+
+
+  /* TODO: fix user profile page past classes section  */
   
   .profile_picture_wrapper .inputfile+label {
     font-size: 1.2rem;
@@ -2450,23 +2330,23 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
     display: flex;
-    margin-bottom: 10px;;
+    margin-bottom: 10px;
   }
-  
+
   .profile_picture_wrapper .inputfile:focus+label,
   .profile_picture_wrapper .inputfile+label:hover {
     background-color: #F2E2CE;
     cursor: pointer;
   }
-  
+
   .overflow {
     text-overflow: ellipsis;
   }
-  
+
   .uploadFileBtn-wrapper {
     display: flex;
   }
-  
+
   .uploadFileBtn {
     border-radius: 20px;
     border: 1px solid #e38817;
@@ -2480,29 +2360,29 @@ footer {
     transition: transform 80ms ease-in;
     margin: 0 auto;
   }
-  
+
   .uploadFileBtn:active {
     transform: scale(0.95);
   }
-  
+
   .uploadFileBtn:hover {
     cursor: pointer;
   }
-  
+
   /* user: my profile - end */
-  
+
   /* open-close-icon - start */
-  
+
   .open_close_icon_container {
     margin-right: 20px;
   }
-  
+
   #my_info_checkbox,
   #past_classes_checkbox,
   #fav_instr_checkbox {
     display: none;
   }
-  
+
   .menu_checkbox_label {
     display: block;
     width: 30px;
@@ -2512,7 +2392,7 @@ footer {
     cursor: pointer;
     padding-top: 15px;
   }
-  
+
   .menu_checkbox_label div {
     width: 6px;
     height: 6px;
@@ -2523,52 +2403,51 @@ footer {
     transition: 0.3s ease width, 0.3s ease margin-left, 0.3s ease margin-bottom,
       0.3s ease background-color;
   }
-  
+
   .menu_checkbox_label div:first-child {
     width: 22px;
   }
-  
+
   .menu_checkbox_label div:nth-child(2) {
     width: 15px;
   }
-  
+
   .menu_checkbox_label div:last-child {
     width: 30px;
     margin-bottom: 0;
   }
-  
+
   #my_info_checkbox:checked+.menu_checkbox_label {
     transform: translateY(-50%) rotateZ(-90deg);
   }
-  
+
   #my_info_checkbox:checked+.menu_checkbox_label div {
     width: 6px;
     margin-bottom: 3px;
     background-color: #404040;
   }
-  
-  
+
+
   #fav_instr_checkbox:checked+.menu_checkbox_label {
     transform: translateY(-50%) rotateZ(-90deg);
   }
-  
+
   #fav_instr_checkbox:checked+.menu_checkbox_label div {
     width: 6px;
     margin-bottom: 3px;
     background-color: #404040;
   }
-  
-  
+
+
   #past_classes_checkbox:checked+.menu_checkbox_label {
     transform: translateY(-50%) rotateZ(-90deg);
   }
-  
+
   #past_classes_checkbox:checked+.menu_checkbox_label div {
     width: 6px;
     margin-bottom: 3px;
     background-color: #404040;
   }
-  
+
   /* open-close-icon - end */
 }
-
