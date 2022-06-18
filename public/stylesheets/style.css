@@ -19,7 +19,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 
@@ -818,6 +818,12 @@ footer {
 
 .home_instr_attention-icon {
   margin-right: 5px;
+}
+
+#home_instr_create_event_btn a, 
+#home_instr_create_class_btn a {
+  text-decoration: none;
+  color: white;
 }
 
 #home_instr_see_all_btn,
@@ -2264,10 +2270,6 @@ footer {
 
   #edit_my_profile_btn:hover {
     cursor: pointer;
-  }
-
-  .hidden {
-    display: none;
   }
 
   .active,

@@ -314,3 +314,17 @@ function showLogOutBtn() {
 }
 
 showLogOutBtn();
+
+
+function renderDynamicContent(){
+
+    document.querySelector("#home_instr_create_class_btn").addEventListener("click", () => {
+        document.querySelector("#new_class_form_wrapper").classList.remove('hidden');
+        document.querySelector("#new_event_form_wrapper").classList.add('hidden');
+    })
+
+    document.querySelector("#home_instr_create_event_btn").addEventListener("click", () => {
+        document.querySelector("#new_class_form_wrapper").classList.add('hidden');
+        document.querySelector("#new_event_form_wrapper").classList.remove('hidden');
+    })
+}

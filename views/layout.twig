@@ -31,14 +31,15 @@
     </div>
     <div id="nav_menu">
       <ul>
-        {# <li class="hidden">Welcome {{data.first_name}}</li> #}
         <li class="welcome_user">Welcome {{data.first_name}}</li>
+
+        {% if data.role == 'user' %}
         <li class="hover-underline-animation"><a href="/index">Browse all classes</a></li>
-        {# <li><a href="/users/{{data[0].user_id}}/profile">My profile</a></li> #}
+
         <li class="hover-underline-animation"><a href="/users/{{data.user_id}}/profile">My profile</a></li>
-        {# <li>{{data[0].first_name}}</li> #}
+        {% endif %}
+        
         <li>
-          {# <img id="my_profile_icon" src="{{(data[0].src?data[0].src:'/images/profile-placeholder.png')}}" #}
           <img id="my_profile_icon" src="{{(data.src?data.src:'/images/profile-placeholder.png')}}"
             alt="profile_pic_small">
           <div id="dropdown_menu" class="hidden">
