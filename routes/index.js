@@ -506,7 +506,7 @@ router.post('/submit_review', function (req, res) {
     if (err) throw err;
     reviews = result.rows;
     client.end();
-    res.redirect(`/class/${class_id}`)
+    res.redirect(`/class/${req.body.class_id}`)
     console.log("review added");
   });
 })
