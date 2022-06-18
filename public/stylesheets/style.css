@@ -2314,9 +2314,6 @@ footer {
     position: absolute;
     z-index: -1;
   }
-
-
-  /* TODO: fix user profile page past classes section  */
   
   .profile_picture_wrapper .inputfile+label {
     font-size: 1.2rem;
