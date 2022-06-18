@@ -45,11 +45,15 @@
                     </div>
 
                     {% if queryData.signedup %}
-                    <div class="going"><span>going</span></div>
+                    {# <div class="going"><span>going</span></div> #}
+                    
+                    {# {% if queryData.class_date|date("d/m/Y") < "now"|date("d/m/Y") %} <div class="going"> #}
+                    {% if queryData.past_event == 1 %} <div class="going">
+                        <span>went</span> </div>
+                        {% else %}
+                        <div class="going"><span>going</span></div>
 
-                    {# {% elseif queryData.class_date|date("d/m/Y") < "now" |date("d/m/Y") %} <div class="going">
-                        <span>went</span>
-                </div> #}
+                        {% endif %}
 
                 {% else %}
                 <div id="basket" class="single_class_basket">

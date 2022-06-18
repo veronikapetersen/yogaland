@@ -213,6 +213,7 @@ router.get('/class/:id', function (req, res, next) {
     let client = createClient();
     client.connect();
     client.query(`SELECT *,
+    CASE WHEN classes.class_date < CURRENT_DATE THEN 1 ELSE 0 END AS past_event,
     (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $2 LIMIT 1) 
     FROM public.classes 
     JOIN public.locations on locations.location_id = classes.location_id 
@@ -285,7 +286,7 @@ router.get('/index', function (req, res, next) {
       + ' ORDER BY c.class_date ASC';
     client.query(sql, [session.user_id], (err, result) => {
 
-      console.log(sql);
+      // console.log(sql);
       if (err) throw err;
       let classesQueryData = result.rows;
       client.end();
@@ -333,26 +334,29 @@ router.get(`/index/classes/*`, function (req, res, next) {
           where += `classes.` + key + `=$` + ++count;
         }
       }
+      where += ' AND classes.class_date > CURRENT_DATE ORDER BY classes.class_date ASC'
     } else {
-      where = ' ';
+      where = ' WHERE classes.class_date > CURRENT_DATE ORDER BY classes.class_date ASC ';
     }
 
     console.log("params array:", paramsArray);
     // createClient();
     let client = createClient();
     client.connect();
+    paramsArray.push(session.user_id);
     // let sql = 'SELECT * FROM public.classes JOIN public.instructors on classes.instructor_id = instructors.instructor_id JOIN public.locations on classes.location_id = locations.location_id ' + where;
     let sql = `SELECT *, 
     (SELECT COUNT(*) AS reservations FROM public.bookings WHERE bookings.class_id = classes.class_id), 
-    (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $${++count} )
+    (SELECT bookings.booking_id AS signedup FROM public.bookings WHERE bookings.class_id = classes.class_id AND bookings.user_id = $${++count} LIMIT 1)
     FROM public.classes 
     JOIN public.instructors on classes.instructor_id = instructors.instructor_id 
     JOIN public.locations on classes.location_id = locations.location_id ` + where;
-    console.log("sql: ", sql);
-    client.query(sql, [paramsArray, session.user_id], (err, result) => {
+    // console.log("sql: ", sql);
+    client.query(sql, paramsArray, (err, result) => {
       if (err) throw err;
       let data = JSON.stringify(result.rows);
       client.end();
+      console.log(result.rows);
       res.json(data);
     })
   } else {
